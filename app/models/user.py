@@ -74,7 +74,7 @@ class Studio(db.Model):
     avatar = db.Column(db.String(255))
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(255), nullable=False)
-    state = db.Column(db.String(100))
+    state = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
@@ -97,7 +97,7 @@ class TattooImage(db.Model):
     tattoo_style = db.Column(db.String(100), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     studio_id = db.Column(db.Integer, db.ForeignKey('studios.id'))
-    users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
@@ -124,7 +124,7 @@ class StudioReview(db.Model):
 
     # RELATIONSHIPS
     user = db.relationship('User', back_populates='user_reviews')  # A review can only belong to one user
-    studio = db.relationship('Studio', back_populates='studio_reveiws')   # A review can only belong to one studio
+    studio = db.relationship('Studio', back_populates='studio_reviews')   # A review can only belong to one studio
 
 
 class Appointment(db.Model):
