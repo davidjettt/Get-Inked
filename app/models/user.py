@@ -59,7 +59,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
-            'studio': self.studio
+            # 'studio': self.studio
         }
 
 
