@@ -82,7 +82,7 @@ class Studio(db.Model):
 
     # RELATIONSHIPS
     studio_users = db.relationship('User', back_populates='studio')   # A studio can have many users, but a user can belong to only one studio
-    tattoo_images = db.relationship('TattooImage', back_populates='studio')   # A studio can have many tattoo images
+    tattoo_images = db.relationship('TattooImage', back_populates='studio', cascade='all, delete')   # A studio can have many tattoo images
     studio_reviews = db.relationship('StudioReview', back_populates='studio', cascade='all, delete')   # A studio can have many reviews
     studio_appointments = db.relationship('Appointment', back_populates='studio', cascade='all, delete')   # A studio can have many appointments
 

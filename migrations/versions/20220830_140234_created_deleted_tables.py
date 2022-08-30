@@ -1,9 +1,8 @@
-"""created/deleted all tables
+"""created/deleted tables
 
-
-Revision ID: 8c741494aa9b
-Revises:
-Create Date: 2022-08-30 11:18:30.963718
+Revision ID: 623bf19fde99
+Revises: 
+Create Date: 2022-08-30 14:02:34.404803
 
 """
 from alembic import op
@@ -11,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8c741494aa9b'
+revision = '623bf19fde99'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -96,7 +95,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['studio_id'], ['studios.id'], ),
-    sa.ForeignKeyConstraint(['user _id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tattoo_image_bookmarks',
