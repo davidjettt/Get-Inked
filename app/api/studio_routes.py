@@ -85,3 +85,5 @@ def join_studio(id):
         studio.studio_users.append(current_user)
         db.session.commit()
         return 'success'
+    else:
+        return 'user already in studio'
