@@ -26,7 +26,7 @@ def seed_studios():
         address='123 Lotus Lane',
         city='Arcadia',
         state='California',
-        user_id=1
+        owner_id=1
     )
     black_diamond = Studio(
         name='Black Diamond',
@@ -34,7 +34,7 @@ def seed_studios():
         address='123 Diamond Ave',
         city='Philadelphia',
         state='Pennsylvania',
-        user_id=2
+        owner_id=2
     )
 
     db.session.add(red_lotus)

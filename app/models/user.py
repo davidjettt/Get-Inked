@@ -15,6 +15,12 @@ tattoo_image_bookmarks = db.Table(
     db.Column('tattoo_images', db.Integer, db.ForeignKey('tattoo_images.id'), primary_key=True)
 )
 
+studio_users = db.Table(
+    'studio_users',
+    db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('studio',db.Integer, db.ForeignKey('studios.id'), primary_key=True)
+)
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -32,7 +38,7 @@ class User(db.Model, UserMixin):
 
 
     # RELATIONSHIPS
-    studio = db.relationship('Studio', back_populates='studio_users', cascade='all, delete')   # A user can belong to only one studio
+    studio = db.relationship('Studio', secondary=studio_users, back_populates='studio_users', cascade='all, delete')   # A user can belong to only one studio
     user_tattoo_images = db.relationship('TattooImage', back_populates='user', cascade='all, delete')   # A user can have many tattoo images
     user_reviews = db.relationship('StudioReview', back_populates='user', cascade='all, delete')   # A user can have many reviews
     user_appointments = db.relationship('Appointment', back_populates='user', cascade='all, delete')   # A user can have many appointments
@@ -60,7 +66,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
-            'studio': [studio.studio_to_dict() for studio in self.studio]
+            # 'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
 
@@ -76,13 +82,14 @@ class Studio(db.Model):
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_id = db.Column(db.Integer, nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
 
     # RELATIONSHIPS
-    studio_users = db.relationship('User', back_populates='studio')   # A studio can have many users, but a user can belong to only one studio
+    studio_users = db.relationship('User', secondary=studio_users, back_populates='studio')   # A studio can have many users, but a user can belong to only one studio
     tattoo_images = db.relationship('TattooImage', back_populates='studio', cascade='all, delete')   # A studio can have many tattoo images
     studio_reviews = db.relationship('StudioReview', back_populates='studio', cascade='all, delete')   # A studio can have many reviews
     studio_appointments = db.relationship('Appointment', back_populates='studio', cascade='all, delete')   # A studio can have many appointments
@@ -101,10 +108,10 @@ class Studio(db.Model):
             'address': self.address,
             'city': self.city,
             'state': self.state,
-            'ownerId': self.user_id,
+            'ownerId': self.owner_id,
             'studioImages': [ image.image_url for image in self.tattoo_images ],
-            'reviews': [ review.review_to_dict() for review in self.studio_reviews ]
-            # 'studioArtists': [self.studio_users.id]
+            'reviews': [ review.review_to_dict() for review in self.studio_reviews ],
+            'studioArtists': [user.id for user in self.studio_users]
         }
 
 
