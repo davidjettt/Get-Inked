@@ -9,6 +9,8 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import UploadPicture from './components/UploadPicture';
+import { loadStudiosThunk } from './store/studios';
+import Studios from './components/Studios/Studios';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -20,6 +22,10 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(loadStudiosThunk())
+  }, [dispatch])
 
   if (!loaded) {
     return null;
@@ -40,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/studios'>
+          <Studios />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
