@@ -32,7 +32,7 @@ def create_studio():
             address=form.data['address'],
             city=form.data['city'],
             state=form.data['state'],
-            user_id=current_user.id
+            owner_id=current_user.id
         )
         db.session.add(new_studio)
         db.session.commit()
@@ -71,9 +71,13 @@ def update_studio(id):
 @login_required
 def delete_studio(id):
     studio = Studio.query.get(id)
-    db.session.delete(studio)
-    db.session.commit()
-    return { 'message': 'Successfully deleted' }
+    if studio.owner_id == current_user.id:
+        db.session.delete(studio)
+        db.session.commit()
+        return { 'message': 'Successfully deleted' }
+    else:
+        return { 'message': 'only owner of studio can delete' }
+
 
 
 # Join a studio
@@ -81,7 +85,11 @@ def delete_studio(id):
 @login_required
 def join_studio(id):
     studio = Studio.query.get(id)
+    if studio.owner_id == current_user.id:
+        return { 'message': 'you are the owner of this studio' }
     if current_user.id not in studio.studio_users:
         studio.studio_users.append(current_user)
         db.session.commit()
         return 'success'
+    else:
+        return 'user already in studio'

@@ -66,7 +66,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
-            'studio': [studio.studio_to_dict() for studio in self.studio]
+            # 'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
 
@@ -82,6 +82,7 @@ class Studio(db.Model):
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(100), nullable=False)
+    owner_id = db.Column(db.Integer, nullable=False)
     # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
@@ -107,7 +108,7 @@ class Studio(db.Model):
             'address': self.address,
             'city': self.city,
             'state': self.state,
-            # 'ownerId': self.user_id,
+            'ownerId': self.owner_id,
             'studioImages': [ image.image_url for image in self.tattoo_images ],
             'reviews': [ review.review_to_dict() for review in self.studio_reviews ],
             'studioArtists': [user.id for user in self.studio_users]
