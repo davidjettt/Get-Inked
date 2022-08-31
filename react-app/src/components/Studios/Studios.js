@@ -27,7 +27,7 @@ export default function Studios() {
                         <span>star </span>
                         <span>average rating</span>
                         <div className='booking-button-container'>
-                            <button>Book</button>
+                            <button className='book-button'>Book</button>
                         </div>
                     </div>
                 </div>
