@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.Text)
     avatar = db.Column(db.String(255))
     tattoo_style = db.Column(db.String(100))
+    # studio_id = db.Column(db.Integer, db.ForeignKey('studios.id'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
@@ -59,7 +60,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
-            # 'studio': self.studio
+            'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
 
@@ -87,6 +88,24 @@ class Studio(db.Model):
     studio_appointments = db.relationship('Appointment', back_populates='studio', cascade='all, delete')   # A studio can have many appointments
 
     studio_bookmarks = db.relationship('User', secondary=studio_bookmarks, back_populates='user_studio_bookmarks')
+
+    def studio_to_dict(self):
+        # print('STUDIO USER', self.studio_users.to_dict())
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'headerImage': self.header_image,
+            'tattooStyle': self.tattoo_style,
+            'avatar': self.avatar,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'ownerId': self.user_id,
+            'studioImages': [ image.image_url for image in self.tattoo_images ],
+            'reviews': [ review.review_to_dict() for review in self.studio_reviews ]
+            # 'studioArtists': [self.studio_users.id]
+        }
 
 
 class TattooImage(db.Model):
@@ -126,6 +145,15 @@ class StudioReview(db.Model):
     user = db.relationship('User', back_populates='user_reviews')  # A review can only belong to one user
     studio = db.relationship('Studio', back_populates='studio_reviews')   # A review can only belong to one studio
 
+    def review_to_dict(self):
+        return {
+            'review': self.review,
+            'stars': self.stars,
+            'reviewImage': self.review_image,
+            'user': {
+                'name': User.query.get(self.user_id).name
+            }
+        }
 
 class Appointment(db.Model):
     __tablename__ = 'appointments'
