@@ -11,6 +11,8 @@ import { authenticate } from './store/session';
 import UploadPicture from './components/UploadPicture';
 import { loadStudiosThunk } from './store/studios';
 import Studios from './components/Studios/Studios';
+import StudioDetails from './components/Studios/StudioDetails';
+import StudioForm from './components/Studios/StudioForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,8 +49,14 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/studios'>
+        <ProtectedRoute exact path='/studios'>
           <Studios />
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/studios/new'>
+          <StudioForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/studios/:studioId'>
+          <StudioDetails />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
