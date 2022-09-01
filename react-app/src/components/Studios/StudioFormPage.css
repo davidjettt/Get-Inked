@@ -1,0 +1,41 @@
+
+.studio-form-page {
+    /* height: 800px; */
+    /* overflow-y: hidden; */
+}
+
+.studio-form-page-main-container {
+    display: flex;
+    justify-content: flex-end;
+    /* overflow-x: hidden; */
+    height: 96vh;
+    /* overflow-y: hidden; */
+}
+
+.studio-form-page-image-container {
+    width: 50%;
+    /* height: 99%; */
+}
+
+.studio-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.studio-form {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    margin-right: 160px;
+}
+
+
+.studio-description-textarea {
+    resize: none;
+    outline: none;
+}
+
+.studio-description-textarea:focus {
+    border-color: black;
+}

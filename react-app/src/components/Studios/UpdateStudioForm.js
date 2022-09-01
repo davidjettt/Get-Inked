@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import StudioForm from "./StudioForm";
+import StudioFormPage from "./StudioFormPage";
 
 
 
@@ -10,6 +10,6 @@ export default function UpdateStudioForm() {
 
 
     return (
-        <StudioForm studio={studio} formType='Update Studio' />
+        <StudioFormPage studio={studio} formType='Update Studio' />
     )
 }
