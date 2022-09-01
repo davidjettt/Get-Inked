@@ -1,0 +1,29 @@
+
+.nav-bar-container-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 60px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+}
+
+.nav-bar-container-sub {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.nav-buttons-right,
+.nav-buttons-left {
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+}

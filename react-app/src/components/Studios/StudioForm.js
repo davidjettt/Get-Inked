@@ -78,7 +78,7 @@ export default function StudioForm({ studio, formType }) {
 
         const reader = new FileReader()
         reader.onload = () => {
-            if (reader.readyState == 2) {
+            if (reader.readyState === 2) {
                 // console.log('READER RESULT', reader.result)
                 setHeaderPreview(reader.result)
             }
@@ -93,7 +93,7 @@ export default function StudioForm({ studio, formType }) {
 
         const reader = new FileReader()
         reader.onload = () => {
-            if (reader.readyState == 2) {
+            if (reader.readyState === 2) {
                 // console.log('READER RESULT', reader.result)
                 setAvatarPreview(reader.result)
             }
@@ -119,7 +119,7 @@ export default function StudioForm({ studio, formType }) {
                             onChange={updateAvatarImage}
                         />
                         <div style={{width: 100, height: 100}}>
-                            <img style={{width: '100%'}} src={avatarPreview} />
+                            <img style={{width: '100%'}} src={avatarPreview} alt='avatar' />
                         </div>
                     </div>
                     <div className="studio-name-container">
@@ -135,7 +135,7 @@ export default function StudioForm({ studio, formType }) {
                             onChange={updateHeaderImage}
                         />
                         <div style={{width:100, height:100}}>
-                            <img style={{width: '100%'}} src={headerPreview} />
+                            <img style={{width: '100%'}} src={headerPreview} alt='header' />
                         </div>
                     </div>
                     <div className="studio-tattoo-style-container">

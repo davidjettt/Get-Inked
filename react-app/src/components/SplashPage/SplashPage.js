@@ -18,7 +18,7 @@ export default function SplashPage() {
             <div className="splash-page-main">
                 <div className="splash-page-main-container">
                     <div className="splash-page-image-container">
-                        <img className="splash-page-image" src={mainHomePageImage} />
+                        <img className="splash-page-image" src={mainHomePageImage} alt='traditional-japanese-tatoos-girl' />
                     </div>
                     <div className="splash-page-login-form-container">
                         <div className='login-header-container'>
