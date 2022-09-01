@@ -4,14 +4,15 @@ import './Studios.css'
 
 export default function Studios() {
     const studios = useSelector(state => Object.values(state.studios))
+    const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
 
     return (
-        <>
+        <div className='studios-container-main'>
             {studios.map((studio) => (
                 <Link key={studio.id} to={`/studios/${studio.id}`}>
                     <div key={studio.id} className='studio-card-container'>
                         <div className='studio-card-image'>
-                            {studio.studioImages && <img src={studio.studioImages[0]} />}
+                            <img src={studio.studioImages[0] || defaultStudioImage } />
                         </div>
                         <div className='studio-info-container'>
                             <div className='studio-avatar'>
@@ -35,6 +36,6 @@ export default function Studios() {
                     </div>
                 </Link>
             ))}
-        </>
+        </div>
     )
 }
