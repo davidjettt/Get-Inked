@@ -8,10 +8,10 @@ export default function Studios() {
     return (
         <>
             {studios.map((studio) => (
-                <Link to={`/studios/${studio.id}`}>
+                <Link key={studio.id} to={`/studios/${studio.id}`}>
                     <div key={studio.id} className='studio-card-container'>
                         <div className='studio-card-image'>
-                            <img src={studio.studioImages[0]} />
+                            {studio.studioImages && <img src={studio.studioImages[0]} />}
                         </div>
                         <div className='studio-info-container'>
                             <div className='studio-avatar'>

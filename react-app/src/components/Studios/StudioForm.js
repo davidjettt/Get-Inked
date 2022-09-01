@@ -1,20 +1,22 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createStudioThunk } from "../../store/studios";
+import { createStudio, createStudioThunk, updateStudio } from "../../store/studios";
 
 
-export default function StudioForm() {
+export default function StudioForm({ studio, formType }) {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [ name, setName ] = useState('')
-    const [ description, setDescription ] = useState('')
-    const [ headerImage, setHeaderImage ] = useState('')
+    const [ name, setName ] = useState(studio?.name || '')
+    const [ description, setDescription ] = useState(studio?.description || '')
+    const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
     const [ tattooStyle, setTattooStyle ] = useState('')
     const [ avatar, setAvatar ] = useState('')
-    const [ address, setAddress ] = useState('')
-    const [ city, setCity ] = useState('')
-    const [ state, setState ] = useState('')
+    const [ address, setAddress ] = useState(studio?.address || '')
+    const [ city, setCity ] = useState(studio?.city || '')
+    const [ state, setState ] = useState(studio?.state || '')
+    const [ headerPreview, setHeaderPreview ] = useState(null)
+    const [ avatarPreview, setAvatarPreview ] = useState(null)
 
 
     const handleSubmit = async (e) => {
@@ -39,18 +41,33 @@ export default function StudioForm() {
         formData.append('city', city)
         formData.append('state', state)
 
-        const res = await fetch('/api/studios/', {
-            method: 'POST',
-            body: formData
-        })
-        if (res.ok) {
-            console.log('success')
+        if (formType === 'Update Studio') {
+            const response = await fetch(`/api/studios/${studio.id}`, {
+                method: 'PUT',
+                body: formData
+            })
+            if (response.ok) {
+                const data = await response.json()
+                dispatch(updateStudio(data))
+            }
+        }
+        else {
+            const res = await fetch('/api/studios/', {
+                method: 'POST',
+                body: formData
+            })
+            if (res.ok) {
+                const data = await res.json()
+                dispatch(createStudio(data))
+            }
         }
         // console.log('FORMDATA', formData)
         // console.log('DATA', payload)
 
         // const badData = await dispatch(createStudioThunk(payload))
-        // console.log('ERRORS', badData)
+        // if (badData) {
+        //     console.log('ERRORS', badData)
+        // }
         history.push('/studios')
     }
 
@@ -58,11 +75,31 @@ export default function StudioForm() {
         const file = e.target.files[0];
         // console.log('FILE', file)
         setHeaderImage(file);
+
+        const reader = new FileReader()
+        reader.onload = () => {
+            if (reader.readyState == 2) {
+                // console.log('READER RESULT', reader.result)
+                setHeaderPreview(reader.result)
+            }
+        }
+        // console.log('FILES', e.target.files)
+        reader.readAsDataURL(e.target.files[0])
     }
     const updateAvatarImage = (e) => {
         const file = e.target.files[0];
         // console.log('AVATAR FILE', file)
         setAvatar(file);
+
+        const reader = new FileReader()
+        reader.onload = () => {
+            if (reader.readyState == 2) {
+                // console.log('READER RESULT', reader.result)
+                setAvatarPreview(reader.result)
+            }
+        }
+        // console.log('FILES', e.target.files)
+        reader.readAsDataURL(e.target.files[0])
     }
 
 
@@ -71,7 +108,9 @@ export default function StudioForm() {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h1>New Studio Form</h1>
+                    {formType === 'Update Studio' ?
+                    <h1>Update Studio</h1> :
+                    <h1>New Studio Form</h1>}
                 </div>
                     <div className="studio-form-avatar-container">
                         <input
@@ -79,6 +118,9 @@ export default function StudioForm() {
                             accept="image/*"
                             onChange={updateAvatarImage}
                         />
+                        <div style={{width: 100, height: 100}}>
+                            <img style={{width: '100%'}} src={avatarPreview} />
+                        </div>
                     </div>
                     <div className="studio-name-container">
                         <input type='text' placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -92,6 +134,9 @@ export default function StudioForm() {
                             accept="image/*"
                             onChange={updateHeaderImage}
                         />
+                        <div style={{width:100, height:100}}>
+                            <img style={{width: '100%'}} src={headerPreview} />
+                        </div>
                     </div>
                     <div className="studio-tattoo-style-container">
                         <input type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />

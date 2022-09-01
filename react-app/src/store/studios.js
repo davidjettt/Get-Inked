@@ -12,14 +12,14 @@ const loadStudios = (studios) => {
     }
 }
 
-const createStudio = (studio) => {
+export const createStudio = (studio) => {
     return {
         type: CREATE_STUDIO,
         studio
     }
 }
 
-const updateStudio = (studio) => {
+export const updateStudio = (studio) => {
     return {
         type: UPDATE_STUDIO,
         studio
@@ -54,7 +54,7 @@ export const loadStudiosThunk = () => async (dispatch) => {
 export const createStudioThunk = (studio) => async (dispatch) => {
     const response = await fetch('/api/studios/', {
         method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(studio)
     })
 
@@ -105,12 +105,12 @@ export default function studioReducer(state = initialState, action) {
         }
         case CREATE_STUDIO: {
             newState = JSON.parse(JSON.stringify(state))
-            newState[action.studio.id] = action.studio
+            newState[action.studio.studio.id] = action.studio.studio
             return newState
         }
         case UPDATE_STUDIO: {
             newState = JSON.parse(JSON.stringify(state))
-            newState[action.studio.id] = action.studio
+            newState[action.studio.studio.id] = action.studio.studio
             return newState
         }
         case DELETE_STUDIO: {
