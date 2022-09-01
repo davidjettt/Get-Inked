@@ -14,6 +14,7 @@ import Studios from './components/Studios/Studios';
 import StudioDetails from './components/Studios/StudioDetails';
 import StudioForm from './components/Studios/StudioForm';
 import UpdateStudioForm from './components/Studios/UpdateStudioForm';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,8 +64,9 @@ function App() {
           <UpdateStudioForm />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-          <UploadPicture />
+          <HomePage />
+          {/* <h1>My Home Page</h1> */}
+          {/* <UploadPicture /> */}
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

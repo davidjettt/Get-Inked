@@ -22,7 +22,7 @@ export default function StudioDetails() {
             </Link>
             <button onClick={handleDelete}>Delete Studio</button>
             <h1>this is studio {studioId}</h1>
-            {studio[0].headerImage && <img src={studio[0]?.headerImage} alt='header image' />}
+            {studio[0]?.headerImage && <img src={studio[0]?.headerImage} alt='header image' />}
             {studio[0].avatar && <img src={studio[0].avatar} alt='studio-avatar' />}
         </>
     )
