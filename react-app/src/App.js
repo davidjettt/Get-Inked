@@ -13,6 +13,7 @@ import { loadStudiosThunk } from './store/studios';
 import Studios from './components/Studios/Studios';
 import StudioDetails from './components/Studios/StudioDetails';
 import StudioForm from './components/Studios/StudioForm';
+import UpdateStudioForm from './components/Studios/UpdateStudioForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,8 +56,11 @@ function App() {
         <ProtectedRoute exact path='/studios/new'>
           <StudioForm />
         </ProtectedRoute>
-        <ProtectedRoute path='/studios/:studioId'>
+        <ProtectedRoute exact path='/studios/:studioId'>
           <StudioDetails />
+        </ProtectedRoute>
+        <ProtectedRoute path='/studios/:studioId/edit'>
+          <UpdateStudioForm />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
