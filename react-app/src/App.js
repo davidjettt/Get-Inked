@@ -16,6 +16,7 @@ import StudioForm from './components/Studios/StudioForm';
 import UpdateStudioForm from './components/Studios/UpdateStudioForm';
 import HomePage from './components/HomePage/HomePage';
 import SplashPage from './components/SplashPage/SplashPage';
+import StudioFormPage from './components/Studios/StudioFormPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,7 +59,7 @@ function App() {
           <Studios />
         </ProtectedRoute>
         <ProtectedRoute exact path='/studios/new'>
-          <StudioForm />
+          <StudioFormPage />
         </ProtectedRoute>
         <ProtectedRoute exact path='/studios/:studioId'>
           <StudioDetails />

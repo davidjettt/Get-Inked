@@ -23,7 +23,7 @@ def get_all_studios():
 def create_studio():
     print('REQUEST FILES', request.files)
     if "header_image" not in request.files:
-        # print('FIRST IF')
+        print('FIRST IF')
         return {"errors": "image required"}, 400
 
     header_image = request.files["header_image"]

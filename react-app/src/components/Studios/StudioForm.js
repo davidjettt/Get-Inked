@@ -106,11 +106,11 @@ export default function StudioForm({ studio, formType }) {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form className="studio-form" onSubmit={handleSubmit}>
                 <div>
                     {formType === 'Update Studio' ?
                     <h1>Update Studio</h1> :
-                    <h1>New Studio Form</h1>}
+                    <h1>Create a Studio</h1>}
                 </div>
                     <div className="studio-form-avatar-container">
                         <input
@@ -126,7 +126,7 @@ export default function StudioForm({ studio, formType }) {
                         <input type='text' placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="studio-description-container">
-                        <textarea placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <textarea className="studio-description-textarea" cols='50' rows='15' placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
                     </div>
                     <div className="studio-header-upload-container">
                         <input
