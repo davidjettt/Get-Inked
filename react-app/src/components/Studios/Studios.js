@@ -5,6 +5,7 @@ import './Studios.css'
 export default function Studios() {
     const studios = useSelector(state => Object.values(state.studios))
     const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
+    const defaultAvatarImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662073397/dragon-heads-tattoo_xrpoon.jpg'
     const studiosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662056527/Skin-Desing-Tattoo-Cover-Up-1536x768_pj155x.jpg'
     return (
         <div className='studios-page-main'>
@@ -24,7 +25,7 @@ export default function Studios() {
                                 </div>
                                 <div className='studio-info-container'>
                                     <div className='studio-avatar'>
-                                        avatar
+                                        <img className='studio-details-avatar' src={studio.avatar || defaultAvatarImage} />
                                     </div>
                                     <div className='studio-name-location-container'>
                                         <div className='studio-name'>
