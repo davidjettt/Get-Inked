@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Studio
-from app.forms import StudioForm
+from app.models import db, Studio, TattooImage
+from app.forms import StudioForm, TattooForm
 from app.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3
 
 studio_routes = Blueprint('studios', __name__)
@@ -22,8 +22,7 @@ def get_all_studios():
 @login_required
 def create_studio():
     print('REQUEST FILES', request.files)
-    # jsonData = request.files.values()
-    # print('JSON DATA', jsonData)
+
     if "header_image" not in request.files or "avatar" not in request.files:
         print('FIRST IF')
         return {"errors": "image required"}, 400
@@ -42,12 +41,14 @@ def create_studio():
     upload_header = upload_file_to_s3(header_image)
     upload_avatar = upload_file_to_s3(avatar_image)
 
-    if "url" not in upload_header or "url" not in upload_avatar:
+    if "url" not in upload_header:
         print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
         return upload_header, 400
+    elif "url" not in upload_avatar:
+        return upload_avatar, 400
 
     url = upload_header["url"]
     url2 = upload_avatar["url"]
@@ -55,10 +56,10 @@ def create_studio():
     form = StudioForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('ERRORS', form.data['name'])
+        # print('ERRORS', form.data['name'])
         # print('FORM DATA', form.data)
         # print('REQUEST', request.form)
-        # print('REQUEST JSON', request.get_json())
+
         new_studio = Studio(
             avatar=url2,
             name=request.form.get('name'),
@@ -114,12 +115,14 @@ def update_studio(id):
     upload_header = upload_file_to_s3(header_image)
     upload_avatar = upload_file_to_s3(avatar_image)
 
-    if "url" not in upload_header or "url" not in upload_avatar:
+    if "url" not in upload_header:
         # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
         return upload_header, 400
+    elif "url" not in upload_avatar:
+        return upload_avatar, 400
 
     url = upload_header["url"]
     url2 = upload_avatar["url"]
@@ -165,7 +168,7 @@ def delete_studio(id):
     if studio.owner_id == current_user.id:
         db.session.delete(studio)
         db.session.commit()
-        return { 'message': 'Successfully deleted' }
+        return { 'message': 'Successfully deleted studio' }
     else:
         return { 'message': 'only owner of studio can delete' }
 
@@ -184,3 +187,42 @@ def join_studio(id):
         return 'success'
     else:
         return 'user already in studio'
+
+
+
+# Create a new tattoo image
+@studio_routes.post('/<int:id>/tattoos')
+@login_required
+def create_tattoo(id):
+    if 'tattoo_image' not in request.files:
+        return { 'errors': 'Tattoo image required' }, 400
+
+    tattoo_image = request.files['tattoo_image']
+
+    if not allowed_file(tattoo_image.filename):
+        return { 'errors': 'File type not permitted' }, 400
+
+    tattoo_image.filename = get_unique_filename(tattoo_image.filename)
+
+    upload_tattoo = upload_file_to_s3(tattoo_image)
+
+    if 'url' not in upload_tattoo:
+        return upload_tattoo, 400
+
+    url = upload_tattoo["url"]
+
+    form = TattooForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_tattoo_image = TattooImage(
+            description=request.form.get('description'),
+            image_url=url,
+            tattoo_style=request.form.get('tattoo_style'),
+            studio_id=id,
+            user_id=current_user.id
+        )
+        db.session.add(new_tattoo_image)
+        db.session.commit()
+        return { 'tattoo': new_tattoo_image.tattoo_to_dict() }
+    else:
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400

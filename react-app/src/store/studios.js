@@ -52,7 +52,6 @@ export const loadStudiosThunk = () => async (dispatch) => {
 }
 
 export const createStudioThunk = (studio) => async (dispatch) => {
-    console.log('STUDIO THUNK', studio)
     const response = await fetch('/api/studios/', {
         method: 'POST',
         body: studio
