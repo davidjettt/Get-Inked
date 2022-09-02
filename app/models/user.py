@@ -134,6 +134,18 @@ class TattooImage(db.Model):
 
     tattoo_image_bookmarks = db.relationship('User', secondary=tattoo_image_bookmarks, back_populates='user_tattoo_image_bookmarks')
 
+    def tattoo_to_dict(self):
+        return {
+            'id': self.id,
+            'description': self.description,
+            'tattooStyle': self.tattoo_style,
+            'imageUrl': self.image_url,
+            'studioId': self.studio_id,
+            'userId': self.user_id,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
+        }
+
 
 class StudioReview(db.Model):
     __tablename__ = 'studio_reviews'

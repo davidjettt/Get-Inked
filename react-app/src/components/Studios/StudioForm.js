@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createStudio, createStudioThunk, updateStudio, updateStudioThunk } from "../../store/studios";
+import { createStudioThunk, updateStudioThunk } from "../../store/studios";
 
 
 export default function StudioForm({ studio, formType }) {
@@ -24,17 +24,7 @@ export default function StudioForm({ studio, formType }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
-        // const payload = {
-        //     'avatar': avatar,
-        //     'name': name,
-        //     'description': description,
-        //     'header_image': headerImage,
-        //     'tattoo_style': tattooStyle,
-        //     'address': address,
-        //     'city': city,
-        //     'state': state
-        // }
-        // console.log('HEADER', headerImage)
+
         const formData = new FormData()
         formData.append('header_image', headerImage)
         formData.append('avatar', avatar)
@@ -43,6 +33,7 @@ export default function StudioForm({ studio, formType }) {
         formData.append('address', address)
         formData.append('city', city)
         formData.append('state', state)
+        formData.append('tattoo_style', tattooStyle)
 
         // console.log('FORM DATA', formData)
         // for (var [key, value] of formData.entries()) {
@@ -50,7 +41,7 @@ export default function StudioForm({ studio, formType }) {
         // }
 
         if (formType === 'Update Studio') {
-            const badData = await dispatch(updateStudioThunk(formData))
+            const badData = await dispatch(updateStudioThunk(formData, studio.id))
             if (badData) {
                 setErrors([badData])
             } else {
