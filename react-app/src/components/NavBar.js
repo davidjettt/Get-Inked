@@ -37,7 +37,9 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div className='tattoos-link-container'>
-            tattoos
+            <NavLink to='/tattoos' exact={true}>
+              Tattoos
+            </NavLink>
           </div>
         </div>
         <div className='nav-buttons-right'>

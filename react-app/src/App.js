@@ -17,6 +17,8 @@ import UpdateStudioForm from './components/Studios/UpdateStudioForm';
 import HomePage from './components/HomePage/HomePage';
 import SplashPage from './components/SplashPage/SplashPage';
 import StudioFormPage from './components/Studios/StudioFormPage';
+import { loadTattoosThunk } from './store/tattoos';
+import Tattoos from './components/Tattoos/Tattoos';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,13 +28,15 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(loadStudiosThunk())
+      await dispatch(loadTattoosThunk())
       setLoaded(true);
     })();
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(loadStudiosThunk())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(loadStudiosThunk())
+  // }, [dispatch])
 
   if (!loaded) {
     return null;
@@ -66,6 +70,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/studios/:studioId/edit'>
           <UpdateStudioForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/tattoos'>
+          <Tattoos />
         </ProtectedRoute>
         <ProtectedRoute path='/home' exact={true} >
           <HomePage />
