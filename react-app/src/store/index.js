@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import studios from './studios'
+import tattoos from './tattoos'
 
 const rootReducer = combineReducers({
   session,
-  studios
+  studios,
+  tattoos
 });
 
 
