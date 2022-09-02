@@ -52,10 +52,14 @@ export const loadStudiosThunk = () => async (dispatch) => {
 }
 
 export const createStudioThunk = (studio) => async (dispatch) => {
+    console.log('STUDIO IN THUNK', studio)
     const response = await fetch('/api/studios/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(studio)
+        // headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify(studio)
+        // processData: false,
+        // contentType: false,
+        body: studio
     })
 
     if (response.ok) {
@@ -63,20 +67,25 @@ export const createStudioThunk = (studio) => async (dispatch) => {
         dispatch(createStudio(data))
     } else {
         const badData = await response.json()
+        // console.log('THUNK', badData.errors)
         if(badData.errors) return badData.errors
     }
 }
 
 export const updateStudioThunk = (studio) => async (dispatch) => {
-    const response = await fetch(`/api/studios/${studio.id}`, {
+    const response = await fetch(`/api/studios/${studio.id}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(studio)
+        body: studio
+        // body: JSON.stringify(studio)
     })
 
     if (response.ok) {
         const data = await response.json()
         dispatch(updateStudio(data))
+    } else {
+        const badData = await response.json()
+        if (badData.errors) return badData.errors
     }
 }
 

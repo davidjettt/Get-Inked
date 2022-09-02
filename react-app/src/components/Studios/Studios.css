@@ -21,15 +21,16 @@
     flex-direction: column;
     flex-grow: 1;
     justify-content: space-between;
-    max-width: 240px;
+    /* max-width: 240px; */
     position: absolute;
     width: 100%;
     z-index: 1;
+    margin-top: 25px;
 }
 
 .header-text {
     position: relative;
-    font-size: 27px;
+    font-size: 36px;
     color: white;
 }
 
@@ -50,9 +51,10 @@
 }
 
 .studio-card-container {
-    /* width: 33%; */
+    /* width: 98%; */
     height: 400px;
     /* width: 500px; */
+    box-shadow: 2px 2px 2px 2px lightgrey;
 }
 
 .studio-card-image-container {
@@ -68,7 +70,7 @@
 
 .studio-link {
     /* border: 1px solid black; */
-    width: 500px;
+    width: 20vw;
     margin-bottom: 20px;
     text-decoration: none;
 }

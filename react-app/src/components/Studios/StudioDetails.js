@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { deleteStudioThunk } from "../../store/studios"
@@ -5,6 +6,7 @@ import threedots from '../../Images/three-dots.svg'
 import './StudioDetails.css'
 
 export default function StudioDetails() {
+    const [ showDropdown, setShowDropdown ] = useState(false)
     const defaultAvatarImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662073397/dragon-heads-tattoo_xrpoon.jpg'
     const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
     const dispatch = useDispatch()
@@ -12,6 +14,22 @@ export default function StudioDetails() {
     const { studioId }  = useParams()
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
     // console.log('STUDIO', studio)
+
+    const handleDropdown = () => {
+        if (showDropdown) return
+        setShowDropdown(true)
+    }
+
+    useEffect(() => {
+        if (!showDropdown) return
+
+        const closeDropdown = () => {
+            setShowDropdown(false)
+        }
+        document.addEventListener("click", closeDropdown);
+
+        return () => document.removeEventListener("click", closeDropdown);
+    }, [showDropdown])
 
     const handleDelete = () => {
         dispatch(deleteStudioThunk(studio))
@@ -27,7 +45,14 @@ export default function StudioDetails() {
                 <div className="studio-details-info-main">
                     <div className="studio-details-info-container">
                         <div className="three-dots">
-                            <img src={threedots} />
+                            <img onClick={handleDropdown} src={threedots} />
+                            {showDropdown &&
+                            <div className="dropdown-container">
+                                <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
+                                    Update Studio
+                                </Link>
+                                <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button>
+                            </div>}
                         </div>
                         <div className="studio-details-avatar-name-location">
                             <div className="studio-details-avatar-container">
@@ -86,10 +111,10 @@ export default function StudioDetails() {
                         </div>
                     </div>
                 </div>
-                <Link to={`/studios/${studioId}/edit`}>
+                {/* <Link to={`/studios/${studioId}/edit`}>
                     <button>Update Studio</button>
                 </Link>
-                <button onClick={handleDelete}>Delete Studio</button>
+                <button onClick={handleDelete}>Delete Studio</button> */}
             </div>
         </div>
     )

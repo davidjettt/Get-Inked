@@ -1,37 +1,40 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createStudio, createStudioThunk, updateStudio } from "../../store/studios";
+import { createStudio, createStudioThunk, updateStudio, updateStudioThunk } from "../../store/studios";
 
 
 export default function StudioForm({ studio, formType }) {
+    console.log('STUDIO', studio)
     const dispatch = useDispatch()
     const history = useHistory()
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
     const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
     const [ tattooStyle, setTattooStyle ] = useState('')
-    const [ avatar, setAvatar ] = useState('')
+    const [ avatar, setAvatar ] = useState(studio?.avatar || '')
     const [ address, setAddress ] = useState(studio?.address || '')
     const [ city, setCity ] = useState(studio?.city || '')
     const [ state, setState ] = useState(studio?.state || '')
     const [ headerPreview, setHeaderPreview ] = useState(null)
     const [ avatarPreview, setAvatarPreview ] = useState(null)
+    const [ errors, setErrors ] = useState([])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const payload = {
-            'avatar': avatar,
-            'name': name,
-            'description': description,
-            'header_image': headerImage,
-            'tattoo_style': tattooStyle,
-            'address': address,
-            'city': city,
-            'state': state
-        }
+        setErrors([])
+        // const payload = {
+        //     'avatar': avatar,
+        //     'name': name,
+        //     'description': description,
+        //     'header_image': headerImage,
+        //     'tattoo_style': tattooStyle,
+        //     'address': address,
+        //     'city': city,
+        //     'state': state
+        // }
+        // console.log('HEADER', headerImage)
         const formData = new FormData()
         formData.append('header_image', headerImage)
         formData.append('avatar', avatar)
@@ -41,24 +44,26 @@ export default function StudioForm({ studio, formType }) {
         formData.append('city', city)
         formData.append('state', state)
 
+        // console.log('FORM DATA', formData)
+        // for (var [key, value] of formData.entries()) {
+        //     console.log(key, value);
+        // }
+
         if (formType === 'Update Studio') {
-            const response = await fetch(`/api/studios/${studio.id}`, {
-                method: 'PUT',
-                body: formData
-            })
-            if (response.ok) {
-                const data = await response.json()
-                dispatch(updateStudio(data))
+            const badData = await dispatch(updateStudioThunk(formData))
+            if (badData) {
+                setErrors([badData])
+            } else {
+                history.push('/studios')
             }
         }
         else {
-            const res = await fetch('/api/studios/', {
-                method: 'POST',
-                body: formData
-            })
-            if (res.ok) {
-                const data = await res.json()
-                dispatch(createStudio(data))
+            const badData = await dispatch(createStudioThunk(formData))
+            // console.log('BAD DATA', badData)
+            if (badData) {
+                setErrors([badData])
+            } else {
+                history.push('/studios')
             }
         }
         // console.log('FORMDATA', formData)
@@ -68,7 +73,6 @@ export default function StudioForm({ studio, formType }) {
         // if (badData) {
         //     console.log('ERRORS', badData)
         // }
-        history.push('/studios')
     }
 
     const updateHeaderImage = (e) => {
@@ -84,7 +88,9 @@ export default function StudioForm({ studio, formType }) {
             }
         }
         // console.log('FILES', e.target.files)
-        reader.readAsDataURL(e.target.files[0])
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0])
+        }
     }
     const updateAvatarImage = (e) => {
         const file = e.target.files[0];
@@ -99,7 +105,9 @@ export default function StudioForm({ studio, formType }) {
             }
         }
         // console.log('FILES', e.target.files)
-        reader.readAsDataURL(e.target.files[0])
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0])
+        }
     }
 
 
@@ -112,39 +120,46 @@ export default function StudioForm({ studio, formType }) {
                     <h1>Update Studio</h1> :
                     <h1>Create a Studio</h1>}
                 </div>
+                <div>
+                    {errors.length > 0 && errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
                     <div className="studio-form-avatar-container">
                         <input
+                            name='avatar'
                             type="file"
                             accept="image/*"
                             onChange={updateAvatarImage}
                         />
                         <div style={{width: 100, height: 100}}>
-                            <img style={{width: '100%'}} src={avatarPreview} alt='avatar' />
+                            {avatarPreview && <img style={{width: '100%'}} src={avatarPreview} alt='' />}
                         </div>
                     </div>
                     <div className="studio-name-container">
-                        <input type='text' placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input name='name' type='text' placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="studio-description-container">
-                        <textarea className="studio-description-textarea" cols='50' rows='15' placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <textarea name='description' className="studio-description-textarea" cols='50' rows='15' placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
                     </div>
                     <div className="studio-header-upload-container">
                         <input
+                            name='header'
                             type="file"
                             accept="image/*"
                             onChange={updateHeaderImage}
                         />
                         <div style={{width:100, height:100}}>
-                            <img style={{width: '100%'}} src={headerPreview} alt='header' />
+                            {headerPreview && <img style={{width: '100%'}} src={headerPreview} alt='' />}
                         </div>
                     </div>
                     <div className="studio-tattoo-style-container">
-                        <input type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />
+                        <input name='tattoo_style' type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />
                     </div>
                     <div className="studio-location-container">
-                        <input type='text' placeholder='address' value={address} onChange={(e) => setAddress(e.target.value)} />
-                        <input type='text' placeholder='city' value={city} onChange={(e) => setCity(e.target.value)} />
-                        <select value={state} onChange={(e) => setState(e.target.value)}>
+                        <input name='address' type='text' placeholder='address' value={address} onChange={(e) => setAddress(e.target.value)} />
+                        <input name='city' type='text' placeholder='city' value={city} onChange={(e) => setCity(e.target.value)} />
+                        <select name='state' value={state} onChange={(e) => setState(e.target.value)}>
                             <option value="none" defaultValue>Select a State</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
