@@ -10,18 +10,18 @@ export default function StudioDetails() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { studioId }  = useParams()
-    const studio = useSelector(state => Object.values(state.studios).filter(studio => +studio.id === +studioId))
+    const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
     // console.log('STUDIO', studio)
 
     const handleDelete = () => {
-        dispatch(deleteStudioThunk(studio[0]))
+        dispatch(deleteStudioThunk(studio))
         history.push('/studios')
     }
 
     return (
         <div className="studio-details-main">
             <div className="studio-details-header-container">
-                <img className="studio-details-header-image" src={studio[0]?.headerImage || defaultStudioImage} alt='header image' />
+                <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header image' />
             </div>
             <div className="studio-details-container">
                 <div className="studio-details-info-main">
@@ -31,22 +31,22 @@ export default function StudioDetails() {
                         </div>
                         <div className="studio-details-avatar-name-location">
                             <div className="studio-details-avatar-container">
-                                <img className="studio-details-avatar" src={studio[0]?.avatar || defaultAvatarImage} alt='studio-avatar' />
+                                <img className="studio-details-avatar" src={studio?.avatar || defaultAvatarImage} alt='studio-avatar' />
                             </div>
                             <div className="studio-details-name-location-container">
                                 <div className="studio-details-name">
-                                    {studio[0]?.name}
+                                    {studio?.name}
                                 </div>
                                 <div className="studio-details-location-container">
-                                    <span className="studio-details-location">{studio[0]?.city}, {studio[0]?.state}</span>
+                                    <span className="studio-details-location">{studio?.city}, {studio?.state}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="studio-details-header-reviews">
                             <div className="studio-details-header-reviews-left">
                                 <div></div>
-                                {studio[0]?.reviews.length > 0 && <div>
-                                    See all reviews {studio[0]?.reviews.length}
+                                {studio?.reviews.length > 0 && <div>
+                                    See all reviews {studio?.reviews.length}
                                 </div>}
                             </div>
                             <div className="studio-details-header-reviews-right">
@@ -79,7 +79,7 @@ export default function StudioDetails() {
                                 <h2>About the Studio</h2>
                             </div>
                             <div className="studio-description">
-                                {studio[0].description}
+                                {studio?.description}
                             </div>
                         </div>
                         <div className="map">

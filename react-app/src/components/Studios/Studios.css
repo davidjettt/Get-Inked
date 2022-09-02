@@ -41,10 +41,12 @@
 }
 
 .studios-cards-container-main {
-    display: grid;
     /* width: fit-content; */
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
+    /* display: flex;
+    flex-wrap: wrap; */
 }
 
 .studio-card-container {

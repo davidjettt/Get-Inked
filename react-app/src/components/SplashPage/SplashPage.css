@@ -29,6 +29,11 @@ body {
     padding: .5rem;
 }
 
+.about-app-container {
+    width: 70%;
+    max-width: 550px;
+}
+
 .login-form {
     height: 30%;
     box-sizing: border-box;
@@ -36,18 +41,98 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 16px;
-    justify-content: center;
+    /* justify-content: center; */
+}
+
+.signup-form {
+    margin-top: 16px;
 }
 
 input {
     outline: none;
     border-color: #ddd;
-    width: 280px;
-    height: 30px;
-    border-radius: 5px;
+    width: 400px;
+    height: 20px;
+    border-radius: 6px;
     margin: 5px;
+    padding: 14px 8px 8px 8px;
 }
 
 input:focus {
     border-color: black;
+}
+
+
+.custom {
+    position: relative;
+    font-size: 13px;
+}
+
+.custom input {
+    font-size: 12px;
+}
+
+
+.custom .placeholder {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* color: #a9a9a9; */
+    color: rgb(168, 165, 165);
+    transition:
+        top 0.3s ease,
+        font-size 0.3s ease,
+        color 0.3s ease;
+}
+
+.custom input:valid + .placeholder,
+.custom input:focus + .placeholder {
+    top: -5px;
+    font-size: 12px;
+    color: #A9A6A6
+}
+
+.login-button {
+    cursor: pointer;
+    width: 417px;
+    /* height: 30px; */
+    background-color: black;
+    color: whitesmoke;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    margin-top: 15px;
+}
+
+.demo-user-button {
+    cursor: pointer;
+    width: 417px;
+    background-color: #ddd;
+    color: black;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    margin-top: 12px;
+}
+
+.change-to-login,
+.change-to-signup-button {
+    border: none;
+    background-color: #fafafa;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Inter';
+    color: #1982FC;
+    cursor: pointer;
+}
+
+.change-to-login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }

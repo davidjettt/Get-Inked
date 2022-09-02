@@ -29,7 +29,11 @@ export default function SplashPage() {
                         </div>
                         {!showSignUp && <LoginForm />}
                         <div>
-                            {!showSignUp && <button onClick={handleShowSignUp}>Go to sign up</button>}
+                            {!showSignUp &&
+                            <div>
+                                Don't have an account?
+                                <button className="change-to-signup-button" onClick={handleShowSignUp}> Sign up</button>
+                            </div>}
                             {showSignUp && <SignUpForm setShowSignUp={setShowSignUp} />}
                         </div>
                     </div>
