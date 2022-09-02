@@ -22,6 +22,8 @@ def get_all_studios():
 @login_required
 def create_studio():
     print('REQUEST FILES', request.files)
+    # jsonData = request.files.values()
+    # print('JSON DATA', jsonData)
     if "header_image" not in request.files or "avatar" not in request.files:
         print('FIRST IF')
         return {"errors": "image required"}, 400
@@ -30,11 +32,7 @@ def create_studio():
 
     avatar_image = request.files["avatar"]
 
-    if not allowed_file(header_image.filename):
-        print('SECOND IF')
-        return {"errors": "file type not permitted"}, 400
-
-    if not allowed_file(avatar_image.filename):
+    if not allowed_file(header_image.filename) or not allowed_file(header_image.filename):
         print('SECOND IF')
         return {"errors": "file type not permitted"}, 400
 
@@ -44,7 +42,7 @@ def create_studio():
     upload_header = upload_file_to_s3(header_image)
     upload_avatar = upload_file_to_s3(avatar_image)
 
-    if "url" not in upload_header:
+    if "url" not in upload_header or "url" not in upload_avatar:
         print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
@@ -54,74 +52,47 @@ def create_studio():
     url = upload_header["url"]
     url2 = upload_avatar["url"]
 
-
-
-    if url:
-        form = StudioForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit:
-            print('REQUEST', request.form)
-            print('REQUEST JSON', request.get_json())
-            # new_studio = Studio(
-            #     avatar=url2,
-            #     name=request.form.get('name'),
-            #     description=request.form.get('description'),
-            #     header_image=url,
-            #     tattoo_style=request.form.get('tattoo_style'),
-            #     address=request.form.get('address'),
-            #     city=request.form.get('city'),
-            #     state=request.form.get('state'),
-            #     owner_id=current_user.id
-            # )
-            new_studio = Studio(
-                avatar=url2,
-                name=form.data['name'],
-                description=form.data['description'],
-                header_image=url,
-                tattoo_style=form.data['tattoo_style'],
-                address=form.data['address'],
-                city=form.data['city'],
-                state=form.data['state'],
-                owner_id=current_user.id
-            )
-            print('NEW STUDIO', new_studio)
-            db.session.add(new_studio)
-            db.session.commit()
-            return { 'studio': new_studio.studio_to_dict() }
-        else:
-            return { 'errors': validation_errors_to_error_messages(request.form.errors) }, 400
-
-    # form = StudioForm()
-
-    # form['csrf_token'].data = request.cookies['csrf_token']
-    # print('FORM DATA', form.data)
-    # if form.validate_on_submit():
-    #     new_studio = Studio(
-    #         avatar=url2,
-    #         name=form.data['name'],
-    #         description=form.data['description'],
-    #         header_image=url,
-    #         tattoo_style=form.data['tattoo_style'],
-    #         avatar=form.data['avatar'],
-    #         address=form.data['address'],
-    #         city=form.data['city'],
-    #         state=form.data['state'],
-    #         owner_id=current_user.id
-    #     )
-        # new_studio.header_image = url
+    form = StudioForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print('ERRORS', form.data['name'])
+        # print('FORM DATA', form.data)
+        # print('REQUEST', request.form)
+        # print('REQUEST JSON', request.get_json())
+        new_studio = Studio(
+            avatar=url2,
+            name=request.form.get('name'),
+            description=request.form.get('description'),
+            header_image=url,
+            tattoo_style=request.form.get('tattoo_style'),
+            address=request.form.get('address'),
+            city=request.form.get('city'),
+            state=request.form.get('state'),
+            owner_id=current_user.id
+        )
+        # new_studio = Studio(
+        #     avatar=url2,
+        #     name=form.data['name'],
+        #     description=form.data['description'],
+        #     header_image=url,
+        #     tattoo_style=form.data['tattoo_style'],
+        #     address=form.data['address'],
+        #     city=form.data['city'],
+        #     state=form.data['state'],
+        #     owner_id=current_user.id
+        # )
         # print('NEW STUDIO', new_studio)
-        # db.session.add(new_studio)
-        # db.session.commit()
-        # return { 'studio': new_studio.studio_to_dict() }
-    # else:
-    #     return { 'errors': validation_errors_to_error_messages(request.form.errors) }, 400
+        db.session.add(new_studio)
+        db.session.commit()
+        return { 'studio': new_studio.studio_to_dict() }
+    else:
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 # Update an existing studio
 @studio_routes.put('/<int:id>')
 @login_required
 def update_studio(id):
-    # form = StudioForm()
     studio = Studio.query.get(id)
     print('REQUEST FILES', request.files)
     print('REQUEST FORM', request.form)
@@ -133,11 +104,7 @@ def update_studio(id):
 
     avatar_image = request.files["avatar"]
 
-    if not allowed_file(header_image.filename):
-        # print('SECOND IF')
-        return {"errors": "file type not permitted"}, 400
-
-    if not allowed_file(avatar_image.filename):
+    if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
         # print('SECOND IF')
         return {"errors": "file type not permitted"}, 400
 
@@ -147,7 +114,7 @@ def update_studio(id):
     upload_header = upload_file_to_s3(header_image)
     upload_avatar = upload_file_to_s3(avatar_image)
 
-    if "url" not in upload_header:
+    if "url" not in upload_header or "url" not in upload_avatar:
         # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
@@ -157,7 +124,9 @@ def update_studio(id):
     url = upload_header["url"]
     url2 = upload_avatar["url"]
 
-    if url and url2:
+    form = StudioForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
         studio.avatar = url2
         studio.name=request.form.get('name')
         studio.description=request.form.get('description')
@@ -167,6 +136,13 @@ def update_studio(id):
         studio.city=request.form.get('city')
         studio.state=request.form.get('state')
         studio.owner_id=current_user.id
+
+        db.session.commit()
+        return { 'studio': studio.studio_to_dict() }
+
+    else:
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
 
     # form['csrf_token'].data = request.cookies['csrf_token']
     # if form.validate_on_submit():
@@ -179,11 +155,6 @@ def update_studio(id):
     #     studio.address = data['address']
     #     studio.city = data['city']
     #     studio.state = data['state']
-
-        db.session.commit()
-        return { 'studio': studio.studio_to_dict() }
-    # else:
-    #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 # Delete a studio

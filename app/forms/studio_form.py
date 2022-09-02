@@ -15,9 +15,9 @@ from app.models import Studio
 class StudioForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(message='A studio name is required')])
     description = StringField('description', validators=[DataRequired(message='A studio description is required')])
-    header_image = StringField('header image')
+    # header_image = StringField('header image')
     tattoo_style = StringField('tattoo style', validators=[DataRequired()])
-    avatar = StringField('avatar')
+    # avatar = StringField('avatar')
     address = StringField('address', validators=[DataRequired(message='A studio address is required')])
     city = StringField('city', validators=[DataRequired(message='A studio city is required')])
     state = StringField('state', validators=[DataRequired(message='A studio state is required')])

@@ -52,13 +52,9 @@ export const loadStudiosThunk = () => async (dispatch) => {
 }
 
 export const createStudioThunk = (studio) => async (dispatch) => {
-    console.log('STUDIO IN THUNK', studio)
+    console.log('STUDIO THUNK', studio)
     const response = await fetch('/api/studios/', {
         method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
-        // body: JSON.stringify(studio)
-        // processData: false,
-        // contentType: false,
         body: studio
     })
 
@@ -72,11 +68,11 @@ export const createStudioThunk = (studio) => async (dispatch) => {
     }
 }
 
-export const updateStudioThunk = (studio) => async (dispatch) => {
-    const response = await fetch(`/api/studios/${studio.id}/`, {
+export const updateStudioThunk = (studio, studioId) => async (dispatch) => {
+    const response = await fetch(`/api/studios/${studioId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: studio
+        // headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(studio)
     })
 
