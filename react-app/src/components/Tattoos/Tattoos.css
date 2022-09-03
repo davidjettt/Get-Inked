@@ -1,0 +1,32 @@
+
+.tattoos-page-main {
+    display: flex;
+    justify-content: center;
+}
+
+.tattoos-page-secondary {
+    width: 80vw;
+}
+
+.tattoo-cards-container-main {
+    flex: 1;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    /* grid-auto-rows: minmax(150px, auto); */
+    /* grid-auto-rows: 10px; */
+    grid-gap: 10px;
+    height: auto;
+    justify-content: center;
+
+}
+
+.tattoo-card {
+    width: 300px;
+}
+
+.tattoo-image {
+    width: 100%;
+    border-radius: 17px;
+    cursor: pointer;
+}
