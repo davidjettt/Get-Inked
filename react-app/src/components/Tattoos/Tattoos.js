@@ -3,7 +3,7 @@ import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 
 export default function Tattoos() {
-    const studiosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662056527/Skin-Desing-Tattoo-Cover-Up-1536x768_pj155x.jpg'
+    const tattoosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662180533/male-doing-image-on-arm-picture-id669911398_eaopmg.jpg'
     const tattoos = useSelector(state => Object.values(state.tattoos))
 
 
@@ -14,13 +14,11 @@ export default function Tattoos() {
                     <div className='header-text-container'>
                         <h3 className='header-text'>Find your inspiration</h3>
                     </div>
-                    <img className='studio-page-header-image' src={studiosHeaderImage} alt='studios-header'/>
+                    <img className='studio-page-header-image' src={tattoosHeaderImage} alt='tattoos-header'/>
                 </div>
                 <div className="tattoo-cards-container-main">
                     {tattoos.map((tattoo) => (
-                        <div key={tattoo.id}>
-                            <SingleTattooModal tattooId={tattoo.id} />
-                        </div>
+                        <SingleTattooModal key={tattoo.id} tattooId={tattoo.id} />
                     ))}
                 </div>
             </div>
