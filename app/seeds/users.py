@@ -37,6 +37,7 @@ def seed_studios():
         address='123 Lotus Lane',
         city='Arcadia',
         state='California',
+        zip_code=90423,
         owner_id=4
     )
     black_diamond = Studio(
@@ -46,6 +47,7 @@ def seed_studios():
         address='123 Diamond Ave',
         city='Philadelphia',
         state='Pennsylvania',
+        zip_code=98213,
         owner_id=5
     )
     golden_needle = Studio(
@@ -55,6 +57,7 @@ def seed_studios():
         address='123 Rodeo Drive',
         city='Los Angeles',
         state='California',
+        zip_code=92421,
         owner_id=2
     )
 
@@ -88,9 +91,9 @@ def seed_tattoo_images():
     )
 
     tattoo4 = TattooImage(
-        description='Foodog and temple full chest tattoo',
+        description='Chrysanthemum and koi fish forearm tattoo',
         tattoo_style='Neo Japanese',
-        image_url='https://scontent-lax3-1.cdninstagram.com/v/t51.2885-15/106254801_270172130915085_5947766085342770121_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-lax3-1.cdninstagram.com&_nc_cat=109&_nc_ohc=X6v4ZzYPpyAAX8TuBb2&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjM0MzI0NDA3ODYxMDQwMDk0MQ%3D%3D.2.w0-ccb7-5&oh=00_AT_YoVfSTvk_sjSgfS1YV32xbATPp3oPnlSHudMbOSfSVA&oe=631933B7&_nc_sid=30a2ef',
+        image_url='https://inkppl.com/en/assets/php/files/062020/250620-1834-6409.jpg',
         studio_id=1,
         user_id=4
     )

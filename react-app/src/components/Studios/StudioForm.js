@@ -16,6 +16,7 @@ export default function StudioForm({ studio, formType }) {
     const [ address, setAddress ] = useState(studio?.address || '')
     const [ city, setCity ] = useState(studio?.city || '')
     const [ state, setState ] = useState(studio?.state || '')
+    const [ zipCode, setZipCode ] = useState(studio?.zipCode || '')
     const [ headerPreview, setHeaderPreview ] = useState(null)
     const [ avatarPreview, setAvatarPreview ] = useState(null)
     const [ errors, setErrors ] = useState([])
@@ -33,6 +34,7 @@ export default function StudioForm({ studio, formType }) {
         formData.append('address', address)
         formData.append('city', city)
         formData.append('state', state)
+        formData.append('zip_code', zipCode)
         formData.append('tattoo_style', tattooStyle)
 
         // console.log('FORM DATA', formData)
@@ -204,6 +206,9 @@ export default function StudioForm({ studio, formType }) {
                             <option value="Wisconsin">WI</option>
                             <option value="Wyoming">WY</option>
                         </select>
+                        <div className="studio-form-zipcode-container">
+                            <input placeholder="Zip Code" type='text' value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                        </div>
                     </div>
                     <div className="studio-form-button-container">
                         <button>Create</button>
