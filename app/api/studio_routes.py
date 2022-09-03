@@ -69,6 +69,7 @@ def create_studio():
             address=request.form.get('address'),
             city=request.form.get('city'),
             state=request.form.get('state'),
+            zip_code=request.form.get('zip_code'),
             owner_id=current_user.id
         )
         # new_studio = Studio(
@@ -138,6 +139,7 @@ def update_studio(id):
         studio.address=request.form.get('address')
         studio.city=request.form.get('city')
         studio.state=request.form.get('state')
+        studio.zip_code=request.form.get('zip_code')
         studio.owner_id=current_user.id
 
         db.session.commit()

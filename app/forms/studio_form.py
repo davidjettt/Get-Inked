@@ -20,3 +20,4 @@ class StudioForm(FlaskForm):
     address = StringField('address', validators=[DataRequired(message='A studio address is required')])
     city = StringField('city', validators=[DataRequired(message='A studio city is required')])
     state = StringField('state', validators=[DataRequired(message='A studio state is required')])
+    zip_code = StringField('zip code', validators=[DataRequired(message='A studio zip code is required')])
