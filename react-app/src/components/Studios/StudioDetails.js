@@ -15,6 +15,8 @@ export default function StudioDetails() {
     const history = useHistory()
     const { studioId }  = useParams()
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
+    const studioOwnerId = studio.ownerId
+    const sessionUserId = useSelector(state => state.session.user.id)
     // console.log('STUDIO', studio)
 
     const handleDropdown = () => {
@@ -115,7 +117,7 @@ export default function StudioDetails() {
                     <div className="studio-portfolio-container">
                         <div className="studio-portfolio-header-container">
                             <h2>Portfolio</h2>
-                            <TattooFormModal studioId={studioId} />
+                            {sessionUserId === studioOwnerId &&  <TattooFormModal studioId={studioId} />}
                         </div>
                         <StudioPortfolio studioId={studio.id} />
                     </div>

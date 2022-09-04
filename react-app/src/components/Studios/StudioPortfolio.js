@@ -1,17 +1,9 @@
-import { useState } from "react"
 import { useSelector } from "react-redux"
 import SingleTattooModal from "../Tattoos/SingleTattooModal"
-import { Modal } from "../../context/Modal"
-import SingleTattoo from "../Tattoos/SingleTattoo"
 
 export default function StudioPortfolio({ studioId }) {
-    const [ showModal, setShowModal ] = useState(false)
     const tattoos = useSelector(state => Object.values(state.tattoos)
                     .filter(tattoo => +studioId === +tattoo.studioId))
-
-    const handleShowModal = () => {
-        setShowModal(true)
-    }
 
     return (
         <>
