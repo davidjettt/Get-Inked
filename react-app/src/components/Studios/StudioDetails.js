@@ -4,6 +4,8 @@ import { Link, useHistory, useParams } from "react-router-dom"
 import { deleteStudioThunk } from "../../store/studios"
 import threedots from '../../Images/three-dots.svg'
 import './StudioDetails.css'
+import StudioPortfolio from "./StudioPortfolio"
+import TattooFormModal from "../Tattoos/TattooFormModal"
 
 export default function StudioDetails() {
     const [ showDropdown, setShowDropdown ] = useState(false)
@@ -110,11 +112,14 @@ export default function StudioDetails() {
                         <div className="map">
                         </div>
                     </div>
+                    <div className="studio-portfolio-container">
+                        <div className="studio-portfolio-header-container">
+                            <h2>Portfolio</h2>
+                            <TattooFormModal studioId={studioId} />
+                        </div>
+                        <StudioPortfolio studioId={studio.id} />
+                    </div>
                 </div>
-                {/* <Link to={`/studios/${studioId}/edit`}>
-                    <button>Update Studio</button>
-                </Link>
-                <button onClick={handleDelete}>Delete Studio</button> */}
             </div>
         </div>
     )

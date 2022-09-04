@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal'
-import SingleTattoo from './SIngleTattoo'
+import SingleTattoo from './SingleTattoo'
 import './Tattoos.css'
 
-export default function SingleTattooModal({ tattooId }) {
+export default function SingleTattooModal({ tattooId, studioPortfolio }) {
     const [ showModal, setShowModal ] = useState(false)
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))
 
@@ -14,8 +14,8 @@ export default function SingleTattooModal({ tattooId }) {
 
     return (
         <>
-            <div className='tattoo-card' onClick={handleShowModal}>
-                <img className='tattoo-image' src={tattoo.imageUrl} alt='tattoo' />
+            <div className={studioPortfolio ? 'studio-portfolio-image-container' : 'tattoo-card'} onClick={handleShowModal}>
+                <img className={studioPortfolio ? 'studio-portfolio-image' : 'tattoo-image'} src={tattoo.imageUrl} alt='tattoo' />
             </div>
             {showModal && <Modal onClose={() => setShowModal(false)}>
                 <SingleTattoo tattooId={tattooId} />

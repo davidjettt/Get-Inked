@@ -123,8 +123,6 @@ body {
     flex-direction: row;
 }
 
-
-
 .studio-details-nav-bar {
     display: flex;
     width: 40%;
@@ -133,10 +131,11 @@ body {
 }
 
 .studio-details-content-container {
-    /* display: flex; */
-    margin-left: 100px;
-
-
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 100px; */
+    margin-left: 14vw;
+    margin-right: 14vw;
 }
 
 .studio-details-line {
@@ -147,4 +146,29 @@ body {
     padding: 20px 0;
     width: 50%;
     display: flex;
+}
+
+
+.studio-portfolio-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.studio-portfolio-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.studio-portfolio-image-container {
+    /* width: 25%; */
+    width: 400px;
+    height: 350px;
+}
+
+.studio-portfolio-image {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
 }
