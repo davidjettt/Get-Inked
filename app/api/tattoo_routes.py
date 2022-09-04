@@ -17,40 +17,40 @@ def get_all_tattoos():
 
 
 # Create a new tattoo image
-@tattoo_routes.post('/')
-@login_required
-def create_tattoo():
-    if 'tattoo_image' not in request.files:
-        return { 'errors': 'Tattoo image required' }, 400
+# @tattoo_routes.post('/')
+# @login_required
+# def create_tattoo():
+#     if 'tattoo_image' not in request.files:
+#         return { 'errors': 'Tattoo image required' }, 400
 
-    tattoo_image = request.files['tattoo_image']
+#     tattoo_image = request.files['tattoo_image']
 
-    if not allowed_file(tattoo_image.filename):
-        return { 'errors': 'File type not permitted' }, 400
+#     if not allowed_file(tattoo_image.filename):
+#         return { 'errors': 'File type not permitted' }, 400
 
-    tattoo_image.filename = get_unique_filename(tattoo_image.filename)
+#     tattoo_image.filename = get_unique_filename(tattoo_image.filename)
 
-    upload_tattoo = upload_file_to_s3(tattoo_image)
+#     upload_tattoo = upload_file_to_s3(tattoo_image)
 
-    if 'url' not in upload_tattoo:
-        return upload_tattoo, 400
+#     if 'url' not in upload_tattoo:
+#         return upload_tattoo, 400
 
-    url = upload_tattoo["url"]
+#     url = upload_tattoo["url"]
 
-    form = TattooForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        new_tattoo_image = TattooImage(
-            description=request.form.get('description'),
-            image_url=url,
-            tattoo_style=request.form.get('tattoo_style'),
-            user_id=current_user.id
-        )
-        db.session.add(new_tattoo_image)
-        db.session.commit()
-        return { 'tattoo': new_tattoo_image.tattoo_to_dict() }
-    else:
-        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+#     form = TattooForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         new_tattoo_image = TattooImage(
+#             description=request.form.get('description'),
+#             image_url=url,
+#             tattoo_style=request.form.get('tattoo_style'),
+#             user_id=current_user.id
+#         )
+#         db.session.add(new_tattoo_image)
+#         db.session.commit()
+#         return { 'tattoo': new_tattoo_image.tattoo_to_dict() }
+#     else:
+#         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 # Update an existing tattoo image

@@ -196,10 +196,10 @@ def join_studio(id):
 @studio_routes.post('/<int:id>/tattoos')
 @login_required
 def create_tattoo(id):
-    if 'tattoo_image' not in request.files:
+    if 'image_url' not in request.files:
         return { 'errors': 'Tattoo image required' }, 400
 
-    tattoo_image = request.files['tattoo_image']
+    tattoo_image = request.files['image_url']
 
     if not allowed_file(tattoo_image.filename):
         return { 'errors': 'File type not permitted' }, 400

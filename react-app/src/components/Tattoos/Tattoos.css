@@ -30,3 +30,64 @@
     border-radius: 17px;
     cursor: pointer;
 }
+
+
+.tattoo-modal-container {
+    width: 50vw;
+    min-height: 500px;
+    max-height: 1000px;
+    display: flex;
+}
+
+.tattoo-modal-image-container {
+    width: 70%;
+}
+
+.tattoo-modal-image {
+    width: 100%;
+}
+
+.tattoo-modal-left-container {
+    width: 30%;
+}
+
+.tattoo-modal-user-avatar-container {
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 10px 13px 16px;
+}
+
+.tattoo-modal-description-container {
+    /* height: 50%; */
+    height: auto;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 14px;
+}
+
+.single-post-profile-image {
+    height: 29px;
+    width: 29px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.tattoo-modal-studio-container {
+    display: flex;
+    margin-top: 14px;
+    text-decoration: none;
+}
+
+.tattoo-modal-studio-container-main {
+    padding: 14px;
+}
+
+.tattoo-modal-studio-name {
+    color: black;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.tattoo-modal-studio-location {
+    font-size: 14px;
+    color: #20212599;
+}
