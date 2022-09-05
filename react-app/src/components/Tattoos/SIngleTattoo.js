@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import TattooOptionsModal from "./TattooOptionsModal";
 
 
-export default function SingleTattoo({ tattooId }) {
+export default function SingleTattoo({ tattooId, studioPortfolio }) {
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))
+    const sessionUserId = useSelector(state => state.session.user.id)
 
 
     return (
@@ -15,14 +17,19 @@ export default function SingleTattoo({ tattooId }) {
             <div className="tattoo-modal-left-container">
                 <div className="tattoo-modal-user-avatar-container">
                     <div className="tattoo-modal-avatar-container">
-                        <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
-                        <span>{tattoo.owner}</span>
+                        <div className="tattoo-modal-owner-info">
+                            <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
+                            <span>{tattoo.owner}</span>
+                        </div>
+                        <div className="tattoo-modal-threedots-container">
+                            {+sessionUserId === +tattoo.userId && <TattooOptionsModal tattooId={tattooId} />}
+                        </div>
                     </div>
                 </div>
                 <div className="tattoo-modal-description-container">
                     {tattoo.description}
                 </div>
-                <div className="tattoo-modal-studio-container-main">
+                {!studioPortfolio && <div className="tattoo-modal-studio-container-main">
                     <span>Done at</span>
                     <Link className="tattoo-modal-studio-container" to={`/studios/${tattoo.studioId}`}>
                         <div className="tattoo-modal-studio-avatar-location">
@@ -37,7 +44,7 @@ export default function SingleTattoo({ tattooId }) {
                             </div>
                         </div>
                     </Link>
-                </div>
+                </div>}
             </div>
         </div>
     )
