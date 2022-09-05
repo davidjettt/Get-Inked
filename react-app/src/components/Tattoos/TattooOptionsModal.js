@@ -17,7 +17,7 @@ export default function TattooOptionsModal({ tattooId }) {
 
     return (
         <>
-            <img src={threeDots} alt='' onClick={handleClick} />
+            <img className="edit-tattoo-three-dots" src={threeDots} alt='' onClick={handleClick} />
             {showTattooOptionsModal && <Modal onClose={handleClose}>
                 <TattooOptions setShowTattooOptionsModal={setShowTattooOptionsModal} tattooId={tattooId} />
             </Modal>}
