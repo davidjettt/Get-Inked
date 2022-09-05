@@ -18,7 +18,7 @@ export default function SingleTattooModal({ tattooId, studioPortfolio }) {
                 <img className={studioPortfolio ? 'studio-portfolio-image' : 'tattoo-image'} src={tattoo.imageUrl} alt='tattoo' />
             </div>
             {showModal && <Modal onClose={() => setShowModal(false)}>
-                <SingleTattoo tattooId={tattooId} />
+                <SingleTattoo studioPortfolio={studioPortfolio} tattooId={tattooId} />
             </Modal>}
         </>
     )

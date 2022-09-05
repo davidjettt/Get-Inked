@@ -59,11 +59,15 @@ def get_all_tattoos():
 def update_tattoo(id):
     tattoo = TattooImage.query.get(id)
     form = TattooForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         tattoo.description = form.data['description']
 
         db.session.commit()
         return { 'tattoo': tattoo.tattoo_to_dict() }
+    else:
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 # Delete an existing tattoo image

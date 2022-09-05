@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { loadStudiosThunk } from "../../store/studios"
 import { createTattooThunk } from "../../store/tattoos"
 
 
@@ -24,8 +25,9 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
 
         const badData = await dispatch(createTattooThunk(formData, studioId))
         if (badData) {
-            setErrors(badData)
+            setErrors([badData])
         } else {
+            await dispatch(loadStudiosThunk())
             setShowTattooFormModal(false)
         }
     }
@@ -55,7 +57,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
             </div>
             <form onSubmit={handleSubmit} className="tattoo-form">
                 <div>
-                    {errors.length > 0 && errors.map((error, ind) => (
+                    {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>

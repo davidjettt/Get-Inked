@@ -143,8 +143,9 @@ class TattooImage(db.Model):
             'tattooStyle': self.tattoo_style,
             'imageUrl': self.image_url,
             'studioId': self.studio_id,
-            # 'userId': self.user_id,
+            'userId': self.user_id,
             'owner': User.query.get(self.user_id).name,
+            'ownerAvatar': User.query.get(self.user_id).avatar,
             'studio': {
                 'name': Studio.query.get(self.studio_id).name,
                 'city': Studio.query.get(self.studio_id).city,

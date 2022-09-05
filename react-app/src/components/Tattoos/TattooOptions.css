@@ -1,0 +1,27 @@
+
+.tattoo-options-modal-buttons-container {
+    width: 400px;
+    height: 130px;
+    border-radius: 10px;
+    /* margin: 5px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-tattoo-button,
+.delete-tattoo-button,
+.cancel-button {
+    max-width: 100%;
+    padding: 14px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.edit-tattoo-button:focus,
+.delete-tattoo-button:focus,
+.cancel-button:focus {
+    background-color: #dbdbdb;
+    opacity: .5;
+}
