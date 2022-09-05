@@ -2,7 +2,7 @@
 .edit-tattoo-form-main {
     width: 50vw;
     height: auto;
-    max-height: 1100px;
+    max-height: 1000px;
 }
 
 .edit-tattoo-form-header-container {
@@ -35,4 +35,15 @@
     border: none;
     font-family: 'Inter';
     padding: 10px;
+}
+
+.edit-tattoo-submit-button,
+.edit-tattoo-cancel-button {
+    cursor: pointer;
+    background-color: white;
+    border: none;
+}
+
+.edit-tattoo-submit-button {
+    font-weight: 700;
 }

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { loadStudiosThunk } from "../../store/studios"
 import { createTattooThunk } from "../../store/tattoos"
+import './TattooForm.css'
 
 
 export default function TattooForm({ studioId, setShowTattooFormModal }) {
@@ -50,10 +51,18 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
         }
     }
 
+    const handleXButton = () => {
+        setShowTattooFormModal(false)
+    }
+
     return (
         <div className="tattoo-form-main">
             <div className="tattoo-form-header-container">
-                <h3>Add a tattoo</h3>
+                <div>
+                    <button onClick={handleXButton} className="x-button">X</button>
+                </div>
+                <h3 className="tattoo-form-title">Add a tattoo</h3>
+                <div></div>
             </div>
             <form onSubmit={handleSubmit} className="tattoo-form">
                 <div>
@@ -71,6 +80,9 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 </div>
                 <div className="tattoo-form-description-container">
                     <textarea
+                        className="tattoo-form-textarea"
+                        cols='50'
+                        rows='10'
                         placeholder="Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -78,18 +90,21 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                     </textarea>
                 </div>
                 <div className="tattoo-form-image-upload-container">
-                    <label>
+                    <label htmlFor="input" className="custom-file-upload">
                         <input
+                            className="image-upload-input"
+                            id='input'
                             type='file'
                             accept="image/*"
                             onChange={updateTattooImage}
                         />
+                        Upload a tattoo
                     </label>
                 </div>
                 <div className="tattoo-form-image-preview-container">
-                    <img src={tattooPreview} alt='' />
+                    {tattooPreview && <img className="tattoo-form-image-preview" src={tattooPreview} alt='' />}
                 </div>
-                <button>Submit</button>
+                <button className="tattoo-form-submit-button">Submit</button>
             </form>
         </div>
     )

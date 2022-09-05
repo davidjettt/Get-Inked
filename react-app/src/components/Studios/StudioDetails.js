@@ -48,7 +48,7 @@ export default function StudioDetails() {
             <div className="studio-details-container">
                 <div className="studio-details-info-main">
                     <div className="studio-details-info-container">
-                        <div className="three-dots">
+                        {sessionUserId === studioOwnerId && <div className="three-dots">
                             <img onClick={handleDropdown} src={threedots} />
                             {showDropdown &&
                             <div className="dropdown-container">
@@ -57,7 +57,7 @@ export default function StudioDetails() {
                                 </Link>
                                 <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button>
                             </div>}
-                        </div>
+                        </div>}
                         <div className="studio-details-avatar-name-location">
                             <div className="studio-details-avatar-container">
                                 <img className="studio-details-avatar" src={studio?.avatar || defaultAvatarImage} alt='studio-avatar' />

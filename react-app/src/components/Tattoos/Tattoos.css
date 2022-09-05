@@ -45,6 +45,7 @@
 
 .tattoo-modal-image {
     width: 100%;
+    height: 100%;
 }
 
 .tattoo-modal-left-container {
@@ -95,4 +96,8 @@
 .tattoo-modal-studio-location {
     font-size: 14px;
     color: #20212599;
+}
+
+.edit-tattoo-three-dots {
+    cursor: pointer;
 }
