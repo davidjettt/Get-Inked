@@ -47,3 +47,9 @@
 .edit-tattoo-submit-button {
     font-weight: 700;
 }
+
+.errors-edit-tattoo-form {
+    color: red;
+    padding: 10px 0;
+    font-weight: 600;
+}

@@ -21,19 +21,18 @@ def get_all_studios():
 @studio_routes.post('/')
 @login_required
 def create_studio():
-    print('REQUEST FILES', request.files)
 
     if "header_image" not in request.files or "avatar" not in request.files:
-        print('FIRST IF')
-        return {"errors": "image required"}, 400
+        # print('FIRST IF')
+        return {"errors": ["Image required"]}, 400
 
     header_image = request.files["header_image"]
 
     avatar_image = request.files["avatar"]
 
     if not allowed_file(header_image.filename) or not allowed_file(header_image.filename):
-        print('SECOND IF')
-        return {"errors": "file type not permitted"}, 400
+        # print('SECOND IF')
+        return {"errors": ["File type not permitted"]}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
     avatar_image.filename = get_unique_filename(avatar_image.filename)
@@ -42,7 +41,7 @@ def create_studio():
     upload_avatar = upload_file_to_s3(avatar_image)
 
     if "url" not in upload_header:
-        print('THIRD IF')
+        # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
@@ -65,7 +64,7 @@ def create_studio():
             name=request.form.get('name'),
             description=request.form.get('description'),
             header_image=url,
-            tattoo_style=request.form.get('tattoo_style'),
+            # tattoo_style=request.form.get('tattoo_style'),
             address=request.form.get('address'),
             city=request.form.get('city'),
             state=request.form.get('state'),
@@ -96,11 +95,9 @@ def create_studio():
 @login_required
 def update_studio(id):
     studio = Studio.query.get(id)
-    print('REQUEST FILES', request.files)
-    print('REQUEST FORM', request.form)
     if "header_image" not in request.files or "avatar" not in request.files:
         # print('FIRST IF')
-        return {"errors": "image required"}, 400
+        return {"errors": "Image required"}, 400
 
     header_image = request.files["header_image"]
 
@@ -108,7 +105,7 @@ def update_studio(id):
 
     if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
         # print('SECOND IF')
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": "File type not permitted"}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
     avatar_image.filename = get_unique_filename(avatar_image.filename)
@@ -135,7 +132,7 @@ def update_studio(id):
         studio.name=request.form.get('name')
         studio.description=request.form.get('description')
         studio.header_image=url
-        studio.tattoo_style=request.form.get('tattoo_style')
+        # studio.tattoo_style=request.form.get('tattoo_style')
         studio.address=request.form.get('address')
         studio.city=request.form.get('city')
         studio.state=request.form.get('state')
@@ -197,12 +194,12 @@ def join_studio(id):
 @login_required
 def create_tattoo(id):
     if 'image_url' not in request.files:
-        return { 'errors': 'Tattoo image required' }, 400
+        return { 'errors': ['Tattoo image required'] }, 400
 
     tattoo_image = request.files['image_url']
 
     if not allowed_file(tattoo_image.filename):
-        return { 'errors': 'File type not permitted' }, 400
+        return { 'errors': ['File type not permitted'] }, 400
 
     tattoo_image.filename = get_unique_filename(tattoo_image.filename)
 

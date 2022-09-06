@@ -53,7 +53,7 @@ const SignUpForm = ({ setShowSignUp }) => {
   return (
     <>
       <form className='signup-form' onSubmit={onSignUp}>
-        <div>
+        <div className='errors-signup'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
