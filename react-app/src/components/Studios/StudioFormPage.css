@@ -28,7 +28,7 @@
     outline: none;
     border: 1px solid #aaa;
     border-radius: 6px;
-    padding: 18px 8px 8px 8px;
+    padding: 10px 8px 8px 8px;
     font-family: 'Inter';
 }
 
@@ -169,4 +169,9 @@
     top: -155px;
     font-size: 12px;
     color: #A9A6A6
+}
+
+.studio-all-fields-required {
+    color: #20212599;
+    font-weight: bold;
 }

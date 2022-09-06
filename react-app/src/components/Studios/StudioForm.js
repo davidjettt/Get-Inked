@@ -112,6 +112,9 @@ export default function StudioForm({ studio, formType }) {
                     <h1>Update Studio</h1> :
                     <h1>Create a Studio</h1>}
                 </div>
+                <div className="studio-all-fields-required">
+                    All fields are required.
+                </div>
                 <div className="errors-studio-form">
                     {errors.length > 0 && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -140,8 +143,8 @@ export default function StudioForm({ studio, formType }) {
                     </div>
                     <div className="studio-description-container">
                         <label className="custom-textarea">
-                            <textarea name='description' className="studio-description-textarea" cols='58' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
-                            <span className="placeholder-textarea">Description</span>
+                            <textarea placeholder="Studio description here..." name='description' className="studio-description-textarea" cols='59' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            {/* <span className="placeholder-textarea">Description</span> */}
                         </label>
                     </div>
                     <div className="studio-header-upload-container">

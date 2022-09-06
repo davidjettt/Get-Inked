@@ -17,7 +17,14 @@ export default function StudioDetails() {
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
     const studioOwnerId = studio.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
-    // console.log('STUDIO', studio)
+
+    let className
+    const description = studio.description
+    if (description.indexOf(' ') === -1) {
+        className = 'word-break'
+    } else {
+        className = 'studio-description'
+    }
 
     const handleDropdown = () => {
         if (showDropdown) return
@@ -107,7 +114,7 @@ export default function StudioDetails() {
                             <div>
                                 <h2>About the Studio</h2>
                             </div>
-                            <div className="studio-description">
+                            <div className={className}>
                                 {studio?.description}
                             </div>
                         </div>

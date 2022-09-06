@@ -39,6 +39,9 @@ const LoginForm = () => {
 
   return (
     <>
+      {/* <div className='login-all-fields-required'>
+        All fields are required.
+      </div> */}
       <form className='login-form' onSubmit={onLogin}>
         {/* <div className='login-header-container'>
           <h1>GET INKED</h1>
