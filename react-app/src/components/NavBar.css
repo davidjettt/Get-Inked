@@ -18,6 +18,7 @@
     width: 80%;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
 }
 
 
@@ -27,4 +28,69 @@
     width: 300px;
     justify-content: space-evenly;
     align-items: center;
+    height: 100%;
+}
+
+.active {
+    border-bottom: 1px solid black;
+}
+
+.new-studio-link-container,
+.tattoos-link-container,
+.studios-link-container {
+    height: 100%;
+}
+
+.nav-tattoos-link,
+.nav-studios-link,
+.new-studio-link {
+    text-decoration: none;
+    color: black;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.home-button-container > a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.three-lines {
+    cursor: pointer;
+}
+
+.nav-three-lines-container {
+    position: relative;
+}
+
+.nav-dropdown-container {
+    width: 250px;
+    height: 200px;
+    /* box-shadow: 2px 2px 2px 2px lightgray; */
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, .2);
+    border-radius: 8px;
+    background-color: white;
+    margin-top: 0.5rem;
+    margin-left:-5rem;
+    position: absolute;
+    right: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logout-button {
+    cursor: pointer;
+    width: 100%;
+    height: 20%;
+    background-color: white;
+    border: none;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #ddd;
 }
