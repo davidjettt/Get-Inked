@@ -26,7 +26,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
 
         const badData = await dispatch(createTattooThunk(formData, studioId))
         if (badData) {
-            setErrors([badData])
+            setErrors(badData)
         } else {
             await dispatch(loadStudiosThunk())
             setShowTattooFormModal(false)
@@ -65,29 +65,34 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 <div></div>
             </div>
             <form onSubmit={handleSubmit} className="tattoo-form">
-                <div>
+                <div className="errors-tattoo-form">
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
                 <div className="tattoo-style-input-container">
-                    <input
-                        type='text'
-                        placeholder="Tattoo Style"
-                        value={tattooStyle}
-                        onChange={(e) => setTattooStyle(e.target.value)}
-                    />
+                    <label className="custom">
+                        <input
+                            style={{ width: 340 }}
+                            type='text'
+                            value={tattooStyle}
+                            onChange={(e) => setTattooStyle(e.target.value)}
+                        />
+                        <span className="placeholder">Tattoo Style</span>
+                    </label>
                 </div>
                 <div className="tattoo-form-description-container">
-                    <textarea
-                        className="tattoo-form-textarea"
-                        cols='50'
-                        rows='10'
-                        placeholder="Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    >
-                    </textarea>
+                    <label className="custom-textarea">
+                        <textarea
+                            className="tattoo-form-textarea"
+                            cols='50'
+                            rows='10'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        >
+                        </textarea>
+                        <span className="placeholder-textarea">Description</span>
+                    </label>
                 </div>
                 <div className="tattoo-form-image-upload-container">
                     <label htmlFor="input" className="custom-file-upload">
@@ -98,7 +103,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                             accept="image/*"
                             onChange={updateTattooImage}
                         />
-                        Upload a tattoo
+                        Upload image
                     </label>
                 </div>
                 <div className="tattoo-form-image-preview-container">

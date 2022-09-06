@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createStudioThunk, updateStudioThunk } from "../../store/studios";
-
+import './StudioFormPage.css'
 
 export default function StudioForm({ studio, formType }) {
-    console.log('STUDIO', studio)
     const dispatch = useDispatch()
     const history = useHistory()
     const [ name, setName ] = useState(studio?.name || '')
@@ -35,7 +34,7 @@ export default function StudioForm({ studio, formType }) {
         formData.append('city', city)
         formData.append('state', state)
         formData.append('zip_code', zipCode)
-        formData.append('tattoo_style', tattooStyle)
+        // formData.append('tattoo_style', tattooStyle)
 
         // console.log('FORM DATA', formData)
         // for (var [key, value] of formData.entries()) {
@@ -45,7 +44,7 @@ export default function StudioForm({ studio, formType }) {
         if (formType === 'Update Studio') {
             const badData = await dispatch(updateStudioThunk(formData, studio.id))
             if (badData) {
-                setErrors([badData])
+                setErrors(badData)
             } else {
                 history.push('/studios')
             }
@@ -54,7 +53,7 @@ export default function StudioForm({ studio, formType }) {
             const badData = await dispatch(createStudioThunk(formData))
             // console.log('BAD DATA', badData)
             if (badData) {
-                setErrors([badData])
+                setErrors(badData)
             } else {
                 history.push('/studios')
             }
@@ -106,53 +105,77 @@ export default function StudioForm({ studio, formType }) {
 
 
     return (
-        <>
+        <div className="studio-form-container">
             <form className="studio-form" onSubmit={handleSubmit}>
                 <div>
                     {formType === 'Update Studio' ?
                     <h1>Update Studio</h1> :
                     <h1>Create a Studio</h1>}
                 </div>
-                <div>
+                <div className="errors-studio-form">
                     {errors.length > 0 && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
                     <div className="studio-form-avatar-container">
-                        <input
-                            name='avatar'
-                            type="file"
-                            accept="image/*"
-                            onChange={updateAvatarImage}
-                        />
-                        <div style={{width: 100, height: 100}}>
-                            {avatarPreview && <img style={{width: '100%'}} src={avatarPreview} alt='' />}
+                        <label className="studio-form-custom-file-upload-avatar">
+                            <input
+                                className="studio-form-avatar-input"
+                                name='avatar'
+                                type="file"
+                                accept="image/*"
+                                onChange={updateAvatarImage}
+                            />
+                            Select an avatar image
+                        </label>
+                        <div className="studio-form-avatar-preview-container">
+                            {avatarPreview && <img className="studio-form-avatar-preview" src={avatarPreview} alt='' />}
                         </div>
                     </div>
                     <div className="studio-name-container">
-                        <input name='name' type='text' placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <label className="custom">
+                            <input name='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                            <span className="placeholder">Name</span>
+                        </label>
                     </div>
                     <div className="studio-description-container">
-                        <textarea name='description' className="studio-description-textarea" cols='50' rows='15' placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <label className="custom-textarea">
+                            <textarea name='description' className="studio-description-textarea" cols='58' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <span className="placeholder-textarea">Description</span>
+                        </label>
                     </div>
                     <div className="studio-header-upload-container">
-                        <input
-                            name='header'
-                            type="file"
-                            accept="image/*"
-                            onChange={updateHeaderImage}
-                        />
-                        <div style={{width:100, height:100}}>
-                            {headerPreview && <img style={{width: '100%'}} src={headerPreview} alt='' />}
+                        <label className="studio-form-custom-file-upload">
+                            <input
+                                className="studio-form-avatar-input"
+                                name='header'
+                                type="file"
+                                accept="image/*"
+                                onChange={updateHeaderImage}
+                            />
+                            Select a header image
+                        </label>
+                        <div className="studio-form-header-preview-container">
+                            {headerPreview && <img className="studio-form-header-preview" src={headerPreview} alt='' />}
                         </div>
                     </div>
-                    <div className="studio-tattoo-style-container">
+                    {/* <div className="studio-tattoo-style-container">
                         <input name='tattoo_style' type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />
-                    </div>
-                    <div className="studio-location-container">
-                        <input name='address' type='text' placeholder='address' value={address} onChange={(e) => setAddress(e.target.value)} />
-                        <input name='city' type='text' placeholder='city' value={city} onChange={(e) => setCity(e.target.value)} />
-                        <select name='state' value={state} onChange={(e) => setState(e.target.value)}>
+                    </div> */}
+                    <div className="studio-form-location-container">
+                        <div>
+                            <label className="custom">
+                                <input name='address' type='text' value={address} onChange={(e) => setAddress(e.target.value)} />
+                                <span className="placeholder">Address</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label className="custom">
+                                <input name='city' type='text' value={city} onChange={(e) => setCity(e.target.value)} />
+                                <span className="placeholder">City</span>
+                            </label>
+                        </div>
+                        <select className="state-select-field" name='state' value={state} onChange={(e) => setState(e.target.value)}>
                             <option value="none" defaultValue>Select a State</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
@@ -207,13 +230,16 @@ export default function StudioForm({ studio, formType }) {
                             <option value="Wyoming">WY</option>
                         </select>
                         <div className="studio-form-zipcode-container">
-                            <input placeholder="Zip Code" type='text' value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                            <label className="custom">
+                                <input type='text' value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                                <span className="placeholder">Zip Code</span>
+                            </label>
                         </div>
                     </div>
                     <div className="studio-form-button-container">
-                        <button>Create</button>
+                        <button className="studio-form-button">{formType ? formType : 'Create Studio'}</button>
                     </div>
             </form>
-        </>
+        </div>
     )
 }

@@ -65,6 +65,11 @@ export default function EditTattooForm({ tattooId, setShowTattooOptionsModal }) 
                                 <span>{tattoo.owner}</span>
                             </div>
                         </div>
+                        <div className="errors-edit-tattoo-form">
+                            {errors.length > 0 && errors.map((error, ind) => (
+                                <div key={ind}>{error}</div>
+                            ))}
+                        </div>
                         <div className="edit-tattoo-textarea-container" >
                             <textarea
                                 className="edit-tattoo-textarea"
@@ -76,11 +81,11 @@ export default function EditTattooForm({ tattooId, setShowTattooOptionsModal }) 
                             >
                             </textarea>
                         </div>
-                        <div>
+                        {/* <div>
                             {errors.length > 0 && errors.map((error, ind) => (
                                 <div key={ind}>{error}</div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </form>

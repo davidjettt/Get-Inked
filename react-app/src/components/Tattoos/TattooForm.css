@@ -30,7 +30,13 @@
     outline: none;
     resize: none;
     font-family: 'Inter';
-    padding: 10px;
+    padding: 18px 8px 8px 8px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+.tattoo-form-textarea:focus {
+    border-color: black;
 }
 
 .tattoo-form-image-upload-container {
@@ -97,4 +103,11 @@
 .tattoo-form-modal-button:hover {
     background-color: black;
     color: white;
+}
+
+.errors-tattoo-form {
+    /* display: flex;
+    flex-direction: column; */
+    color: red;
+    font-weight: 600;
 }

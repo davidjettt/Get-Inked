@@ -43,7 +43,7 @@ const LoginForm = () => {
         {/* <div className='login-header-container'>
           <h1>GET INKED</h1>
         </div> */}
-        <div>
+        <div className='errors-login'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}

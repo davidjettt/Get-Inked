@@ -50,7 +50,7 @@ body {
 
 input {
     outline: none;
-    border-color: #ddd;
+    border: 1px solid #aaa;
     width: 400px;
     height: 20px;
     border-radius: 6px;
@@ -135,4 +135,15 @@ input:focus {
     display: flex;
     justify-content: center;
     margin-top: 50px;
+}
+
+.errors-login {
+    color: red;
+    font-weight: 600;
+}
+
+.errors-signup {
+    color: red;
+    text-align: center;
+    font-weight: 600;
 }
