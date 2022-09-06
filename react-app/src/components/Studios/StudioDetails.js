@@ -49,7 +49,7 @@ export default function StudioDetails() {
                 <div className="studio-details-info-main">
                     <div className="studio-details-info-container">
                         {sessionUserId === studioOwnerId && <div className="three-dots">
-                            <img onClick={handleDropdown} src={threedots} />
+                            <img onClick={handleDropdown} src={threedots} alt='three-dots' />
                             {showDropdown &&
                             <div className="dropdown-container">
                                 <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>

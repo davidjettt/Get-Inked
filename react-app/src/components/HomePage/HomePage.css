@@ -1,0 +1,101 @@
+
+.home-page-main-image-container {
+    position: relative;
+}
+
+.main-image-text-container {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    width: 500px;
+}
+
+
+.home-page-main-image {
+    width: 100%;
+}
+
+.app-name,
+.app-description {
+    font-weight: 700;
+    font-size: 30px;
+    color: white;
+    letter-spacing: 6px;
+    line-height: 40px;
+}
+
+.home-page-artists-container {
+    display: flex;
+    justify-content: center;
+    margin: 150px 0;
+}
+
+.home-page-artists-secondary {
+    display: flex;
+    gap: 100px;
+}
+
+.artists-left-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.artists-paragraph {
+    margin: 18px 0;
+}
+
+.artists-image-container {
+    /* margin-right: 16px; */
+}
+
+.artists-image {
+    min-width: 95%;
+    max-width: 100%;
+}
+
+
+
+.home-page-tattoos-container {
+    display: flex;
+    justify-content: center;
+}
+
+.home-page-tattoos-secondary {
+    display: flex;
+    gap: 100px;
+}
+
+.artists-heading,
+.tattoos-heading {
+    font-size: 42px;
+}
+
+.artists-paragraph,
+.tattoos-paragraph {
+    color: #20213599
+}
+
+.studios-link,
+.tattoos-link {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    border: 1px solid #20213599;
+    border-radius: 5px;
+    width: 140px;
+    padding: 8px;
+}
+
+.tattoos-paragraph {
+    margin: 20px 0;
+}
+
+.tattoos-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid red; */
+    /* width: 30%; */
+}
