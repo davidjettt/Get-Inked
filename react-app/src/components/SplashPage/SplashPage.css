@@ -107,6 +107,18 @@ input:focus {
     margin-top: 15px;
 }
 
+.login-all-fields-required {
+    margin: 20px 0px 10px 0px;
+    color: #20212599;
+}
+
+.signup-all-fields-required {
+    color: #20212599;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
 .demo-user-button {
     cursor: pointer;
     width: 417px;
@@ -146,4 +158,9 @@ input:focus {
     color: red;
     text-align: center;
     font-weight: 600;
+}
+
+.errors-login,
+.errors-signup {
+    margin-bottom: 8px;
 }

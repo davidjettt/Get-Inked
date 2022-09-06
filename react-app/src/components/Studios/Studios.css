@@ -55,6 +55,7 @@
     height: 400px;
     /* width: 500px; */
     box-shadow: 2px 2px 2px 2px lightgrey;
+    border-radius: 12px;
 }
 
 .studio-card-image-container {
@@ -66,6 +67,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .studio-link {
@@ -79,6 +82,12 @@
     border-bottom: 1px solid #ddd;
     display: flex;
     padding: 5px;
+}
+
+.studio-name-location-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .studio-avatar {
@@ -95,4 +104,6 @@
 .studio-location {
     color: #20212599;
     text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 550;
 }

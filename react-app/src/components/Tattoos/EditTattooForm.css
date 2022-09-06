@@ -1,8 +1,8 @@
 
 .edit-tattoo-form-main {
     width: 50vw;
-    height: auto;
-    max-height: 1000px;
+    height: 1000px;
+    /* max-height: 1000px; */
 }
 
 .edit-tattoo-form-header-container {
@@ -14,10 +14,12 @@
 
 .edit-tattoo-form-and-image-container {
     display: flex;
+    height: 96%;
 }
 
 .edit-tattoo-image-container {
     width: 70%;
+    height: 100%;
 }
 
 .edit-tattoo-image {
@@ -27,6 +29,11 @@
 
 .edit-tattoo-form-container {
     padding: 10px;
+    width: 30%;
+}
+
+.edit-tattoo-textarea-container {
+    width: 100%;
 }
 
 .edit-tattoo-textarea {
@@ -35,6 +42,7 @@
     border: none;
     font-family: 'Inter';
     padding: 10px;
+    width: 90%;
 }
 
 .edit-tattoo-submit-button,

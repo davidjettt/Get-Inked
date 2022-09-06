@@ -53,6 +53,9 @@ const SignUpForm = ({ setShowSignUp }) => {
   return (
     <>
       <form className='signup-form' onSubmit={onSignUp}>
+        <div className='signup-all-fields-required'>
+          All fields are required.
+        </div>
         <div className='errors-signup'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>

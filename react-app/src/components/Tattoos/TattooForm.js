@@ -65,6 +65,9 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 <div></div>
             </div>
             <form onSubmit={handleSubmit} className="tattoo-form">
+                <div className="studio-all-fields-required">
+                    All fields are required.
+                </div>
                 <div className="errors-tattoo-form">
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -85,13 +88,14 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                     <label className="custom-textarea">
                         <textarea
                             className="tattoo-form-textarea"
+                            placeholder="Tattoo description here..."
                             cols='50'
                             rows='10'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         >
                         </textarea>
-                        <span className="placeholder-textarea">Description</span>
+                        {/* <span className="placeholder-textarea">Description</span> */}
                     </label>
                 </div>
                 <div className="tattoo-form-image-upload-container">

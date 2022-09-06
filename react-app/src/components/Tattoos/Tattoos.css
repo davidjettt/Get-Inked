@@ -50,6 +50,7 @@
 
 .tattoo-modal-left-container {
     width: 30%;
+    padding: 5px;
 }
 
 .tattoo-modal-user-avatar-container {
@@ -62,11 +63,21 @@
     justify-content: space-between;
 }
 
+.tattoo-modal-owner-info {
+    display: flex;
+    align-items: center;
+}
+
 .tattoo-modal-description-container {
-    /* height: 50%; */
+    /* height: 70%; */
     height: auto;
+    max-height: 70%;
     border-bottom: 1px solid #dbdbdb;
     padding: 14px;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    color: #20212599;
+    overflow-y: auto;
 }
 
 .single-post-profile-image {
@@ -100,4 +111,16 @@
 
 .edit-tattoo-three-dots {
     cursor: pointer;
+}
+
+.done-at-text {
+    color: #20212599;
+    font-size: 14px;
+
+}
+
+.tattoo-style-container {
+    padding: 15px;
+    border-bottom: 1px solid #dbdbdb;
+    color: #20212599;
 }

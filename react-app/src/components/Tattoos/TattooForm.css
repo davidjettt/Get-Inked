@@ -30,9 +30,10 @@
     outline: none;
     resize: none;
     font-family: 'Inter';
-    padding: 18px 8px 8px 8px;
+    padding: 10px 8px 8px 8px;
     border: 1px solid #aaa;
     border-radius: 6px;
+    font-size: 12px;
 }
 
 .tattoo-form-textarea:focus {
@@ -110,4 +111,5 @@
     flex-direction: column; */
     color: red;
     font-weight: 600;
+    padding: 10px 0;
 }

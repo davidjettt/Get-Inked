@@ -97,7 +97,7 @@ def update_studio(id):
     studio = Studio.query.get(id)
     if "header_image" not in request.files or "avatar" not in request.files:
         # print('FIRST IF')
-        return {"errors": "Image required"}, 400
+        return {"errors": ["Image required"]}, 400
 
     header_image = request.files["header_image"]
 
@@ -105,7 +105,7 @@ def update_studio(id):
 
     if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
         # print('SECOND IF')
-        return {"errors": "File type not permitted"}, 400
+        return {"errors": ["File type not permitted"]}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
     avatar_image.filename = get_unique_filename(avatar_image.filename)

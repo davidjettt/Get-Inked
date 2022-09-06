@@ -19,21 +19,24 @@ export default function SingleTattoo({ tattooId, studioPortfolio }) {
                     <div className="tattoo-modal-avatar-container">
                         <div className="tattoo-modal-owner-info">
                             <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
-                            <span>{tattoo.owner}</span>
+                            <span className="tattoo-owner-name-text">{tattoo.owner}</span>
                         </div>
                         <div className="tattoo-modal-threedots-container">
                             {+sessionUserId === +tattoo.userId && <TattooOptionsModal tattooId={tattooId} />}
                         </div>
                     </div>
                 </div>
+                <div className="tattoo-style-container">
+                    Style: {tattoo.tattooStyle}
+                </div>
                 <div className="tattoo-modal-description-container">
                     {tattoo.description}
                 </div>
                 {!studioPortfolio && <div className="tattoo-modal-studio-container-main">
-                    <span>Done at</span>
+                    <span className="done-at-text">Done at</span>
                     <Link className="tattoo-modal-studio-container" to={`/studios/${tattoo.studioId}`}>
                         <div className="tattoo-modal-studio-avatar-location">
-                            <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
+                            <img className="single-post-profile-image" src={tattoo.studio.avatar || defaultUserProfilePic} alt='' />
                         </div>
                         <div className="tattoo-modal-studio-name-location">
                             <div className="tattoo-modal-studio-name">
