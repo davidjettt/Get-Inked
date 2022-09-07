@@ -1,0 +1,43 @@
+
+.delete-modal-main {
+    /* padding: 10px; */
+    /* margin: 20px; */
+    width: 400px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-message-container {
+    padding: 10px 0;
+    height: 33%;
+    text-align: center;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.yes-button,
+.no-button {
+    height: 33%;
+    padding: 10px;
+    width: 100%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.yes-button:focus,
+.no-button:focus {
+    background-color: #dbdbdb;
+}
+
+.yes-button {
+    /* color: #1982FC; */
+    color: red;
+    font-weight: bold;
+}
+
+.no-button {
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-top: 1px solid #dbdbdb;
+}

@@ -2,6 +2,7 @@ import { useState } from "react"
 import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import Footer from "../Footer/Footer"
+import dragon from '../../Images/dragon-yin-yang-image.svg'
 import './SplashPage.css'
 
 export default function SplashPage() {
@@ -22,7 +23,8 @@ export default function SplashPage() {
                     </div>
                     <div className="splash-page-login-form-container">
                         <div className='login-header-container'>
-                            <h1>GET INKED</h1>
+                            <img className="splash-logo-image" src={dragon} alt='splash-logo' />
+                            <div className="splash-logo-text">GET INKED</div>
                         </div>
                         <div className="about-app-container">
                             Get Inked is a web app where authenticated users can create or join a tattoo studio and can post images of their work to draw in more clients. Users will be able to view the portfolio of a studio or artist and schedule an appointment for their next art piece on their body.

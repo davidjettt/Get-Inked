@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import threeLines from '../Images/three-lines.svg'
+import dragon from '../Images/dragon-yin-yang-image.svg'
 
 const NavBar = () => {
   const [ showDropdown, setShowDropdown ] = useState(false)
@@ -30,8 +31,11 @@ useEffect(() => {
       <div className='nav-bar-container-sub'>
         <div className='nav-buttons-left'>
           <div className='home-button-container'>
-            <NavLink to='/home' exact={true} activeClassName='active'>
-              Home
+            <NavLink to='/home' exact={true}>
+              <div className='nav-header-container'>
+                <img className="nav-logo-image" src={dragon} alt='nav-logo' />
+                <div className="nav-logo-text">GET INKED</div>
+              </div>
             </NavLink>
           </div>
           {/* <div className='login-link-container'>
@@ -62,7 +66,7 @@ useEffect(() => {
         </div>
         <div className='nav-buttons-right'>
           <div className='new-studio-link-container'>
-            <NavLink className='new-studio-link' to='/studios/new' exact={true} activeClassName='active'>
+            <NavLink className='new-studio-link' to='/studios/new' exact={true}>
               Create a studio
             </NavLink>
           </div>

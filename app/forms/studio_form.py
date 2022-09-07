@@ -12,7 +12,7 @@ from app.models import Studio
 
 def zip_code_check(form, field):
     zip_code = field.data
-    if len(zip_code) is not 5 or zip_code.isdigit() is False:
+    if len(zip_code) != 5 or zip_code.isdigit() is False:
         raise ValidationError('Zip code must be 5 digits')
 
 def name_length(form, field):

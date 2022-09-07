@@ -1,7 +1,79 @@
 
-.footer-container {
+.footer-container-main {
     height: 110px;
-    background-color: #20212599;
+    background-color: rgb(31,33,37);
+    display: flex;
+    justify-content: center;
     /* margin: 0;
     padding: 0; */
 }
+
+.footer-container-secondary {
+    width: 85%;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-logo-container {
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.footer-logo-image {
+    width: 60px;
+    height: 60px;
+}
+
+.footer-about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: red; */
+    width: 25%;
+}
+
+.developer-container {
+    color: whitesmoke;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.icons-container {
+    display: flex;
+    justify-content: space-around;
+    /* background-color: yellow; */
+    width: 30%;
+}
+
+.github,
+.linkedin {
+    width: 30px;
+}
+
+/* .about,
+.links {
+    color: white;
+}
+
+.links {
+    font-weight: 550;
+}
+
+.links > li {
+    list-style: none;
+    font-weight: 300;
+    margin: 5px;
+}
+
+li:first-child {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+} */

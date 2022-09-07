@@ -29,6 +29,22 @@ body {
     padding: .5rem;
 }
 
+.login-header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.splash-logo-image {
+    width: 70px;
+    height: 70px;
+}
+
+.splash-logo-text {
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
 .about-app-container {
     width: 70%;
     max-width: 550px;

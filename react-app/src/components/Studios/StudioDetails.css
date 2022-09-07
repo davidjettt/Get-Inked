@@ -179,3 +179,7 @@ body {
     word-break: break-all;
     word-wrap: break-word;
 }
+
+.dropdown-off {
+    display: none;
+}

@@ -25,7 +25,7 @@ export default function Studios() {
                                 </div>
                                 <div className='studio-info-container'>
                                     <div className='studio-avatar'>
-                                        <img className='studio-details-avatar' src={studio.avatar || defaultAvatarImage} />
+                                        <img className='studio-details-avatar' src={studio.avatar || defaultAvatarImage} alt='avatar' />
                                     </div>
                                     <div className='studio-name-location-container'>
                                         <div className='studio-name'>
