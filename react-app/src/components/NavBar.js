@@ -74,10 +74,10 @@ useEffect(() => {
             <img onClick={handleDropdown} className='three-lines' src={threeLines}  alt='three-lines'/>
             {showDropdown &&
             <div className='nav-dropdown-container'>
-              <div className='your-profile-container'>Your profile</div>
-              <div className='your-profile-settings-container'>Your profile settings</div>
-              <div className='appointments-container'>Appointments</div>
-              <div className='bookmarks-container'>Bookmarks</div>
+              <div className='your-profile-container'></div>
+              <div className='your-profile-settings-container'></div>
+              <div className='appointments-container'></div>
+              <div className='bookmarks-container'></div>
               <LogoutButton />
             </div>}
           </div>
