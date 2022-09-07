@@ -22,9 +22,11 @@ def get_all_studios():
 @login_required
 def create_studio():
 
-    if "header_image" not in request.files or "avatar" not in request.files:
+    if "avatar" not in request.files:
         # print('FIRST IF')
-        return {"errors": ["Image required"]}, 400
+        return {"errors": ["Avatar image required"]}, 400
+    elif "header_image" not in request.files:
+        return { "errors": ["Header image required"] }, 400
 
     header_image = request.files["header_image"]
 

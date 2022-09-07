@@ -25,6 +25,11 @@ def city_length(form, field):
     if len(city) > 17:
         raise ValidationError('City of studio cannot exceed 17 characters')
 
+def address_length(form, field):
+    address = field.data
+    if len(address) > 50:
+        raise ValidationError('Address of studio cannot exceed 50 characters')
+
 
 class StudioForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(message='A studio name is required'), name_length])
@@ -32,7 +37,7 @@ class StudioForm(FlaskForm):
     # header_image = StringField('header image')
     # tattoo_style = StringField('tattoo style', validators=[DataRequired()])
     # avatar = StringField('avatar')
-    address = StringField('address', validators=[DataRequired(message='A studio address is required')])
+    address = StringField('address', validators=[DataRequired(message='A studio address is required'), address_length])
     city = StringField('city', validators=[DataRequired(message='A studio city is required'), city_length])
     state = StringField('state', validators=[DataRequired(message='A studio state is required')])
     zip_code = StringField('zip code', validators=[DataRequired(message='A studio zip code is required'), zip_code_check])
