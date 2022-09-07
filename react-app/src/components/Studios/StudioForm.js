@@ -20,7 +20,6 @@ export default function StudioForm({ studio, formType }) {
     const [ avatarPreview, setAvatarPreview ] = useState(null)
     const [ errors, setErrors ] = useState([])
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
@@ -59,12 +58,6 @@ export default function StudioForm({ studio, formType }) {
             }
         }
         // console.log('FORMDATA', formData)
-        // console.log('DATA', payload)
-
-        // const badData = await dispatch(createStudioThunk(payload))
-        // if (badData) {
-        //     console.log('ERRORS', badData)
-        // }
     }
 
     const isImage = (url) => {
@@ -120,14 +113,13 @@ export default function StudioForm({ studio, formType }) {
     }
 
 
-
     return (
         <div className="studio-form-container">
             <form className="studio-form" onSubmit={handleSubmit}>
                 <div>
                     {formType === 'Update Studio' ?
-                    <h1>Update Studio</h1> :
-                    <h1>Create a Studio</h1>}
+                    <h1 className="studio-form-title">Update Studio</h1> :
+                    <h1 className="studio-form-title">Create a Studio</h1>}
                 </div>
                 <div className="studio-all-fields-required">
                     All fields are required.
@@ -145,6 +137,7 @@ export default function StudioForm({ studio, formType }) {
                                 type="file"
                                 accept="image/*"
                                 onChange={updateAvatarImage}
+                                // defaultValue={studio?.avatar || null}
                             />
                             Select an avatar image
                         </label>

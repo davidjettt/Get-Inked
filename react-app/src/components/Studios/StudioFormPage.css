@@ -23,6 +23,11 @@
     object-fit: cover;
 }
 
+.studio-form-title {
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
 .studio-description-textarea {
     resize: none;
     outline: none;

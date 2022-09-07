@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux"
 import Footer from '../Footer/Footer'
 import tattoo1 from '../../Images/collage/collage-tattoo-1.jpg'
 import tattoo2 from '../../Images/collage/collage-tattoo-2.jpeg'
@@ -10,9 +9,8 @@ import tattoo6 from '../../Images/collage/collage-tattoo-6.jpeg'
 import './HomePage.css'
 
 export default function HomePage() {
-    const mainHomePageImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662437719/tattoo-models_r663as.webp'
+    const mainHomePageImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662587273/332474_uh4kq5.jpg'
     const studioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662107273/737e3063f926dc54367f44b51e7fdc29_p1ynfi.jpg'
-    const sessionUser = useSelector(state => state.session.user)
 
     return (
         <div className="home-page-main">
@@ -23,6 +21,9 @@ export default function HomePage() {
                     </div>
                     <div className="app-description">
                         FIND THE RIGHT ARTIST FOR YOUR NEXT TATTOO
+                    </div>
+                    <div className='app-message'>
+                        Because getting a tattoo is a big deal. We will help you find the right artist for you tattoo and make the process as painless as possible.
                     </div>
                 </div>
                 <img className="home-page-main-image" src={mainHomePageImage} alt='traditional-japanese-tattoos-girl' />
