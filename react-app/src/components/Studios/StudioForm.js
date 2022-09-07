@@ -67,16 +67,26 @@ export default function StudioForm({ studio, formType }) {
         // }
     }
 
+    const isImage = (url) => {
+        return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
+    }
+
     const updateHeaderImage = (e) => {
+        setErrors([])
         const file = e.target.files[0];
         // console.log('FILE', file)
-        setHeaderImage(file);
+        // setHeaderImage(file);
 
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
                 // console.log('READER RESULT', reader.result)
-                setHeaderPreview(reader.result)
+                if (isImage(file.name)) {
+                    setHeaderPreview(reader.result)
+                    setHeaderImage(file);
+                } else {
+                    setErrors(['Not a valid image file type'])
+                }
             }
         }
         // console.log('FILES', e.target.files)
@@ -85,15 +95,22 @@ export default function StudioForm({ studio, formType }) {
         }
     }
     const updateAvatarImage = (e) => {
+        setErrors([])
         const file = e.target.files[0];
         // console.log('AVATAR FILE', file)
-        setAvatar(file);
+        // console.log('IS IMAGE TEST', isImage(file.name))
+        // setAvatar(file);
 
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
                 // console.log('READER RESULT', reader.result)
-                setAvatarPreview(reader.result)
+                if (isImage(file.name)) {
+                    setAvatarPreview(reader.result)
+                    setAvatar(file);
+                } else {
+                    setErrors(['Not a valid image file type'])
+                }
             }
         }
         // console.log('FILES', e.target.files)

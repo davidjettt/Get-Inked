@@ -33,19 +33,25 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
         }
     }
 
+    const isImage = (url) => {
+        return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
+    }
+
     const updateTattooImage = (e) => {
+        setErrors([])
         const file = e.target.files[0];
-        // console.log('FILE', file)
-        setTattooImage(file);
 
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
-                // console.log('READER RESULT', reader.result)
-                setTattooPreview(reader.result)
+                if (isImage(file.name)) {
+                    setTattooPreview(reader.result)
+                    setTattooImage(file);
+                } else {
+                    setErrors(['Not a valid image file'])
+                }
             }
         }
-        // console.log('FILES', e.target.files)
         if (e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
         }
