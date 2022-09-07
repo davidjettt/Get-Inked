@@ -1,4 +1,4 @@
-import axios from 'axios'
+
 
 const LOAD_STUDIOS = '/studios/load'
 const CREATE_STUDIO = '/studios/create'

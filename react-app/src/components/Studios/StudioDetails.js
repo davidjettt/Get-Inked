@@ -6,21 +6,25 @@ import threedots from '../../Images/three-dots.svg'
 import './StudioDetails.css'
 import StudioPortfolio from "./StudioPortfolio"
 import TattooFormModal from "../Tattoos/TattooFormModal"
+import { Modal } from "../../context/Modal"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 export default function StudioDetails() {
     const [ showDropdown, setShowDropdown ] = useState(false)
+    const [ showModal, setShowModal ] = useState(false)
+    const [ menuClassName, setMenuClassName ] = useState(false)
     const defaultAvatarImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662073397/dragon-heads-tattoo_xrpoon.jpg'
     const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
     const dispatch = useDispatch()
     const history = useHistory()
     const { studioId }  = useParams()
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
-    const studioOwnerId = studio.ownerId
+    const studioOwnerId = studio?.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
 
     let className
-    const description = studio.description
-    if (description.indexOf(' ') === -1) {
+    const description = studio?.description
+    if (description?.indexOf(' ') === -1) {
         className = 'word-break'
     } else {
         className = 'studio-description'
@@ -29,6 +33,7 @@ export default function StudioDetails() {
     const handleDropdown = () => {
         if (showDropdown) return
         setShowDropdown(true)
+        setMenuClassName(true)
     }
 
     useEffect(() => {
@@ -36,6 +41,7 @@ export default function StudioDetails() {
 
         const closeDropdown = () => {
             setShowDropdown(false)
+            setMenuClassName(false)
         }
         document.addEventListener("click", closeDropdown);
 
@@ -50,20 +56,23 @@ export default function StudioDetails() {
     return (
         <div className="studio-details-main">
             <div className="studio-details-header-container">
-                <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header image' />
+                <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header' />
             </div>
             <div className="studio-details-container">
                 <div className="studio-details-info-main">
                     <div className="studio-details-info-container">
                         {sessionUserId === studioOwnerId && <div className="three-dots">
                             <img onClick={handleDropdown} src={threedots} alt='three-dots' />
-                            {showDropdown &&
-                            <div className="dropdown-container">
-                                <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
+                            <div className={menuClassName ? "dropdown-container" : 'dropdown-off'}>
+                                {showDropdown && <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
                                     Update Studio
-                                </Link>
-                                <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button>
-                            </div>}
+                                </Link>}
+                                {/* <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button> */}
+                                {showDropdown && <button className="delete-studio-button" onClick={() => setShowModal(true)}>Delete Studio</button>}
+                                {showModal && <Modal onClose={() => setShowModal(false)}>
+                                    <DeleteButton studio={{...studio}} setShowModal={setShowModal} />
+                                </Modal>}
+                            </div>
                         </div>}
                         <div className="studio-details-avatar-name-location">
                             <div className="studio-details-avatar-container">
@@ -126,7 +135,7 @@ export default function StudioDetails() {
                             <h2>Portfolio</h2>
                             {sessionUserId === studioOwnerId &&  <TattooFormModal studioId={studioId} />}
                         </div>
-                        <StudioPortfolio studioId={studio.id} />
+                        {studio && <StudioPortfolio studioId={studio.id} />}
                     </div>
                 </div>
             </div>
