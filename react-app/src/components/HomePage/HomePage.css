@@ -2,28 +2,48 @@
 .home-page-main-image-container {
     position: relative;
     /* height: 1400px; */
+    /* width: max-content; */
 }
 
 .main-image-text-container {
     position: absolute;
-    top: 35%;
-    left: 10%;
+    top: 15%;
+    left: 12%;
     width: 500px;
 }
 
 
 .home-page-main-image {
+    /* width: 100%;
+    height: 95%; */
+    /* min-height: 100%; */
+    /* min-width: 1024px; */
+
+    /* Set up proportionate scaling */
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
-.app-name,
 .app-description {
     font-weight: 700;
-    font-size: 30px;
+    font-size: 40px;
+    color: white;
+    letter-spacing: 6px;
+    padding: 13px 0;
+}
+
+.app-name {
+    font-size: 28px;
     color: white;
     letter-spacing: 6px;
     line-height: 40px;
+}
+
+.app-message {
+    color: white;
+    letter-spacing: 1px;
+    width: 80%;
+    font-size: 20px;
 }
 
 .home-page-artists-container {
