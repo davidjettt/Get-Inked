@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import Footer from '../Footer/Footer'
+import tattoo1 from '../../Images/collage/collage-tattoo-1.jpg'
+import tattoo2 from '../../Images/collage/collage-tattoo-2.jpeg'
+import tattoo3 from '../../Images/collage/collage-tattoo-3.jpeg'
+import tattoo4 from '../../Images/collage/collage-tattoo-4.jpeg'
+import tattoo5 from '../../Images/collage/collage-tattoo-5.jpeg'
+import tattoo6 from '../../Images/collage/collage-tattoo-6.jpeg'
 import './HomePage.css'
 
 export default function HomePage() {
@@ -45,7 +51,12 @@ export default function HomePage() {
                         </Link>
                     </div>
                     <div className='tattoos-image-container'>
-                        <img className='artists-image' src={studioImage} alt='' />
+                        {/* <img className='artists-image' src={studioImage} alt='' /> */}
+                        <img className='tat1' src={tattoo1} alt='' />
+                        <img className='tat2' src={tattoo2} alt='' />
+                        <img className='tat3' src={tattoo3} alt='' />
+                        <img className='tat4' src={tattoo4} alt='' />
+                        <img className='tat5' src={tattoo5} alt='' />
                     </div>
                 </div>
             </div>

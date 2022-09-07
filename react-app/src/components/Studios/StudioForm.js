@@ -10,7 +10,7 @@ export default function StudioForm({ studio, formType }) {
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
     const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
-    const [ tattooStyle, setTattooStyle ] = useState('')
+    // const [ tattooStyle, setTattooStyle ] = useState('')
     const [ avatar, setAvatar ] = useState(studio?.avatar || '')
     const [ address, setAddress ] = useState(studio?.address || '')
     const [ city, setCity ] = useState(studio?.city || '')

@@ -38,8 +38,8 @@ export default function Studios() {
                                     </div>
                                 </div>
                                 <div className='studio-reviews-container'>
-                                    <span>star </span>
-                                    <span>average rating</span>
+                                    {/* <span>star </span>
+                                    <span>average rating</span> */}
                                     {/* <div className='booking-button-container'>
                                         <button className='book-button-studios-page'>Book</button>
                                     </div> */}
