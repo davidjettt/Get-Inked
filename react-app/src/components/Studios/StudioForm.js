@@ -85,7 +85,7 @@ export default function StudioForm({ studio, formType }) {
                     setHeaderPreview(reader.result)
                     setHeaderImage(file);
                 } else {
-                    setErrors(['Not a valid image file type'])
+                    setErrors(['Not a valid header image file type'])
                 }
             }
         }
@@ -109,7 +109,7 @@ export default function StudioForm({ studio, formType }) {
                     setAvatarPreview(reader.result)
                     setAvatar(file);
                 } else {
-                    setErrors(['Not a valid image file type'])
+                    setErrors(['Not a valid avatar image file type'])
                 }
             }
         }
