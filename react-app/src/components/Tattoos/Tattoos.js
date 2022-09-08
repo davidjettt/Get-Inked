@@ -3,7 +3,7 @@ import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 
 export default function Tattoos() {
-    const tattoosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662180533/male-doing-image-on-arm-picture-id669911398_eaopmg.jpg'
+    const tattoosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662605953/Tattoo-master-puts-tattoo-in-form-of-flower-on-arm-1296x728-header_qkrn6j.jpg'
     const tattoos = useSelector(state => Object.values(state.tattoos))
 
 

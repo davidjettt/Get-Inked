@@ -56,7 +56,7 @@ export default function HomePage() {
                         <img className='tat1' src={tattoo1} alt='' />
                         <img className='tat2' src={tattoo2} alt='' />
                         <img className='tat3' src={tattoo3} alt='' />
-                        <img className='tat4' src={tattoo4} alt='' />
+                        <img className='tat4' src={tattoo6} alt='' />
                         <img className='tat5' src={tattoo5} alt='' />
                     </div>
                 </div>
