@@ -21,6 +21,18 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 # Splash/Landing Page
 ![](react-app/src/Images/app-screenshots/get-inked-splash-page.png)
 
+# Home Page (top)
+![](react-app/src/Images/app-screenshots/get-inked-homepage-top.png)
+
+# Home Page (bottom)
+![](react-app/src/Images/app-screenshots/get-inked-homepage-bottom.png)
+
+# Studio Form
+![](react-app/src/Images/app-screenshots/get-inked-studio-form.png)
+
+# Tattoos Page
+![](react-app/src/Images/app-screenshots/get-inked-tattoos-2.png)
+
 ## Getting started
 1. Clone this repository (only this branch)
 
