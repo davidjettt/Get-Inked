@@ -179,6 +179,8 @@ class StudioReview(db.Model):
             'review': self.review,
             'stars': self.stars,
             'reviewImage': self.review_image,
+            'user_id': self.user_id,
+            'studio_id': self.studio_id,
             'user': {
                 'name': User.query.get(self.user_id).name
             }
