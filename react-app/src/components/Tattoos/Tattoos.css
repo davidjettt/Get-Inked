@@ -27,21 +27,21 @@
     margin: 5px;
 }
 
-.tattoo-card.small {
+/* .tattoo-card.small {
     grid-row-end: span 26;
 }
 
 .tattoo-card.medium {
     grid-row-end: span 33;
-}
+} */
 
-/* .tattoo-card.small {
+.tattoo-card.small {
     grid-row-end: span 30;
 }
 
 .tattoo-card.medium {
     grid-row-end: span 37;
-} */
+}
 
 .tattoo-card.large {
     grid-row-end: span 40;
@@ -52,6 +52,8 @@
     height: 100%;
     border-radius: 17px;
     cursor: pointer;
+    object-fit: cover;
+    object-position: 50% 50%;
     /* margin: 5px; */
 }
 
@@ -126,6 +128,7 @@
     color: black;
     font-weight: 600;
     font-size: 14px;
+    word-break: break-word;
 }
 
 .tattoo-modal-studio-location {
@@ -147,4 +150,6 @@
     padding: 15px;
     border-bottom: 1px solid #dbdbdb;
     color: #20212599;
+    /* white-space: pre-wrap; */
+    word-break: break-word;
 }

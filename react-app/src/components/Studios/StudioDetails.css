@@ -28,6 +28,7 @@ body {
 
 .studio-details-name-location-container {
     margin-left: 15px;
+    word-break: break-word;
 }
 
 .studio-details-info-main {

@@ -8,6 +8,13 @@ export default function SingleTattoo({ tattooId, studioPortfolio }) {
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))
     const sessionUserId = useSelector(state => state.session.user.id)
 
+    // let className
+    // const tattooStyle = tattoo?.tattooStyle
+    // if (tattooStyle?.indexOf(' ') === -1) {
+    //     className = 'word-break'
+    // } else {
+    //     className = 'tattoo-style-container'
+    // }
 
     return (
         <div className="tattoo-modal-container">

@@ -17,7 +17,7 @@ export default function SingleTattooModal({ tattooId, studioPortfolio, small, me
 
     return (
         <>
-            <div className={studioPortfolio ? 'studio-portfolio-image-container' : `tattoo-card ${randomClass}`} onClick={handleShowModal}>
+            <div className={studioPortfolio ? 'studio-portfolio-image-container' : `tattoo-card ${small || medium}`} onClick={handleShowModal}>
                 <img className={studioPortfolio ? 'studio-portfolio-image' : 'tattoo-image'} src={tattoo.imageUrl} alt='tattoo' />
             </div>
             {showModal && <Modal onClose={() => setShowModal(false)}>

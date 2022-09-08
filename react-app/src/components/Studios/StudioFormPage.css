@@ -2,13 +2,14 @@
 .studio-form-page {
     /* height: 800px; */
     /* overflow-y: hidden; */
+    /* height: 100vh; */
 }
 
 .studio-form-page-main-container {
     display: flex;
     justify-content: flex-end;
     /* overflow-x: hidden; */
-    height: 96vh;
+    /* height: 96vh; */
     /* overflow-y: hidden; */
 }
 
