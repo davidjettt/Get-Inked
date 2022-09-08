@@ -61,7 +61,7 @@ export default function EditTattooForm({ tattooId, setShowTattooOptionsModal }) 
                     <div className="edit-tattoo-form-container">
                         <div className="edit-tattoo-user-info-container">
                             <div className="edit-tattoo-avatar-container">
-                                <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
+                                <img className="edit-tattoo-profile-image" src={defaultUserProfilePic} alt='' />
                                 <span>{tattoo.owner}</span>
                             </div>
                         </div>
@@ -77,15 +77,10 @@ export default function EditTattooForm({ tattooId, setShowTattooOptionsModal }) 
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder='Description'
                                 cols='30'
-                                rows='50'
+                                rows='10'
                             >
                             </textarea>
                         </div>
-                        {/* <div>
-                            {errors.length > 0 && errors.map((error, ind) => (
-                                <div key={ind}>{error}</div>
-                            ))}
-                        </div> */}
                     </div>
                 </div>
             </form>

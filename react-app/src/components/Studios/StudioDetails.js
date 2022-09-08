@@ -85,7 +85,8 @@ export default function StudioDetails() {
                                     {studio?.name}
                                 </div>
                                 <div className="studio-details-location-container">
-                                    <span className="studio-details-location">{studio?.city}, {studio?.state}</span>
+                                    <div className='studio-details-location' >{ studio?.address }</div>
+                                    <span className="studio-details-location">{studio?.city}, {studio?.state} {studio?.zipCode}</span>
                                 </div>
                             </div>
                         </div>

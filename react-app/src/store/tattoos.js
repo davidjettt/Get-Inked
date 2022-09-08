@@ -87,7 +87,8 @@ export default function tattoosReducer (state = initialState, action) {
     let newState
     switch(action.type) {
         case LOAD_TATTOOS: {
-            newState = JSON.parse(JSON.stringify(state))
+            // newState = JSON.parse(JSON.stringify(state))
+            newState = {}
             action.tattoos.allTattoos.forEach((tattoo) => {
                 newState[tattoo.id] = tattoo
             })

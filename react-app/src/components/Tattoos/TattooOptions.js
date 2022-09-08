@@ -40,8 +40,8 @@ export default function TattooOptions({ tattooId, setShowTattooOptionsModal }) {
                     <button className="delete-tattoo-button" onClick={handleDeleteModal}>Delete tattoo</button>
                     <button className="cancel-button" onClick={handleTattooOptionsModal} >Cancel</button>
                 </div>}
-                {showEditTattooModal && <EditTattooForm setShowTattooOptionsModal={setShowTattooOptionsModal} tattooId={tattooId} />}
             </div>
+            {showEditTattooModal && <EditTattooForm setShowTattooOptionsModal={setShowTattooOptionsModal} tattooId={tattooId} />}
             {showModal &&
                 <DeleteButton tattoo={{...tattoo}} setShowModal={setShowModal} />
             }

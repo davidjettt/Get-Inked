@@ -51,7 +51,8 @@ body {
 }
 
 .login-form {
-    height: 30%;
+    /* height: 30%; */
+    /* height: 30%; */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -157,6 +158,14 @@ input:focus {
     font-family: 'Inter';
     color: #1982FC;
     cursor: pointer;
+}
+
+.change-to-signup-container {
+    margin-top: 50px;
+    /* border: 1px solid red; */
+    /* min-height: 200px;
+    display: flex;
+    align-items: center; */
 }
 
 .change-to-login-container {

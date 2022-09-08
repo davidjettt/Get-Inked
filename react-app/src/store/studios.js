@@ -86,8 +86,7 @@ export const updateStudioThunk = (studio, studioId) => async (dispatch) => {
 
 export const deleteStudioThunk = (studio) => async (dispatch) => {
     const response = await fetch(`/api/studios/${studio.id}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
+        method: 'DELETE'
     })
 
     if (response.ok) {

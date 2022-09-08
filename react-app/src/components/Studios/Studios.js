@@ -1,12 +1,22 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { loadTattoosThunk } from '../../store/tattoos'
 import './Studios.css'
 
 export default function Studios() {
+    const dispatch = useDispatch()
     const studios = useSelector(state => Object.values(state.studios))
     const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
     const defaultAvatarImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662073397/dragon-heads-tattoo_xrpoon.jpg'
     const studiosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662056527/Skin-Desing-Tattoo-Cover-Up-1536x768_pj155x.jpg'
+
+    // const tattoos = useSelector(state => Object.values(state.tattoos).find())
+
+    // useEffect(() => {
+    //     dispatch(loadTattoosThunk())
+    // }, [dispatch])
+
     return (
         <div className='studios-page-main'>
             <div className='studios-page-container'>
@@ -21,7 +31,8 @@ export default function Studios() {
                         <Link className='studio-link' key={studio.id} to={`/studios/${studio.id}`}>
                             <div key={studio.id} className='studio-card-container'>
                                 <div className='studio-card-image-container'>
-                                    <img className='studio-preview-image' src={studio.studioImages[0] || defaultStudioImage } alt='studio-preview' />
+                                    {studio.studioImages?.length > 0 && <img className='studio-preview-image' src={ studio.studioImages[0] } alt='studio-preview' />}
+                                    {studio.studioImages?.length === 0 && <img className='studio-preview-image' src={ defaultStudioImage } alt='studio-preview' />}
                                 </div>
                                 <div className='studio-info-container'>
                                     <div className='studio-avatar'>
