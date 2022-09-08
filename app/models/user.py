@@ -176,11 +176,12 @@ class StudioReview(db.Model):
 
     def review_to_dict(self):
         return {
+            'id': self.id,
             'review': self.review,
             'stars': self.stars,
             'reviewImage': self.review_image,
-            'user_id': self.user_id,
-            'studio_id': self.studio_id,
+            'userId': self.user_id,
+            'studioId': self.studio_id,
             'user': {
                 'name': User.query.get(self.user_id).name
             }

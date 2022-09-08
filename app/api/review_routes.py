@@ -1,3 +1,4 @@
+from re import U
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import login, validation_errors_to_error_messages
@@ -50,6 +51,11 @@ def create_studio_review():
             review_image=url,
             user_id=current_user.id,
             studio_id=request.form.get('studio_id')
+            # review=form.data['review'],
+            # stars=form.data['stars'],
+            # review_image=url,
+            # user_id=current_user.id,
+            # studio_id=form.data['studio_id']
         )
         db.session.add(new_review)
         db.session.commit()
