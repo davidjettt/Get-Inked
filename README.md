@@ -17,6 +17,12 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 ![68747470733a2f2f696d672e736869656c64732e696f2f62616467652f637373332d2532333135373242362e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d63737333266c6f676f436f6c6f723d7768697465](https://user-images.githubusercontent.com/94085979/187011825-efa962b0-85f6-4ead-a408-835f449860e9.svg)
 ![68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f636b65722d2532333064623765642e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d646f636b6572266c6f676f436f6c6f723d7768697465](https://user-images.githubusercontent.com/94085979/187011829-d3f5161e-f9df-4432-8a2b-00a4c583740f.svg)
 ![68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6865726f6b752d2532333433303039382e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6865726f6b75266c6f676f436f6c6f723d7768697465](https://user-images.githubusercontent.com/94085979/187011832-f41fd6fb-9845-4e2b-8423-4c58848612a4.svg)
+![](https://img.shields.io/badge/-Amazon%20S3-569A31?logo=amazon-s3&logoColor=white&style=for-the-badge)
+
+# Wiki Links
+- [Database Schema](https://github.com/davidjettt/Get-Inked/wiki/Database-Schema)
+- [MVP Features](https://github.com/davidjettt/Get-Inked/wiki/MVP-Features)
+- [User Stories](https://github.com/davidjettt/Get-Inked/wiki/User-Stories)
 
 # Splash/Landing Page
 ![](react-app/src/Images/app-screenshots/get-inked-splash-page.png)

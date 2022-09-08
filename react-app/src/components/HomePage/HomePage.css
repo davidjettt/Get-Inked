@@ -69,12 +69,15 @@
 }
 
 .artists-image-container {
-    /* margin-right: 16px; */
+    margin-right: 7px;
+    /* width: 50%; */
+    width: 700px;
 }
 
 .artists-image {
-    min-width: 95%;
-    max-width: 100%;
+    /* min-width: 95%;
+    max-width: 100%; */
+    width: 98%;
 }
 
 
