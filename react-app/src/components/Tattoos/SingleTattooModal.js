@@ -5,6 +5,7 @@ import SingleTattoo from './SIngleTattoo'
 import './Tattoos.css'
 
 export default function SingleTattooModal({ tattooId, studioPortfolio }) {
+    const cardClasses = [ 'small', 'medium', 'large' ]
     const [ showModal, setShowModal ] = useState(false)
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))
 
@@ -12,9 +13,11 @@ export default function SingleTattooModal({ tattooId, studioPortfolio }) {
         setShowModal(true)
     }
 
+    const randomClass = cardClasses[Math.floor(Math.random() * cardClasses.length)]
+
     return (
         <>
-            <div className={studioPortfolio ? 'studio-portfolio-image-container' : 'tattoo-card'} onClick={handleShowModal}>
+            <div className={studioPortfolio ? 'studio-portfolio-image-container' : `tattoo-card ${randomClass}`} onClick={handleShowModal}>
                 <img className={studioPortfolio ? 'studio-portfolio-image' : 'tattoo-image'} src={tattoo.imageUrl} alt='tattoo' />
             </div>
             {showModal && <Modal onClose={() => setShowModal(false)}>
