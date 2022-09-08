@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal'
 import SingleTattoo from './SIngleTattoo'
 import './Tattoos.css'
 
-export default function SingleTattooModal({ tattooId, studioPortfolio }) {
+export default function SingleTattooModal({ tattooId, studioPortfolio, small, medium }) {
     const cardClasses = [ 'small', 'medium', 'large' ]
     const [ showModal, setShowModal ] = useState(false)
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))

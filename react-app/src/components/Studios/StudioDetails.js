@@ -8,6 +8,7 @@ import StudioPortfolio from "./StudioPortfolio"
 import TattooFormModal from "../Tattoos/TattooFormModal"
 import { Modal } from "../../context/Modal"
 import DeleteButton from "../DeleteButton/DeleteButton"
+import Footer from "../Footer/Footer"
 
 export default function StudioDetails() {
     const [ showDropdown, setShowDropdown ] = useState(false)
@@ -90,15 +91,17 @@ export default function StudioDetails() {
                         <div className="studio-details-header-reviews">
                             <div className="studio-details-header-reviews-left">
                                 <div></div>
-                                {studio?.reviews.length > 0 && <div>
+                                {/* {studio?.reviews.length > 0 && <div>
                                     See all reviews {studio?.reviews.length}
-                                </div>}
+                                </div>} */}
                             </div>
                             <div className="studio-details-header-reviews-right">
                                 <div className="studio-details-header-booking-button-container">
-                                    <button>Book</button>
+                                    {/* <button>
+                                        Book
+                                    </button> */}
                                     <div>
-                                        Bookmark
+                                        {/* Bookmark */}
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +110,13 @@ export default function StudioDetails() {
                 </div>
                 <div className="studio-details-nav-bar">
                     <div>
-                        <button>Studio</button>
+                        {/* <button>Studio</button> */}
                     </div>
                     <div>
-                        <button>Portfolio</button>
+                        {/* <button>Portfolio</button> */}
                     </div>
                     <div>
-                        <button>Artists</button>
+                        {/* <button>Artists</button> */}
                     </div>
                 </div>
                 <div className="studio-details-line"></div>
@@ -139,6 +142,7 @@ export default function StudioDetails() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

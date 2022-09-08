@@ -35,6 +35,14 @@
     grid-row-end: span 33;
 }
 
+/* .tattoo-card.small {
+    grid-row-end: span 30;
+}
+
+.tattoo-card.medium {
+    grid-row-end: span 37;
+} */
+
 .tattoo-card.large {
     grid-row-end: span 40;
 }
