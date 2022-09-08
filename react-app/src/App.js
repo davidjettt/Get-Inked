@@ -15,6 +15,7 @@ import SplashPage from './components/SplashPage/SplashPage';
 import StudioFormPage from './components/Studios/StudioFormPage';
 import { loadTattoosThunk } from './store/tattoos';
 import Tattoos from './components/Tattoos/Tattoos';
+import { loadAllReviewsThunk } from './store/reviews';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,6 +27,7 @@ function App() {
       await dispatch(authenticate());
       await dispatch(loadStudiosThunk())
       await dispatch(loadTattoosThunk())
+      await dispatch(loadAllReviewsThunk())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -45,12 +47,12 @@ function App() {
         <Route path='/' exact={true}>
           <SplashPage />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute exact path='/studios'>
           <Studios />
         </ProtectedRoute>

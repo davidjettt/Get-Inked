@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+
+from app.models.user import StudioReview
 from .auth_routes import validation_errors_to_error_messages
 from app.models import db, Studio, TattooImage
-from app.forms import StudioForm, TattooForm
+from app.forms import StudioForm, TattooForm, StudioReviewForm
 from app.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3
 
 studio_routes = Blueprint('studios', __name__)
@@ -227,3 +229,44 @@ def create_tattoo(id):
         return { 'tattoo': new_tattoo_image.tattoo_to_dict() }
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+
+# # Create a studio review
+# @studio_routes.post('/<int:id>/reviews')
+# @login_required
+# def create_review(id):
+#     # if 'review_image' not in request.files:
+#     #     return { 'errors': ['Review image required'] }, 400
+#     url = ''
+
+#     if 'review_image' in request.files:
+#         review_image = request.files['review_image']
+
+#         if not allowed_file(review_image.filename):
+#             return { 'errors': ['File type not permitted'] }, 400
+
+#         review_image.filename = get_unique_filename(review_image.filename)
+
+#         upload_review = upload_file_to_s3(review_image)
+
+#         if 'url' not in upload_review:
+#             return upload_review, 400
+
+#         url = upload_review["url"]
+
+#     form =  StudioReviewForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         new_review = StudioReview(
+#             review=request.form.get('review'),
+#             stars=request.form.get('stars'),
+#             review_image=url,
+#             user_id=current_user.id,
+#             studio_id=id
+#         )
+#         db.session.add(new_review)
+#         db.session.commit()
+#         return { 'review': new_review.review_to_dict() }
+#     else:
+#         return {'errors': validation_errors_to_error_messages(form.errors)}, 400

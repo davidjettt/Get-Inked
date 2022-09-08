@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import studios from './studios'
 import tattoos from './tattoos'
+import reviews from './reviews'
 
 const rootReducer = combineReducers({
   session,
   studios,
-  tattoos
+  tattoos,
+  reviews
 });
 
 
