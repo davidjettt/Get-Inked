@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createStudioThunk, updateStudioThunk } from "../../store/studios";
+import { useHistory, useParams } from "react-router-dom";
+import { createStudioThunk, updateAvatarThunk, updateStudioThunk } from "../../store/studios";
+import EditStudioPics from "./EditStudioPics";
 import './StudioFormPage.css'
 
 export default function StudioForm({ studio, formType }) {
     const dispatch = useDispatch()
     const history = useHistory()
+    const { studioId } = useParams()
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
     const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
@@ -17,7 +19,7 @@ export default function StudioForm({ studio, formType }) {
     const [ state, setState ] = useState(studio?.state || '')
     const [ zipCode, setZipCode ] = useState(studio?.zipCode || '')
     const [ headerPreview, setHeaderPreview ] = useState(null)
-    const [ avatarPreview, setAvatarPreview ] = useState(null)
+    const [ avatarPreview, setAvatarPreview ] = useState(studio?.avatar || null)
     const [ errors, setErrors ] = useState([])
 
     const handleSubmit = async (e) => {
@@ -111,7 +113,6 @@ export default function StudioForm({ studio, formType }) {
             reader.readAsDataURL(e.target.files[0])
         }
     }
-
 
     return (
         <div className="studio-form-container">

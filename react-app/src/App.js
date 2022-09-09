@@ -16,6 +16,7 @@ import StudioFormPage from './components/Studios/StudioFormPage';
 import { loadTattoosThunk } from './store/tattoos';
 import Tattoos from './components/Tattoos/Tattoos';
 import { loadAllReviewsThunk } from './store/reviews';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,36 +43,38 @@ function App() {
 
   return (
     <BrowserRouter>
-      {sessionUser && <NavBar />}
-      <Switch>
-        <Route path='/' exact={true}>
-          <SplashPage />
-        </Route>
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute> */}
-        <ProtectedRoute exact path='/studios'>
-          <Studios />
-        </ProtectedRoute>
-        <ProtectedRoute exact path='/studios/new'>
-          <StudioFormPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path='/studios/:studioId'>
-          <StudioDetails />
-        </ProtectedRoute>
-        <ProtectedRoute path='/studios/:studioId/edit'>
-          <UpdateStudioForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/tattoos'>
-          <Tattoos />
-        </ProtectedRoute>
-        <ProtectedRoute path='/home' exact={true} >
-          <HomePage />
-        </ProtectedRoute>
-      </Switch>
+      <ScrollToTop>
+        {sessionUser && <NavBar />}
+        <Switch>
+          <Route path='/' exact={true}>
+            <SplashPage />
+          </Route>
+          {/* <ProtectedRoute path='/users' exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute> */}
+          <ProtectedRoute exact path='/studios'>
+            <Studios />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/studios/new'>
+            <StudioFormPage />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/studios/:studioId'>
+            <StudioDetails />
+          </ProtectedRoute>
+          <ProtectedRoute path='/studios/:studioId/edit'>
+            <UpdateStudioForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/tattoos'>
+            <Tattoos />
+          </ProtectedRoute>
+          <ProtectedRoute path='/home' exact={true} >
+            <HomePage />
+          </ProtectedRoute>
+        </Switch>
+      </ScrollToTop>
     </BrowserRouter>
   );
 }
