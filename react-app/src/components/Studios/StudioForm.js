@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { createStudioThunk, updateAvatarThunk, updateStudioThunk } from "../../store/studios";
-import EditStudioPics from "./EditStudioPics";
+import { useHistory } from "react-router-dom";
+import { createStudioThunk, updateStudioThunk } from "../../store/studios";
 import './StudioFormPage.css'
 
 export default function StudioForm({ studio, formType }) {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { studioId } = useParams()
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
     const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
@@ -42,85 +40,113 @@ export default function StudioForm({ studio, formType }) {
         //     console.log(key, value);
         // }
 
-        if (formType === 'Update Studio') {
-            const badData = await dispatch(updateStudioThunk(formData, studio.id))
-            if (badData) {
-                setErrors(badData)
-            } else {
-                history.push('/studios')
-            }
+        const badData = await dispatch(createStudioThunk(formData))
+        if (badData) {
+            setErrors(badData)
+        } else {
+            history.push('/studios')
         }
-        else {
-            const badData = await dispatch(createStudioThunk(formData))
-            // console.log('BAD DATA', badData)
-            if (badData) {
-                setErrors(badData)
-            } else {
-                history.push('/studios')
-            }
-        }
-        // console.log('FORMDATA', formData)
     }
 
-    const isImage = (url) => {
-        return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
-    }
+    // const isImage = (url) => {
+    //     return /\.(jpg|jpeg|png|webp|gif)$/.test(url.toLowerCase());
+    // }
+
+    const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
 
     const updateHeaderImage = (e) => {
         setErrors([])
         const file = e.target.files[0];
-        // console.log('FILE', file)
-        // setHeaderImage(file);
 
-        const reader = new FileReader()
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                // console.log('READER RESULT', reader.result)
-                if (isImage(file.name)) {
-                    setHeaderPreview(reader.result)
-                    setHeaderImage(file);
-                } else {
-                    setErrors(['Not a valid header image file type'])
+        if (file) {
+            const fileType = allowedTypes.find(type => file.type.includes(type))
+
+            if (fileType) {
+                const reader = new FileReader()
+                reader.onload = () => {
+                    if (reader.readyState === 2) {
+                        setHeaderPreview(reader.result)
+                        setHeaderImage(file)
+                    }
                 }
+                reader.readAsDataURL(file)
+            } else {
+                setErrors(['Not a valid header image file type'])
             }
         }
-        // console.log('FILES', e.target.files)
-        if (e.target.files[0]) {
-            reader.readAsDataURL(e.target.files[0])
-        }
+
+        // const reader = new FileReader()
+        // reader.onload = () => {
+        //     if (reader.readyState === 2) {
+        //         // console.log('READER RESULT', reader.result)
+        //         if (isImage(file.name)) {
+        //             setHeaderPreview(reader.result)
+        //             setHeaderImage(file);
+        //         } else {
+        //             setErrors(['Not a valid header image file type'])
+        //         }
+        //     }
+        // }
+        // // console.log('FILES', e.target.files)
+        // if (e.target.files[0]) {
+        //     reader.readAsDataURL(e.target.files[0])
+        // }
     }
+
     const updateAvatarImage = (e) => {
         setErrors([])
+
         const file = e.target.files[0];
         // console.log('AVATAR FILE', file)
-        // console.log('IS IMAGE TEST', isImage(file.name))
-        // setAvatar(file);
+        if (file) {
+            const fileType = allowedTypes.find((type) => {
+                return file.type.includes(type)
+                // const split = file.type.split('/')
+                // console.log('SPLIT', split)
+                // split[split.length - 1].includes(type)
+                // split[split.length - 1] === type
+            })
 
-        const reader = new FileReader()
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                // console.log('READER RESULT', reader.result)
-                if (isImage(file.name)) {
-                    setAvatarPreview(reader.result)
-                    setAvatar(file);
-                } else {
-                    setErrors(['Not a valid avatar image file type'])
+            // console.log('FILE TYPE', fileType)
+
+            if (fileType) {
+                const reader = new FileReader()
+                reader.onload = () => {
+                    if (reader.readyState === 2) {
+                        setAvatarPreview(reader.result)
+                        setAvatar(file)
+                    }
                 }
+
+                reader.readAsDataURL(file)
+
+            } else {
+                setErrors(['Not a valid avatar image file type'])
             }
         }
-        // console.log('FILES', e.target.files)
-        if (e.target.files[0]) {
-            reader.readAsDataURL(e.target.files[0])
-        }
+        // const reader = new FileReader()
+        // reader.onload = () => {
+        //     if (reader.readyState === 2) {
+        //         // console.log('READER RESULT', reader.result)
+        //         if (isImage(file.name)) {
+        //             setAvatarPreview(reader.result)
+        //             setAvatar(file);
+        //         } else {
+        //             setErrors(['Not a valid avatar image file type'])
+        //         }
+        //     }
+        // }
+        // // console.log('FILES', e.target.files)
+        // if (e.target.files[0]) {
+        //     reader.readAsDataURL(e.target.files[0])
+        // }
     }
 
     return (
         <div className="studio-form-container">
             <form className="studio-form" onSubmit={handleSubmit}>
                 <div>
-                    {formType === 'Update Studio' ?
-                    <h1 className="studio-form-title">Update Studio</h1> :
-                    <h1 className="studio-form-title">Create a Studio</h1>}
+                    <h1 className="studio-form-title">Create a Studio</h1>
                 </div>
                 <div className="studio-all-fields-required">
                     All fields are required.
@@ -138,7 +164,6 @@ export default function StudioForm({ studio, formType }) {
                                 type="file"
                                 accept="image/*"
                                 onChange={updateAvatarImage}
-                                // defaultValue={studio?.avatar || null}
                             />
                             Select an avatar image
                         </label>
@@ -251,7 +276,7 @@ export default function StudioForm({ studio, formType }) {
                         </div>
                     </div>
                     <div className="studio-form-button-container">
-                        <button className="studio-form-button">{formType ? formType : 'Create Studio'}</button>
+                        <button className="studio-form-button">Create Studio</button>
                     </div>
             </form>
         </div>
