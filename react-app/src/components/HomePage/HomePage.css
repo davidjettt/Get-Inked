@@ -27,6 +27,7 @@
 .app-description {
     font-weight: 700;
     font-size: 40px;
+    /* font-size: 1vw; */
     color: white;
     letter-spacing: 6px;
     padding: 13px 0;
@@ -44,6 +45,46 @@
     letter-spacing: 1px;
     width: 80%;
     font-size: 20px;
+}
+
+@media screen and (max-width: 1855px) {
+    .main-image-text-container {
+        position: absolute;
+        top: 10%;
+        left: 12%;
+        width: 500px;
+    }
+}
+@media screen and (max-width: 1485px) {
+    .main-image-text-container {
+        position: absolute;
+        top: 4%;
+        left: 15%;
+        width: 500px;
+    }
+}
+@media screen and (max-width: 640px) {
+    .app-description {
+        font-weight: 700;
+        font-size: 28px;
+        color: white;
+        letter-spacing: 6px;
+        padding: 13px 0;
+    }
+
+    .app-name {
+        font-size: 18px;
+        color: white;
+        letter-spacing: 6px;
+        line-height: 40px;
+    }
+
+    .app-message {
+        color: white;
+        letter-spacing: 1px;
+        width: 80%;
+        font-size: 16px;
+    }
 }
 
 .home-page-artists-container {

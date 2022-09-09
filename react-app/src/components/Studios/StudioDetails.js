@@ -142,7 +142,7 @@ export default function StudioDetails() {
                         </div>
                         {studio && <StudioPortfolio studioId={studio.id} />}
                     </div>
-                    <Reviews studioId={studioId} />
+                    {/* <Reviews studioId={studioId} /> */}
                 </div>
             </div>
             <Footer />

@@ -34,7 +34,7 @@ def create_studio():
 
     avatar_image = request.files["avatar"]
 
-    if not allowed_file(header_image.filename) or not allowed_file(header_image.filename):
+    if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
         # print('SECOND IF')
         return {"errors": ["File type not permitted"]}, 400
 
@@ -93,6 +93,40 @@ def create_studio():
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
+
+# Updating avatar image
+@studio_routes.put('/<int:id>/avatar')
+@login_required
+def update_avatar(id):
+    studio = Studio.query.get(id)
+
+    if "avatar" not in request.files:
+        # print('FIRST IF')
+        return {"errors": ["Avatar image required"]}, 400
+
+    avatar_image = request.files["avatar"]
+
+    if not allowed_file(avatar_image.filename):
+        # print('SECOND IF')
+        return {"errors": ["File type not permitted"]}, 400
+
+    avatar_image.filename = get_unique_filename(avatar_image.filename)
+
+    upload_avatar = upload_file_to_s3(avatar_image)
+
+    if "url" not in upload_avatar:
+        # print('THIRD IF')
+        # if the dictionary doesn't have a filename key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload_avatar, 400
+
+    url = upload_avatar["url"]
+
+    studio.avatar = url
+    db.session.commit()
+
+    return { 'studio': studio.studio_to_dict() }
 
 # Update an existing studio
 @studio_routes.put('/<int:id>')
