@@ -104,3 +104,21 @@
 .logout-button:hover {
     background-color: #ddd;
 }
+
+@media screen and (max-width: 700px) {
+    .nav-tattoos-link,
+    .nav-studios-link,
+    .new-studio-link {
+        font-size: 13px;
+    }
+    .nav-logo-image {
+        width: 30px;
+        height: 30px;
+    }
+    .nav-logo-text {
+        font-size: 15px;
+    }
+    .nav-studios-link {
+        margin: 0px 10px;
+    }
+}

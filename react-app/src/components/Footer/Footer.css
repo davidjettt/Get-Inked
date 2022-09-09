@@ -1,11 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .footer-container-main {
     height: 110px;
     background-color: rgb(31,33,37);
     display: flex;
     justify-content: center;
-    /* margin: 0;
-    padding: 0; */
+    /* width: 100vw; */
 }
 
 .footer-container-secondary {
@@ -40,6 +43,7 @@
     color: whitesmoke;
     font-size: 18px;
     letter-spacing: 1px;
+    width: 100%;
 }
 
 .icons-container {
@@ -52,28 +56,17 @@
 .github,
 .linkedin {
     width: 30px;
+    padding: 5px
 }
 
-/* .about,
-.links {
-    color: white;
+@media screen and (max-width: 800px) {
+    .footer-container-secondary {
+        justify-content: space-evenly;
+    }
+    .developer-container {
+        font-size: 15px;
+    }
+    .icons-container {
+        flex-direction: column;
+    }
 }
-
-.links {
-    font-weight: 550;
-}
-
-.links > li {
-    list-style: none;
-    font-weight: 300;
-    margin: 5px;
-}
-
-li:first-child {
-    margin-top: 20px;
-}
-
-a {
-    text-decoration: none;
-    color: white;
-} */

@@ -24,6 +24,15 @@
     object-fit: cover;
 }
 
+@media screen and (max-width: 875px) {
+    .studio-form-page-image-container {
+        display: none;
+    }
+    .studio-form-page-main-container {
+        justify-content: center;
+    }
+}
+
 .studio-form-title {
     letter-spacing: 2px;
     font-weight: 600;

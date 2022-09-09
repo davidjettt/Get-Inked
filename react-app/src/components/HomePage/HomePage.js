@@ -28,36 +28,38 @@ export default function HomePage() {
                 </div>
                 <img className="home-page-main-image" src={mainHomePageImage} alt='traditional-japanese-tattoos-girl' />
             </div>
-            <div className="home-page-artists-container">
-                <div className="home-page-artists-secondary">
-                    <div className="artists-image-container">
-                        <img className='artists-image' src={studioImage} alt='' />
-                    </div>
-                    <div className="artists-left-container">
-                        <div className='artists-heading'>Studios on Get Inked</div>
-                        <div className='artists-paragraph'>Take a look at our featured tattoo studios.</div>
-                        <Link className='studios-link' to='/studios'>
-                            Discover studios
-                        </Link>
+            <div className='home-page-below-image-container'>
+                <div className="home-page-artists-container">
+                    <div className="home-page-artists-secondary">
+                        <div className="artists-image-container">
+                            <img className='artists-image' src={studioImage} alt='' />
+                        </div>
+                        <div className="artists-left-container">
+                            <div className='artists-heading'>Studios on Get Inked</div>
+                            <div className='artists-paragraph'>Take a look at our featured tattoo studios.</div>
+                            <Link className='studios-link' to='/studios'>
+                                Discover studios
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='home-page-tattoos-container'>
-                <div className='home-page-tattoos-secondary'>
-                    <div className='tattoos-right-container'>
-                        <div className='tattoos-heading'>Get inspired for your next tattoo.</div>
-                        <div className='tattoos-paragraph'>We've curated a beautiful library of tattoos for you to explore.</div>
-                        <Link className='tattoos-link' to='/tattoos'>
-                            Explore tattoos
-                        </Link>
-                    </div>
-                    <div className='tattoos-image-container'>
-                        {/* <img className='artists-image' src={studioImage} alt='' /> */}
-                        <img className='tat1' src={tattoo1} alt='' />
-                        <img className='tat2' src={tattoo2} alt='' />
-                        <img className='tat3' src={tattoo3} alt='' />
-                        <img className='tat4' src={tattoo6} alt='' />
-                        <img className='tat5' src={tattoo5} alt='' />
+                <div className='home-page-tattoos-container'>
+                    <div className='home-page-tattoos-secondary'>
+                        <div className='tattoos-right-container'>
+                            <div className='tattoos-heading'>Get inspired for your next tattoo.</div>
+                            <div className='tattoos-paragraph'>We've curated a beautiful library of tattoos for you to explore.</div>
+                            <Link className='tattoos-link' to='/tattoos'>
+                                Explore tattoos
+                            </Link>
+                        </div>
+                        <div className='tattoos-image-container'>
+                            {/* <img className='artists-image' src={studioImage} alt='' /> */}
+                            <img className='tat1' src={tattoo1} alt='' />
+                            <img className='tat2' src={tattoo2} alt='' />
+                            <img className='tat3' src={tattoo3} alt='' />
+                            <img className='tat4' src={tattoo6} alt='' />
+                            <img className='tat5' src={tattoo5} alt='' />
+                        </div>
                     </div>
                 </div>
             </div>

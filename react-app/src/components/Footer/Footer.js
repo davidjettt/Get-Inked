@@ -13,18 +13,6 @@ export default function Footer() {
                     GET INKED
                 </div>
                 <div className='footer-about-container'>
-                    {/* <div className='about'>
-                        About
-                    </div> */}
-                    {/* <div className='links'>
-                        About
-                        <li>
-                            <a target='_blank' href='https://github.com/davidjettt'>GitHub</a>
-                        </li>
-                        <li>
-                            <a target='_blank' href='https://www.linkedin.com/in/david-jetsupphasuk-1494a6125/'>LinkedIn</a>
-                        </li>
-                    </div> */}
                     <div className='developer-container'>
                         Developed by David Jetsupphasuk
                     </div>
