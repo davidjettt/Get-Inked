@@ -37,6 +37,19 @@
     height: 100%;
 }
 
+@media screen and (max-width: 675px) {
+    .edit-tattoo-form-and-image-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .edit-tattoo-image-container {
+        width: 100%;
+    }
+    .edit-tattoo-form-container {
+        width: 100%;
+    }
+}
+
 .edit-tattoo-profile-image {
     height: 29px;
     width: 29px;

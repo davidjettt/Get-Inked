@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TattooOptionsModal from "./TattooOptionsModal";
 
 
 export default function SingleTattoo({ tattooId, studioPortfolio }) {
+    const [ overflow, setOverflow ] = useState(false)
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
     const tattoo = useSelector(state => Object.values(state.tattoos).find(tattoo => +tattoo.id === +tattooId))
     const sessionUserId = useSelector(state => state.session.user.id)
@@ -15,6 +17,19 @@ export default function SingleTattoo({ tattooId, studioPortfolio }) {
     // } else {
     //     className = 'tattoo-style-container'
     // }
+
+
+    useEffect(() => {
+        if (!overflow) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = '15px';
+        }
+        return () => {
+            document.body.style.overflow = 'visible'
+            document.body.style.paddingRight = '0px';
+        }
+    }, [overflow]);
+
 
     return (
         <div className="tattoo-modal-container">

@@ -61,17 +61,63 @@
 .tattoo-modal-container {
     width: 50vw;
     min-height: 500px;
-    max-height: 1000px;
+    /* height: 80vh; */
+    max-height: 700px;
+    /* height: 80vh;
+    max-height: 800px; */
     display: flex;
+    /* overflow-y: auto; */
 }
+
+@media screen and (max-width: 1000px) {
+    .tattoo-modal-container {
+        height: 700px;
+        flex-direction: column;
+        overflow-y: auto;
+        width: 50vw;
+        /* max-height: 600px; */
+    }
+    .tattoo-modal-image-container {
+        min-width: 100%;
+    }
+    .tattoo-modal-left-container {
+        min-width: 100%;
+        /* overflow-x: auto; */
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .tattoo-modal-container {
+        height: 80vh;
+        max-height: 800px;
+        width: 70vw;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .tattoo-modal-image-container {
+        min-width: 100%;
+    }
+    .tattoo-modal-left-container {
+        min-width: 100%;
+    }
+}
+
+/* @media screen and (max-height: 500px) {
+    .tattoo-modal-container {
+        width: 80vw;
+    }
+} */
 
 .tattoo-modal-image-container {
     width: 70%;
+    /* height: 100%; */
 }
 
 .tattoo-modal-image {
     width: 100%;
     height: 100%;
+    max-height: 700px;
+    /* object-fit: cover; */
 }
 
 .tattoo-modal-left-container {
@@ -128,6 +174,10 @@
     color: black;
     font-weight: 600;
     font-size: 14px;
+    word-break: break-word;
+}
+
+.tattoo-modal-studio-name-location {
     word-break: break-word;
 }
 
