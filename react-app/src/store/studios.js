@@ -1,9 +1,16 @@
 
-
+const GET_STUDIO = '/studios/getOne'
 const LOAD_STUDIOS = '/studios/load'
 const CREATE_STUDIO = '/studios/create'
 const UPDATE_STUDIO = '/studios/update'
 const DELETE_STUDIO = '/studios/delete'
+
+const getOneStudio = (studio) => {
+    return {
+        type: GET_STUDIO,
+        studio
+    }
+}
 
 const loadStudios = (studios) => {
     return {
@@ -94,6 +101,41 @@ export const deleteStudioThunk = (studio) => async (dispatch) => {
     }
 }
 
+export const getStudioThunk = (studioId) => async (dispatch) => {
+    const response = await fetch(`/api/studios/${studioId}/one`)
+    const data = await response.json()
+    dispatch(getOneStudio(data))
+}
+
+export const updateAvatarThunk = (formData, studioId) => async (dispatch) => {
+    const response = await fetch(`/api/studios/${studioId}/avatar`, {
+        method: 'POST',
+        body: formData
+    })
+    if (response.ok) {
+        return
+    } else {
+        const badData = await response.json()
+        // console.log('DATA THUNK', badData)
+        if (badData.errors) return badData.errors
+    }
+}
+
+export const updateHeaderThunk = (formData, studioId) => async (dispatch) => {
+    const response = await fetch(`/api/studios/${studioId}/header`, {
+        method: 'PUT',
+        body: formData
+    })
+
+    if (response.ok) {
+        return
+    } else {
+        const badData = await response.json()
+        // console.log('DATA THUNK', badData)
+        if (badData.errors) return badData.errors
+    }
+}
+
 const initialState = {}
 
 export default function studioReducer(state = initialState, action) {
@@ -119,6 +161,11 @@ export default function studioReducer(state = initialState, action) {
         case DELETE_STUDIO: {
             newState = JSON.parse(JSON.stringify(state))
             delete newState[action.studio.id]
+            return newState
+        }
+        case GET_STUDIO: {
+            newState = JSON.parse(JSON.stringify(state))
+            newState[action.studio.studio.id] = action.studio.studio
             return newState
         }
         default:

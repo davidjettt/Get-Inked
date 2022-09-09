@@ -93,9 +93,15 @@ def create_studio():
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
+# Update Studio
+@studio_routes.get('/<int:id>/one')
+@login_required
+def get_studio(id):
+    studio = Studio.query.get(id)
+    return { 'studio': studio.studio_to_dict() }
 
 # Updating avatar image
-@studio_routes.put('/<int:id>/avatar')
+@studio_routes.post('/<int:id>/avatar')
 @login_required
 def update_avatar(id):
     studio = Studio.query.get(id)
@@ -108,7 +114,7 @@ def update_avatar(id):
 
     if not allowed_file(avatar_image.filename):
         # print('SECOND IF')
-        return {"errors": ["File type not permitted"]}, 400
+        return {"errors": ["File type for avatar not permitted"]}, 400
 
     avatar_image.filename = get_unique_filename(avatar_image.filename)
 
@@ -128,28 +134,25 @@ def update_avatar(id):
 
     return { 'studio': studio.studio_to_dict() }
 
-# Update an existing studio
-@studio_routes.put('/<int:id>')
+# Updating studio header image
+@studio_routes.put('/<int:id>/header')
 @login_required
-def update_studio(id):
+def update_header(id):
     studio = Studio.query.get(id)
-    if "header_image" not in request.files or "avatar" not in request.files:
+
+    if "header" not in request.files:
         # print('FIRST IF')
-        return {"errors": ["Image required"]}, 400
+        return {"errors": ["Header image required"]}, 400
 
-    header_image = request.files["header_image"]
+    header_image = request.files["header"]
 
-    avatar_image = request.files["avatar"]
-
-    if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
+    if not allowed_file(header_image.filename):
         # print('SECOND IF')
-        return {"errors": ["File type not permitted"]}, 400
+        return {"errors": ["File type for header not permitted"]}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
-    avatar_image.filename = get_unique_filename(avatar_image.filename)
 
     upload_header = upload_file_to_s3(header_image)
-    upload_avatar = upload_file_to_s3(avatar_image)
 
     if "url" not in upload_header:
         # print('THIRD IF')
@@ -157,19 +160,79 @@ def update_studio(id):
         # it means that there was an error when we tried to upload
         # so we send back that error message
         return upload_header, 400
-    elif "url" not in upload_avatar:
-        return upload_avatar, 400
 
     url = upload_header["url"]
-    url2 = upload_avatar["url"]
+
+    studio.header_image = url
+    db.session.commit()
+
+    return { 'studio': studio.studio_to_dict() }
+
+# Update an existing studio
+# @studio_routes.put('/<int:id>')
+# @login_required
+# def update_studio(id):
+#     studio = Studio.query.get(id)
+#     if "header_image" not in request.files or "avatar" not in request.files:
+#         # print('FIRST IF')
+#         return {"errors": ["Image required"]}, 400
+
+#     header_image = request.files["header_image"]
+
+#     avatar_image = request.files["avatar"]
+
+#     if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
+#         # print('SECOND IF')
+#         return {"errors": ["File type not permitted"]}, 400
+
+#     header_image.filename = get_unique_filename(header_image.filename)
+#     avatar_image.filename = get_unique_filename(avatar_image.filename)
+
+#     upload_header = upload_file_to_s3(header_image)
+#     upload_avatar = upload_file_to_s3(avatar_image)
+
+#     if "url" not in upload_header:
+#         # print('THIRD IF')
+#         # if the dictionary doesn't have a filename key
+#         # it means that there was an error when we tried to upload
+#         # so we send back that error message
+#         return upload_header, 400
+#     elif "url" not in upload_avatar:
+#         return upload_avatar, 400
+
+#     url = upload_header["url"]
+#     url2 = upload_avatar["url"]
+
+#     form = StudioForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         studio.avatar = url2
+#         studio.name=request.form.get('name')
+#         studio.description=request.form.get('description')
+#         studio.header_image=url
+#         # studio.tattoo_style=request.form.get('tattoo_style')
+#         studio.address=request.form.get('address')
+#         studio.city=request.form.get('city')
+#         studio.state=request.form.get('state')
+#         studio.zip_code=request.form.get('zip_code')
+#         studio.owner_id=current_user.id
+
+#         db.session.commit()
+#         return { 'studio': studio.studio_to_dict() }
+
+#     else:
+#         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+@studio_routes.put('/<int:id>')
+@login_required
+def update_studio(id):
+    studio = Studio.query.get(id)
 
     form = StudioForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        studio.avatar = url2
         studio.name=request.form.get('name')
         studio.description=request.form.get('description')
-        studio.header_image=url
         # studio.tattoo_style=request.form.get('tattoo_style')
         studio.address=request.form.get('address')
         studio.city=request.form.get('city')
