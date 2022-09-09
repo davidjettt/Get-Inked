@@ -87,6 +87,12 @@
     }
 }
 
+.home-page-below-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .home-page-artists-container {
     display: flex;
     justify-content: center;
@@ -215,6 +221,23 @@
     height: 100%;
 }
 
-@media screen and (max-width: 1277px) {
-
+@media screen and (max-width: 1100px) {
+    .home-page-artists-secondary {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .home-page-tattoos-secondary {
+        flex-direction: column-reverse;
+        gap: 50px;
+    }
+    .tattoos-image-container {
+        width: 80vw;
+        align-self: center;
+    }
+    .artists-left-container {
+        align-items: center;
+    }
+    .tattoos-right-container {
+        align-items: center;
+    }
 }

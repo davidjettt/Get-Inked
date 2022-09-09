@@ -2,3 +2,9 @@
 .new-edit-studio-form-main {
     display: flex;
 }
+
+@media screen and (max-width: 875px) {
+    .new-edit-studio-form-main {
+        justify-content: center;
+    }
+}
