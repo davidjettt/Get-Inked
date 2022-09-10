@@ -17,8 +17,8 @@ def zip_code_check(form, field):
 
 def name_length(form, field):
     name = field.data
-    if len(name) > 40:
-        raise ValidationError('Name of studio cannot exceed 40 characters')
+    if len(name) > 30:
+        raise ValidationError('Name of studio cannot exceed 30 characters')
 
 def city_length(form, field):
     city = field.data
