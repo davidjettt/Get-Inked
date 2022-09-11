@@ -9,7 +9,7 @@ import TattooFormModal from "../Tattoos/TattooFormModal"
 import { Modal } from "../../context/Modal"
 import DeleteButton from "../DeleteButton/DeleteButton"
 import Footer from "../Footer/Footer"
-// import Reviews from "../Reviews/Reviews"
+import Reviews from "../Reviews/Reviews"
 
 export default function StudioDetails() {
     const [ showDropdown, setShowDropdown ] = useState(false)
@@ -142,7 +142,7 @@ export default function StudioDetails() {
                         </div>
                         {studio && <StudioPortfolio studioId={studio.id} />}
                     </div>
-                    {/* <Reviews studioId={studioId} /> */}
+                    <Reviews studioId={studioId} />
                 </div>
             </div>
             <Footer />
