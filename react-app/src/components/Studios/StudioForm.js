@@ -215,7 +215,7 @@ export default function StudioForm({ studio, formType }) {
                             </label>
                         </div>
                         <select className="state-select-field" name='state' value={state} onChange={(e) => setState(e.target.value)}>
-                            <option value="none" defaultValue>Select a State</option>
+                            <option value="" defaultValue>Select a State</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="Arizona">AZ</option>
