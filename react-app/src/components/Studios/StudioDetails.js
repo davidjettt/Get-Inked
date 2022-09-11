@@ -7,6 +7,7 @@ import './StudioDetails.css'
 import StudioPortfolio from "./StudioPortfolio"
 import TattooFormModal from "../Tattoos/TattooFormModal"
 import { Modal } from "../../context/Modal"
+import { Rating } from 'react-simple-star-rating'
 import DeleteButton from "../DeleteButton/DeleteButton"
 import Footer from "../Footer/Footer"
 import Reviews from "../Reviews/Reviews"
@@ -23,6 +24,16 @@ export default function StudioDetails() {
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
     const studioOwnerId = studio?.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
+
+    let starCount = 0
+
+    studio.reviews.forEach((review) => {
+        starCount += review.stars
+    })
+    const avgRating = (starCount / studio.reviews.length).toFixed(1)
+
+    // console.log('AVG RATING', avgRating)
+
 
     let className
     const description = studio?.description
@@ -91,12 +102,23 @@ export default function StudioDetails() {
                             </div>
                         </div>
                         <div className="studio-details-header-reviews">
-                            <div className="studio-details-header-reviews-left">
-                                <div></div>
-                                {/* {studio?.reviews.length > 0 && <div>
+                            {studio?.reviews.length > 0 && <div className="studio-details-header-reviews-left">
+                                <Rating
+                                    size={20}
+                                    allowHalfIcon={true}
+                                    ratingValue={avgRating * 20}
+                                    // onClick={newRating}
+                                    fillColor='#1F2125'
+                                    readonly={true}
+                                    // transition={true}
+                                />
+                                <div className="avg-rating" >
+                                    {avgRating}
+                                </div>
+                                <div>
                                     See all reviews {studio?.reviews.length}
-                                </div>} */}
-                            </div>
+                                </div>
+                            </div>}
                             <div className="studio-details-header-reviews-right">
                                 <div className="studio-details-header-booking-button-container">
                                     {/* <button>
@@ -142,7 +164,7 @@ export default function StudioDetails() {
                         </div>
                         {studio && <StudioPortfolio studioId={studio.id} />}
                     </div>
-                    {/* <Reviews studioId={studioId} /> */}
+                    <Reviews studioId={studioId} />
                 </div>
             </div>
             <Footer />

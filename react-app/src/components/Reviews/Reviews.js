@@ -1,6 +1,8 @@
 import { Rating } from 'react-simple-star-rating';
 import { useSelector } from "react-redux"
+import threeDots from '../../Images/three-dots.svg'
 import './Reviews.css'
+import ReviewFormModal from './ReviewFormModal';
 
 export default function Reviews({ studioId }) {
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
@@ -12,6 +14,7 @@ export default function Reviews({ studioId }) {
             <div className="reviews-main">
                 <div className="reviews-header-container">
                     <h2>Reviews</h2>
+                    <ReviewFormModal studioId={studioId} />
                 </div>
                 <div className="reviews-container">
                     {reviews.map((review) => (
