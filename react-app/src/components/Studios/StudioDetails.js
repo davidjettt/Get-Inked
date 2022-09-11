@@ -26,11 +26,13 @@ export default function StudioDetails() {
     const sessionUserId = useSelector(state => state.session.user.id)
 
     let starCount = 0
-
-    studio.reviews.forEach((review) => {
-        starCount += review.stars
-    })
-    const avgRating = (starCount / studio.reviews.length).toFixed(1)
+    let avgRating
+    if (studio?.reviews.length > 0) {
+        studio.reviews.forEach((review) => {
+            starCount += review.stars
+        })
+        avgRating = (starCount / studio.reviews.length).toFixed(1)
+    }
 
     // console.log('AVG RATING', avgRating)
 

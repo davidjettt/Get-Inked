@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import threeDots from '../../Images/three-dots.svg'
 import './Reviews.css'
 import ReviewFormModal from './ReviewFormModal';
+import ReviewOptionsModal from './ReviewOptionsModal';
 
 export default function Reviews({ studioId }) {
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
@@ -42,7 +43,9 @@ export default function Reviews({ studioId }) {
                                     <img className="review-image" src={review.reviewImage}  alt='review' />}
                                 </div>
                             </div>
-                            {/* <div></div> */}
+                            <div className='review-options-container'>
+                                <ReviewOptionsModal reviewId={review.id} />
+                            </div>
                         </div>
                     ))}
                 </div>

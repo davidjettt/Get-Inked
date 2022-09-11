@@ -77,8 +77,7 @@ export const deleteReviewThunk = (review) => async (dispatch) => {
     })
 
     if (response.ok) {
-        const data = await response.json()
-        dispatch(deleteReview(data))
+        dispatch(deleteReview(review))
     }
 }
 
@@ -87,7 +86,7 @@ export default function reviewsReducer(state = initialState, action) {
     let newState
     switch (action.type) {
         case LOAD_REVIEWS:
-            newState = JSON.parse(JSON.stringify(state))
+            newState = {}
             action.reviews.allReviews.forEach((review) => {
                 newState[review.id] = review
             })
