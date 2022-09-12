@@ -36,6 +36,7 @@ export default function EditStudioPics({ studioId }) {
                             setErrors(data)
                         } else {
                             dispatch(getStudioThunk(studioId))
+                            // window.alert('Successfully changed avatar image')
                         }
                     } else {
                         // console.log('ELSE')

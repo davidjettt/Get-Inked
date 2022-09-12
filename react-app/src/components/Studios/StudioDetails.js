@@ -24,10 +24,15 @@ export default function StudioDetails() {
     const studioOwnerId = studio?.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
 
+    useEffect(() => {
+        if (!studio) {
+            history.push('/studios')
+        }
+    }, [studio])
 
-    if (!studio) {
-        history.push('/not-found')
-    }
+    // if (!studio) {
+    //     history.push('/not-found')
+    // }
 
     let className
     const description = studio?.description
@@ -61,96 +66,98 @@ export default function StudioDetails() {
     }
 
     return (
-        <div className="studio-details-main">
-            <div className="studio-details-header-container">
-                <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header' />
-            </div>
-            <div className="studio-details-container">
-                <div className="studio-details-info-main">
-                    <div className="studio-details-info-container">
-                        {sessionUserId === studioOwnerId && <div className="three-dots">
-                            <img onClick={handleDropdown} src={threedots} alt='three-dots' />
-                            <div className={menuClassName ? "dropdown-container" : 'dropdown-off'}>
-                                {showDropdown && <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
-                                    Update Studio
-                                </Link>}
-                                {/* <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button> */}
-                                {showDropdown && <button className="delete-studio-button" onClick={() => setShowModal(true)}>Delete Studio</button>}
-                                {showModal && <Modal onClose={() => setShowModal(false)}>
-                                    <DeleteButton studio={{...studio}} setShowModal={setShowModal} />
-                                </Modal>}
-                            </div>
-                        </div>}
-                        <div className="studio-details-avatar-name-location">
-                            <div className="studio-details-avatar-container">
-                                <img className="studio-details-avatar" src={studio?.avatar || defaultAvatarImage} alt='studio-avatar' />
-                            </div>
-                            <div className="studio-details-name-location-container">
-                                <div className="studio-details-name">
-                                    {studio?.name}
+        <>
+            <div className="studio-details-main">
+                <div className="studio-details-header-container">
+                    <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header' />
+                </div>
+                <div className="studio-details-container">
+                    <div className="studio-details-info-main">
+                        <div className="studio-details-info-container">
+                            {sessionUserId === studioOwnerId && <div className="three-dots">
+                                <img onClick={handleDropdown} src={threedots} alt='three-dots' />
+                                <div className={menuClassName ? "dropdown-container" : 'dropdown-off'}>
+                                    {showDropdown && <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
+                                        Update Studio
+                                    </Link>}
+                                    {/* <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button> */}
+                                    {showDropdown && <button className="delete-studio-button" onClick={() => setShowModal(true)}>Delete Studio</button>}
+                                    {showModal && <Modal onClose={() => setShowModal(false)}>
+                                        <DeleteButton studio={{...studio}} setShowModal={setShowModal} />
+                                    </Modal>}
                                 </div>
-                                <div className="studio-details-location-container">
-                                    <div className='studio-details-location' >{ studio?.address }</div>
-                                    <span className="studio-details-location">{studio?.city}, {studio?.state} {studio?.zipCode}</span>
+                            </div>}
+                            <div className="studio-details-avatar-name-location">
+                                <div className="studio-details-avatar-container">
+                                    <img className="studio-details-avatar" src={studio?.avatar || defaultAvatarImage} alt='studio-avatar' />
+                                </div>
+                                <div className="studio-details-name-location-container">
+                                    <div className="studio-details-name">
+                                        {studio?.name}
+                                    </div>
+                                    <div className="studio-details-location-container">
+                                        <div className='studio-details-location' >{ studio?.address }</div>
+                                        <span className="studio-details-location">{studio?.city}, {studio?.state} {studio?.zipCode}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="studio-details-header-reviews">
-                            <div className="studio-details-header-reviews-left">
-                                <div></div>
-                                {/* {studio?.reviews.length > 0 && <div>
-                                    See all reviews {studio?.reviews.length}
-                                </div>} */}
-                            </div>
-                            <div className="studio-details-header-reviews-right">
-                                <div className="studio-details-header-booking-button-container">
-                                    {/* <button>
-                                        Book
-                                    </button> */}
-                                    <div>
-                                        {/* Bookmark */}
+                            <div className="studio-details-header-reviews">
+                                <div className="studio-details-header-reviews-left">
+                                    <div></div>
+                                    {/* {studio?.reviews.length > 0 && <div>
+                                        See all reviews {studio?.reviews.length}
+                                    </div>} */}
+                                </div>
+                                <div className="studio-details-header-reviews-right">
+                                    <div className="studio-details-header-booking-button-container">
+                                        {/* <button>
+                                            Book
+                                        </button> */}
+                                        <div>
+                                            {/* Bookmark */}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="studio-details-nav-bar">
-                    <div>
-                        {/* <button>Studio</button> */}
+                    <div className="studio-details-nav-bar">
+                        <div>
+                            {/* <button>Studio</button> */}
+                        </div>
+                        <div>
+                            {/* <button>Portfolio</button> */}
+                        </div>
+                        <div>
+                            {/* <button>Artists</button> */}
+                        </div>
                     </div>
-                    <div>
-                        {/* <button>Portfolio</button> */}
-                    </div>
-                    <div>
-                        {/* <button>Artists</button> */}
-                    </div>
-                </div>
-                <div className="studio-details-line"></div>
-                <div className="studio-details-content-container">
-                    <div className="about-the-studio-container">
-                        <div className="about-the-studio">
-                            <div>
-                                <h2>About the Studio</h2>
+                    <div className="studio-details-line"></div>
+                    <div className="studio-details-content-container">
+                        <div className="about-the-studio-container">
+                            <div className="about-the-studio">
+                                <div>
+                                    <h2>About the Studio</h2>
+                                </div>
+                                <div className={className}>
+                                    {studio?.description}
+                                </div>
                             </div>
-                            <div className={className}>
-                                {studio?.description}
+                            <div className="map">
                             </div>
                         </div>
-                        <div className="map">
+                        <div className="studio-portfolio-container">
+                            <div className="studio-portfolio-header-container">
+                                <h2>Portfolio</h2>
+                                {sessionUserId === studioOwnerId &&  <TattooFormModal studioId={studioId} />}
+                            </div>
+                            {studio && <StudioPortfolio studioId={studio.id} />}
                         </div>
+                        {/* <Reviews studioId={studioId} /> */}
                     </div>
-                    <div className="studio-portfolio-container">
-                        <div className="studio-portfolio-header-container">
-                            <h2>Portfolio</h2>
-                            {sessionUserId === studioOwnerId &&  <TattooFormModal studioId={studioId} />}
-                        </div>
-                        {studio && <StudioPortfolio studioId={studio.id} />}
-                    </div>
-                    {/* <Reviews studioId={studioId} /> */}
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </>
     )
 }
