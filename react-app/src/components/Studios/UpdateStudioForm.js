@@ -15,7 +15,7 @@
 // }
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import {  updateStudioThunk } from "../../store/studios";
 import EditStudioPics from "./EditStudioPics";
 import './StudioFormPage.css'
@@ -36,6 +36,11 @@ export default function UpdateStudioForm() {
     const [ state, setState ] = useState(studio?.state || '')
     const [ zipCode, setZipCode ] = useState(studio?.zipCode || '')
     const [ errors, setErrors ] = useState([])
+
+
+    if (!studio) {
+        return <Redirect to='/not-found' />
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
