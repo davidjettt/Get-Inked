@@ -24,6 +24,11 @@ export default function StudioDetails() {
     const studioOwnerId = studio?.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
 
+
+    if (!studio) {
+        history.push('/not-found')
+    }
+
     let className
     const description = studio?.description
     if (description?.indexOf(' ') === -1) {
