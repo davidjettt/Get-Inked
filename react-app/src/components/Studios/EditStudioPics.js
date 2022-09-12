@@ -8,33 +8,42 @@ export default function EditStudioPics({ studioId }) {
     const dispatch = useDispatch()
     const studio = useSelector(state => state.studios[+studioId])
 
-
-    const isImage = (url) => {
-        return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
     }
 
     const submitAvatar = async (e) => {
         setErrors([])
 
-        // let file
-        // if (e.target.files[0]) {
-        //     file = e.target.files[0]
-        //     console.log(file)
-        // }
-
         const file = e.target.files[0]
 
         if (file) {
-            const formData = new FormData()
-            formData.append('avatar', file)
+            const reader = new FileReader()
+            reader.onload = async () => {
+                if (reader.readyState === 2) {
+                    if (await isImgUrl(reader.result)) {
+                        const formData = new FormData()
+                        formData.append('avatar', file)
 
-            const data = await dispatch(updateAvatarThunk(formData, studio.id))
-            console.log('DATA', data)
-            if (data) {
-                setErrors(data)
-            } else {
-                dispatch(getStudioThunk(studioId))
+                        const data = await dispatch(updateAvatarThunk(formData, studio.id))
+                        if (data) {
+                            // console.log('HERE')
+                            setErrors(data)
+                        } else {
+                            dispatch(getStudioThunk(studioId))
+                        }
+                    } else {
+                        // console.log('ELSE')
+                        setErrors(['Invalid avatar image'])
+                    }
+                }
             }
+            reader.readAsDataURL(file)
         }
 
         // if (isImage(file?.name)) {
@@ -55,16 +64,25 @@ export default function EditStudioPics({ studioId }) {
         const file = e.target.files[0]
 
         if (file) {
-            const formData = new FormData()
-            formData.append('header', file)
+            const reader = new FileReader()
+            reader.onload = async () => {
+                if (reader.readyState === 2) {
+                    if (await isImgUrl(reader.result)) {
+                        const formData = new FormData()
+                        formData.append('header', file)
 
-            const data = await dispatch(updateHeaderThunk(formData, studio.id))
-            console.log('DATA', data)
-            if (data) {
-                setErrors(data)
-            } else {
-                dispatch(getStudioThunk(studioId))
+                        const data = await dispatch(updateHeaderThunk(formData, studio.id))
+                        if (data) {
+                            setErrors(data)
+                        } else {
+                            dispatch(getStudioThunk(studioId))
+                        }
+                    } else {
+                        setErrors(['Invalid header image'])
+                    }
+                }
             }
+            reader.readAsDataURL(file)
         }
         // let file
         // if (e.target.files[0]) {
