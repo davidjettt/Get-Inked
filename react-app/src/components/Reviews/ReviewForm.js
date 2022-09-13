@@ -74,13 +74,12 @@ export default function ReviewForm({ setOpenModal , studioId }) {
         <>
             <div className='review-modal-main'>
                 <div className='review-modal-title-container'>
-                    <button onClick={handleXButton}>X</button>
-                    <h3>Write a review for { studio.name }</h3>
+                    <button className='create-review-x-button' onClick={handleXButton}>X</button>
+                    <div className='review-form-title' >Write a review for { studio.name }</div>
+                    <div></div>
                 </div>
-                <div>
-                    Fields with a
-                    <span> * </span>
-                    is a required field.
+                <div className='review-form-message'>
+                    A star rating and review are required.
                 </div>
                 <div className="errors-tattoo-form">
                     {errors.map((error, ind) => (
@@ -92,37 +91,40 @@ export default function ReviewForm({ setOpenModal , studioId }) {
                         <Rating
                             // className='user-review-stars'
                             ratingValue={rating}
-                            size={20}
+                            size={25}
                             initialValue={0}
                             onClick={newRating}
                             fillColor='#1F2125'
                             transition={true}
                         />
-                        <span>*</span>
                     </div>
                     <div className='review-form-review-container'>
                         <textarea
+                            className='create-review-form-textarea'
+                            cols='40'
+                            rows='8'
                             placeholder='Write your review here...'
                             value={studioReview}
                             onChange={(e) => setStudioReview(e.target.value)}
                         >
                         </textarea>
-                        <span>*</span>
                     </div>
                     <div className='review-form-image-upload-container'>
-                        <label>
+                        <label htmlFor='input' className='custom-file-upload'>
                             <input
+                                className='image-upload-input'
                                 type='file'
                                 onChange={updateReviewImage}
                                 id='input'
                                 accept='image/*'
                             />
+                            Upload review image
                         </label>
                         <div className='review-form-image-preview-container'>
                             {imagePreview &&  <img className='review-form-image-preview' src={imagePreview}  alt='review' />}
                         </div>
                     </div>
-                    <button>Submit Review</button>
+                    <button className='tattoo-form-submit-button'>Submit Review</button>
                 </form>
             </div>
         </>

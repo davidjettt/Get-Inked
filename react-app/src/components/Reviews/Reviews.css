@@ -4,6 +4,29 @@
     /* border: 1px solid red; */
 }
 
+.reviews-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviews-header-container > button {
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #aaa;
+    height: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 7px;
+    font-family: 'Inter';
+    font-weight: 500;
+}
+
+.reviews-header-container > button:hover {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
 .user-review-main {
     display: flex;
     justify-content: flex-start;
@@ -15,6 +38,7 @@
 .review {
     display: flex;
     flex-direction: column;
+    width: 50%;
     /* border: 1px solid blue; */
 }
 
@@ -43,4 +67,8 @@
     border-radius: 14px;
     object-fit: cover;
     margin-right: 1rem;
+}
+
+.review-options-container > img {
+
 }
