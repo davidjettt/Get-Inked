@@ -7,7 +7,8 @@ import ReviewOptionsModal from './ReviewOptionsModal';
 
 export default function Reviews({ studioId }) {
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
-    const reviews = useSelector(state => Object.values(state.reviews).filter(review => +studioId === +review.studioId))
+    const reviews = useSelector(state => Object.values(state.reviews)
+                    .filter(review => +studioId === +review.studioId).reverse())
 
 
     return (
