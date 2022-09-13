@@ -15,8 +15,9 @@
 // }
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import {  updateStudioThunk } from "../../store/studios";
+import { loadTattoosThunk } from "../../store/tattoos";
 import EditStudioPics from "./EditStudioPics";
 import './StudioFormPage.css'
 import './UpdateStudioForm.css'
@@ -37,6 +38,11 @@ export default function UpdateStudioForm() {
     const [ zipCode, setZipCode ] = useState(studio?.zipCode || '')
     const [ errors, setErrors ] = useState([])
 
+
+    if (!studio) {
+        return <Redirect to='/not-found' />
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
@@ -55,6 +61,7 @@ export default function UpdateStudioForm() {
         if (badData) {
             setErrors(badData)
         } else {
+            await dispatch(loadTattoosThunk())
             history.push('/studios')
         }
 
@@ -102,7 +109,7 @@ export default function UpdateStudioForm() {
                                 </label>
                             </div>
                             <select className="state-select-field" name='state' value={state} onChange={(e) => setState(e.target.value)}>
-                                <option value="none" defaultValue>Select a State</option>
+                                <option value="" defaultValue>Select a State</option>
                                 <option value="Alabama">AL</option>
                                 <option value="Alaska">AK</option>
                                 <option value="Arizona">AZ</option>

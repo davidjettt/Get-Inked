@@ -52,6 +52,15 @@ export default function StudioForm({ studio, formType }) {
     //     return /\.(jpg|jpeg|png|webp|gif)$/.test(url.toLowerCase());
     // }
 
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
+    }
+
     const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
 
     const updateHeaderImage = (e) => {
@@ -63,10 +72,14 @@ export default function StudioForm({ studio, formType }) {
 
             if (fileType) {
                 const reader = new FileReader()
-                reader.onload = () => {
+                reader.onload = async () => {
                     if (reader.readyState === 2) {
-                        setHeaderPreview(reader.result)
-                        setHeaderImage(file)
+                        if (await isImgUrl(reader.result)) {
+                            setHeaderPreview(reader.result)
+                            setHeaderImage(file)
+                        } else {
+                            setErrors(['Invalid header image'])
+                        }
                     }
                 }
                 reader.readAsDataURL(file)
@@ -107,19 +120,19 @@ export default function StudioForm({ studio, formType }) {
                 // split[split.length - 1] === type
             })
 
-            // console.log('FILE TYPE', fileType)
-
             if (fileType) {
                 const reader = new FileReader()
-                reader.onload = () => {
+                reader.onload = async () => {
                     if (reader.readyState === 2) {
-                        setAvatarPreview(reader.result)
-                        setAvatar(file)
+                        if ( await isImgUrl(reader.result) ) {
+                            setAvatarPreview(reader.result)
+                            setAvatar(file)
+                        } else {
+                            setErrors(['Invalid avatar image'])
+                        }
                     }
                 }
-
                 reader.readAsDataURL(file)
-
             } else {
                 setErrors(['Not a valid avatar image file type'])
             }
@@ -215,7 +228,7 @@ export default function StudioForm({ studio, formType }) {
                             </label>
                         </div>
                         <select className="state-select-field" name='state' value={state} onChange={(e) => setState(e.target.value)}>
-                            <option value="none" defaultValue>Select a State</option>
+                            <option value="" defaultValue>Select a State</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="Arizona">AZ</option>

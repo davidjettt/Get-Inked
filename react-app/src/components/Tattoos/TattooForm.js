@@ -37,20 +37,46 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
     //     return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
     // }
 
+    // function isImageUrl(url) {
+    //     const img = new Image()
+    //     img.src = url
+    //     if (img.onerror === false) {
+    //         return false
+    //     } else {
+    //         return true
+    //     }
+    // }
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
+    }
+
     const updateTattooImage = (e) => {
         setErrors([])
         const allowedTypes = [ "png", "jpg", "jpeg", "gif", "webp" ]
         const file = e.target.files[0];
 
+        // console.log('FILE', file)
+        // console.log('ERROR', image)
         if (file) {
             const fileType = allowedTypes.find(type => file.type.includes(type))
 
             if (fileType) {
                 const reader = new FileReader()
-                reader.onload = () => {
+                reader.onload = async () => {
                     if (reader.readyState === 2) {
-                        setTattooPreview(reader.result)
-                        setTattooImage(file)
+
+                        if ( await isImgUrl(reader.result)) {
+                            // console.log('IMAGE VAL', await isImgUrl(reader.result))
+                            setTattooPreview(reader.result)
+                            setTattooImage(file)
+                        } else {
+                            setErrors(['Invalid image'])
+                        }
                     }
                 }
                 reader.readAsDataURL(file)
@@ -58,6 +84,11 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 setErrors(['Not a valid image file type'])
             }
         }
+        // if (errors.length) {
+        //     console.log('HERE')
+        //     setTattooImage(null)
+        //     setTattooPreview('')
+        // }
     }
 
     const handleXButton = () => {

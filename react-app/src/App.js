@@ -17,6 +17,7 @@ import { loadTattoosThunk } from './store/tattoos';
 import Tattoos from './components/Tattoos/Tattoos';
 import { loadAllReviewsThunk } from './store/reviews';
 import ScrollToTop from './components/ScrollToTop';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -64,14 +65,20 @@ function App() {
           <ProtectedRoute exact path='/studios/:studioId'>
             <StudioDetails />
           </ProtectedRoute>
-          <ProtectedRoute path='/studios/:studioId/edit'>
+          <ProtectedRoute exact path='/studios/:studioId/edit'>
             <UpdateStudioForm />
           </ProtectedRoute>
-          <ProtectedRoute path='/tattoos'>
+          <ProtectedRoute exact path='/tattoos'>
             <Tattoos />
           </ProtectedRoute>
           <ProtectedRoute path='/home' exact={true} >
             <HomePage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/not-found'>
+            <NotFound />
+          </ProtectedRoute>
+          <ProtectedRoute>
+            <NotFound />
           </ProtectedRoute>
         </Switch>
       </ScrollToTop>
