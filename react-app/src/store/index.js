@@ -4,12 +4,14 @@ import session from './session'
 import studios from './studios'
 import tattoos from './tattoos'
 import reviews from './reviews'
+import appointments from './appointments'
 
 const rootReducer = combineReducers({
   session,
   studios,
   tattoos,
-  reviews
+  reviews,
+  appointments
 });
 
 

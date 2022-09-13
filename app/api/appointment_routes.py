@@ -8,14 +8,13 @@ from app.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3
 appointment_routes = Blueprint('appointments', __name__)
 
 
-# Get user appointments
-# @appointment_routes('/')
-# @login_required
-# def get_user_appointments(id):
-#     appointments = Appointment.query.filter_by(user_id=id)
-
-
-# Upload appointment reference image
+# Get all appointments
+@appointment_routes.get('/')
+@login_required
+def get_appts():
+    appts = Appointment.query.all()
+    appts_list = [ appt.appt_to_dict() for appt in appts ]
+    return { 'allAppointments': appts_list }
 
 
 # Create an appointment
