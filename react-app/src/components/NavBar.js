@@ -6,6 +6,7 @@ import './NavBar.css'
 import threeLines from '../Images/three-lines.svg'
 import dragon from '../Images/dragon-yin-yang-image.svg'
 
+
 const NavBar = () => {
   const [ showDropdown, setShowDropdown ] = useState(false)
 
@@ -74,10 +75,10 @@ useEffect(() => {
             <img onClick={handleDropdown} className='three-lines' src={threeLines}  alt='three-lines'/>
             {showDropdown &&
             <div className='nav-dropdown-container'>
-              <div className='your-profile-container'></div>
-              <div className='your-profile-settings-container'></div>
-              <div className='appointments-container'></div>
-              <div className='bookmarks-container'></div>
+              <div className='your-profile-container'>Your Profile</div>
+              <div className='your-profile-settings-container'>Profile Settings</div>
+              <div className='appointments-container'>Appointments</div>
+              <div className='bookmarks-container'>Your Bookmarks</div>
               <LogoutButton />
             </div>}
           </div>

@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import {  updateStudioThunk } from "../../store/studios";
+import { loadTattoosThunk } from "../../store/tattoos";
 import EditStudioPics from "./EditStudioPics";
 import './StudioFormPage.css'
 import './UpdateStudioForm.css'
@@ -60,6 +61,7 @@ export default function UpdateStudioForm() {
         if (badData) {
             setErrors(badData)
         } else {
+            await dispatch(loadTattoosThunk())
             history.push('/studios')
         }
 
