@@ -1,0 +1,61 @@
+
+.user-appointments-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.appointments-title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin: 15px 0;
+}
+
+.user-appts-secondary {
+    width: 50vw;
+    /* border: 1px solid blue; */
+}
+
+.user-appts-container {
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.single-appt {
+    border: 1px solid #202159;
+    border-radius: 8px;
+    width: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    margin: 20px 0;
+}
+
+.single-appt-header {
+    text-align: center;
+    border-bottom: 1px solid #202159;
+    padding: 10px;
+}
+
+.single-appt-body {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+}
+
+.single-appt-image-container {
+    width: 200px;
+    height: auto;
+}
+
+.single-appt-image {
+    width: 100%;
+    height: 100%;
+}
+
+.property {
+    font-weight: 550;
+}
