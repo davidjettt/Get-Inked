@@ -32,7 +32,7 @@ const deleteAppt = (appt) => {
 }
 
 export const loadApptsThunk = () => async (dispatch) => {
-    const response = await fetch('/api/appointments')
+    const response = await fetch('/api/appointments/')
 
     if (response.ok) {
         const data = await response.json()

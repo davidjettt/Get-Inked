@@ -3,6 +3,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from datetime import datetime
 
 studio_bookmarks = db.Table(
     'studio_bookmarks',
@@ -217,9 +218,17 @@ class Appointment(db.Model):
             'color': self.color,
             'description': self.description,
             'imageReferences': self.image_references,
-            'date': self.date,
+            'date': {
+                'month': self.date.strftime('%B'),
+                'day': self.date.strftime('%d'),
+                'year': self.date.strftime('%Y')
+
+            },
             'userId': self.user_id,
             'studioId': self.studio_id,
+            'studio': {
+                'name': Studio.query.get(self.studio_id).name
+            },
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }

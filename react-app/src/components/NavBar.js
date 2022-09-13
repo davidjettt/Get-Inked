@@ -1,15 +1,16 @@
 
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import threeLines from '../Images/three-lines.svg'
 import dragon from '../Images/dragon-yin-yang-image.svg'
+import { useSelector } from 'react-redux';
 
 
 const NavBar = () => {
   const [ showDropdown, setShowDropdown ] = useState(false)
-
+  const sessionUserId = useSelector(state => state.session.user.id)
   const handleDropdown = () => {
     if (showDropdown) return
     setShowDropdown(true)
@@ -77,7 +78,9 @@ useEffect(() => {
             <div className='nav-dropdown-container'>
               <div className='your-profile-container'>Your Profile</div>
               <div className='your-profile-settings-container'>Profile Settings</div>
-              <div className='appointments-container'>Appointments</div>
+              <div className='appointments-container'>
+                <Link to={`/users/${sessionUserId}/appointments`}>Appointments</Link>
+              </div>
               <div className='bookmarks-container'>Your Bookmarks</div>
               <LogoutButton />
             </div>}

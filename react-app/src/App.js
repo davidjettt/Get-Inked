@@ -18,6 +18,8 @@ import Tattoos from './components/Tattoos/Tattoos';
 import { loadAllReviewsThunk } from './store/reviews';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound/NotFound';
+import { loadApptsThunk } from './store/appointments';
+import Appointments from './components/Appointments/Appointments';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +32,7 @@ function App() {
       await dispatch(loadStudiosThunk())
       await dispatch(loadTattoosThunk())
       await dispatch(loadAllReviewsThunk())
+      await dispatch(loadApptsThunk())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -73,6 +76,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/home' exact={true} >
             <HomePage />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/users/:userId/appointments'>
+            <Appointments />
           </ProtectedRoute>
           <ProtectedRoute path='/not-found'>
             <NotFound />
