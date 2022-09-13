@@ -79,7 +79,7 @@ def update_studio_review(id):
         db.session.commit()
         return { 'review': review.review_to_dict() }
     else:
-        return { 'errors': validation_errors_to_error_messages(form.errors) }
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 # Delete a studio review
