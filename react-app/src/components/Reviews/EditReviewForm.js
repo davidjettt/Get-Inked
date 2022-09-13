@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Rating } from 'react-simple-star-rating'
 import { updateReviewThunk } from '../../store/reviews'
 import { loadStudiosThunk } from '../../store/studios'
+import './EditReviewForm.css'
 
 export default function EditReviewForm({ reviewId, setShowOptionsModal }) {
     const dispatch = useDispatch()
@@ -42,17 +43,18 @@ export default function EditReviewForm({ reviewId, setShowOptionsModal }) {
             <div className="edit-review-main">
                 <div className="edit-review-header-container">
                     <button onClick={handleXButton}>X</button>
-                    <h2>Edit Review</h2>
-                    <div>
-                        All fields are required.
-                    </div>
+                    <div className='edit-review-title'>Edit Review</div>
+                    <div></div>
+                </div>
+                <div className='review-form-message'>
+                    All fields are required.
                 </div>
                 <div className="errors-tattoo-form">
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form className='edit-review-form' onSubmit={handleSubmit}>
                     <div className="edit-review-stars-container">
                     <Rating
                             // className='user-review-stars'
@@ -66,13 +68,15 @@ export default function EditReviewForm({ reviewId, setShowOptionsModal }) {
                     </div>
                     <div className='edit-review-textarea-container'>
                         <textarea
+                            cols='40'
+                            rows='8'
                             placeholder='Write your review here...'
                             value={studioReview}
                             onChange={(e) => setStudioReview(e.target.value)}
                         >
                         </textarea>
                     </div>
-                    <button>Update Review</button>
+                    <button className='tattoo-form-submit-button'>Update Review</button>
                 </form>
             </div>
         </>
