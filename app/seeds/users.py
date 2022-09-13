@@ -1,5 +1,5 @@
 from app.models import db, User, Studio, TattooImage, StudioReview, Appointment
-
+from datetime import datetime
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -153,6 +153,45 @@ def seed_studio_reviews():
     db.session.add(review2)
     db.session.add(review3)
     db.session.add(review4)
+    db.session.commit()
+
+def seed_appointments():
+    appt1 = Appointment(
+        placement='chest',
+        size='large',
+        color=False,
+        description='Two foo dogs on both pecs',
+        image_references='https://images.saymedia-content.com/.image/t_share/MTczODA2Mjk4ODczODY1Nzg2/the-guardian-lions-foo-dog-tattoo-meanings-history-tattoo-images.jpg',
+        date=datetime(2022, 12, 1),
+        user_id=1,
+        studio_id=1
+    )
+
+    appt2 = Appointment(
+        placement='left hip',
+        size='large',
+        color=False,
+        description='Subtle floral hip tattoo',
+        image_references='https://kickassthings.com/wp-content/uploads/2020/09/best-hip-tattoo-ideas-@karolinaszymanska_tattoo-1.jpg',
+        date=datetime(2022, 12, 10),
+        user_id=5,
+        studio_id=3
+    )
+
+    appt3 = Appointment(
+        placement='left arm',
+        size='large',
+        color=True,
+        description='Traditional Japanese style dragon sleeve',
+        image_references='https://i.pinimg.com/736x/5d/82/74/5d827492e30743a0789040d0a4b598b8.jpg',
+        date=datetime(2023, 1, 12),
+        user_id=1,
+        studio_id=1
+    )
+
+    db.session.add(appt1)
+    db.session.add(appt2)
+    db.session.add(appt3)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the users table.

@@ -66,6 +66,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
+            'appointments': [ appt.appt_to_dict() for appt in self.user_appointments ]
             # 'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
@@ -208,6 +209,20 @@ class Appointment(db.Model):
     studio = db.relationship('Studio', back_populates='studio_appointments')  # An appointment can only be at one studio
 
 
+    def appt_to_dict(self):
+        return {
+            'id': self.id,
+            'placement': self.placement,
+            'size': self.size,
+            'color': self.color,
+            'description': self.description,
+            'imageReferences': self.image_references,
+            'date': self.date,
+            'userId': self.user_id,
+            'studioId': self.studio_id,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
+        }
 
 
 # class Bookmark(db.Model):
