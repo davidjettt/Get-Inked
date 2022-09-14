@@ -32,7 +32,7 @@ function App() {
       await dispatch(loadStudiosThunk())
       await dispatch(loadTattoosThunk())
       await dispatch(loadAllReviewsThunk())
-      await dispatch(loadApptsThunk())
+      // await dispatch(loadApptsThunk())
       setLoaded(true);
     })();
   }, [dispatch]);
