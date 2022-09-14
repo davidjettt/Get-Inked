@@ -20,9 +20,9 @@ def user(id):
 
 
 # Get user appointments
-@user_routes.get('/<int:id>/appointments')
-@login_required
-def get_user_appointments(id):
-    appointments = Appointment.query.filter_by(user_id=id).all()
+# @user_routes.get('/<int:id>/appointments')
+# @login_required
+# def get_user_appointments(id):
+#     appointments = Appointment.query.filter_by(user_id=id).all()
 
-    return { 'appointments': [ appointment.appt_to_dict() for appointment in appointments ] }
+#     return { 'appointments': [ appointment.appt_to_dict() for appointment in appointments ] }

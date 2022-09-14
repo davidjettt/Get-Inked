@@ -10,7 +10,6 @@ appointment_routes = Blueprint('appointments', __name__)
 
 # Get all appointments
 @appointment_routes.get('/')
-@login_required
 def get_appts():
     appts = Appointment.query.all()
     appts_list = [ appt.appt_to_dict() for appt in appts ]
