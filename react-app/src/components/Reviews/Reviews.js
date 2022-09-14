@@ -9,6 +9,8 @@ export default function Reviews({ studioId }) {
     const defaultUserProfilePic = 'https://nitreo.com/img/igDefaultProfilePic.png'
     const reviews = useSelector(state => Object.values(state.reviews)
                     .filter(review => +studioId === +review.studioId).reverse())
+    const sessionUserId = useSelector(state => state.session.user.id)
+    const studioOwnerId = useSelector(state => state.studios[+studioId].ownerId)
 
 
     return (
@@ -16,7 +18,7 @@ export default function Reviews({ studioId }) {
             <div className="reviews-main">
                 <div className="reviews-header-container">
                     <h2>Reviews</h2>
-                    <ReviewFormModal studioId={studioId} />
+                    {studioOwnerId !== sessionUserId && <ReviewFormModal studioId={studioId} />}
                 </div>
                 <div className="reviews-container">
                     {reviews.map((review) => (

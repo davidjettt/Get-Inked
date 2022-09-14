@@ -122,6 +122,22 @@ body {
     flex-direction: row;
 }
 
+.booking-button {
+    cursor: pointer;
+    border: none;
+    background-color: black;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    width: 100px;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+}
+
 .studio-details-nav-bar {
     display: flex;
     width: 40%;

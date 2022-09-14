@@ -107,7 +107,7 @@ export default function StudioDetails() {
                             </div>
                         </div>
                         <div className="studio-details-header-reviews">
-                            {studio.reviews.length > 0 && <div className="studio-details-header-reviews-left">
+                            {studio.reviews.length > 0 ? <div className="studio-details-header-reviews-left">
                                 <Rating
                                     size={20}
                                     allowHalfIcon={true}
@@ -123,12 +123,12 @@ export default function StudioDetails() {
                                 <div>
                                     See all reviews {studio?.reviews.length}
                                 </div>
-                            </div>}
+                            </div> : <div>No reviews yet</div>}
                             <div className="studio-details-header-reviews-right">
                                 <div className="studio-details-header-booking-button-container">
-                                    {/* <button>
+                                    <Link className="booking-button" to={`/studios/${studioId}/appointment`}>
                                         Book
-                                    </button> */}
+                                    </Link>
                                     <div>
                                         {/* Bookmark */}
                                     </div>

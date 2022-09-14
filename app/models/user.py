@@ -115,7 +115,8 @@ class Studio(db.Model):
             'ownerId': self.owner_id,
             'studioImages': [ image.image_url for image in self.tattoo_images ],
             'reviews': [ review.review_to_dict() for review in self.studio_reviews ],
-            'studioArtists': [user.id for user in self.studio_users]
+            'studioArtists': [user.id for user in self.studio_users],
+            'appointmentDates': [appt.date for appt in self.studio_appointments]
         }
 
 
@@ -218,6 +219,7 @@ class Appointment(db.Model):
             'color': self.color,
             'description': self.description,
             'imageReferences': self.image_references,
+            'origDateFormat': self.date,
             'date': {
                 'month': self.date.strftime('%B'),
                 'day': self.date.strftime('%d'),
