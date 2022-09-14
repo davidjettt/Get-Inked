@@ -1,7 +1,7 @@
-const LOAD_APPTS = 'appointments/load'
-const CREATE_APPT = 'appointments/create'
-const UPDATE_APPT = 'appointments/update'
-const DELETE_APPT = 'appointments/delete'
+const LOAD_APPTS = '/appointments/load'
+const CREATE_APPT = '/appointments/create'
+const UPDATE_APPT = '/appointments/update'
+const DELETE_APPT = '/appointments/delete'
 
 const loadAppts = (appts) => {
     return {
