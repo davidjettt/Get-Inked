@@ -8,8 +8,6 @@ export default function Appointments() {
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
 
-    console.log('APPTS', userAppts)
-
     return (
         <>
             <div className='user-appointments-main'>
