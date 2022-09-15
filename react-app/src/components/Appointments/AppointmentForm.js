@@ -2,32 +2,98 @@ import { useParams } from "react-router-dom";
 import Calendar from 'react-calendar'
 import './AppointmentForm.css'
 import 'react-calendar/dist/Calendar.css';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
+import { createApptThunk } from "../../store/appointments";
+import plusSign from '../../Images/plus-sign.svg'
 
 export default function AppointmentForm() {
+    const dispatch = useDispatch()
     const { studioId } = useParams()
     const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
     const studio = useSelector(state => state.studios[+studioId])
     const studioName = studio.name
-    const [ errors, setErrors ] = useState([])
-    const [ date, setDate ] = useState('')
+    const [ placement, setPlacement ] = useState('')
+    const [ size, setSize ] = useState('')
+    const [ description, setDescription ] = useState('')
     const [ color, setColor ] = useState(false)
+    const [ imageRef, setImageRef ] = useState('')
+    // const [ imgRefPreview, setImgRefPreview ] = useState(null)
+    const [ imgRefPreview, setImgRefPreview ] = useState([])
+    const [ images, setImages ] = useState([])
+    const [ date, setDate ] = useState(null)
+    const [ errors, setErrors ] = useState([])
     // const [ validDate, setValidDate ] = useState(date)
 
-    console.log('DATE', date)
-    const today = new Date()
-    // let validDate
-    useEffect(() => {
-        if (date && date.getTime() < today.getTime()) {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setErrors([])
+
+        const today = new Date()
+        if (!date) {
+            setErrors(['Date is required'])
+        }
+        else if (date.getTime() < today.getTime()) {
             setErrors(["Can't pick a day in the past!"])
         } else {
-            // validDate = date
-            setErrors([])
-        }
+            const formData = new FormData()
+            formData.append('placement', placement)
+            formData.append('size', size)
+            formData.append('color', color)
+            formData.append('description', description)
+            // formData.append('date', date.getTime())
+            formData.append('date', date.toUTCString())
+            formData.append('studio_id', studioId)
+            images.forEach(image => formData.append('ref_images', image))
 
-    }, [date])
+            const badData = await dispatch(createApptThunk(formData))
+            if (badData) setErrors(badData)
+        }
+    }
+
+    const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
+
+    const updateImgRef = (e) => {
+        setErrors([])
+
+        const file = e.target.files[0]
+        if (file) {
+            const fileType = allowedTypes.find(type => file.type.includes(type))
+
+            if (fileType) {
+                const test = document.getElementById('blah')
+
+                if (file && imgRefPreview.length < 3) {
+                    // test.src = URL.createObjectURL(file)
+                    setImgRefPreview([...imgRefPreview, URL.createObjectURL(file)])
+                    setImages([...images, file])
+                } else {
+                    setErrors(['Max 3 images'])
+                }
+            } else {
+                setErrors(['Invalid image file type'])
+            }
+        }
+    }
+
+    const removeImg = (idx) => {
+        setErrors([])
+        imgRefPreview.splice(idx, 1)
+        images.splice(idx, 1)
+    }
+
+    // console.log('DATE', date)
+    // const today = new Date()
+    // // let validDate
+    // useEffect(() => {
+    //     if (date && date.getTime() < today.getTime()) {
+    //         setErrors(["Can't pick a day in the past!"])
+    //     } else {
+    //         // validDate = date
+    //         setErrors([])
+    //     }
+
+    // }, [date])
 
     // console.log('VALID DATE', validDate)
 
@@ -43,12 +109,12 @@ export default function AppointmentForm() {
                             <div key={ind}>{error}</div>
                         ))}
                     </div>
-                    <form className="appt-form">
+                    <form onSubmit={handleSubmit} className="appt-form">
                         <div className="placement-size-container">
                             <div className="describe-tattoo-title">
                                 Describe your tattoo
                             </div>
-                            <select className="appt-form-placement-select">
+                            <select className="appt-form-placement-select" value={placement} onChange={(e) => setPlacement(e.target.value)}>
                                 <option value='' defaultValue>Placement</option>
                                 <option value='Ankle'>Ankle</option>
                                 <option value='Back - full'>Back - full</option>
@@ -73,7 +139,7 @@ export default function AppointmentForm() {
                                 <option value='Upper arm - outer'>Upper arm - outer</option>
                                 <option value='Wrist'>Wrist</option>
                             </select>
-                            <select className="appt-form-size-select">
+                            <select className="appt-form-size-select" value={size} onChange={(e) => setSize(e.target.value)}>
                                 <option value='' defaultValue>Size</option>
                                 <option value='Small'>S - (2" x 2") Size of a credit card</option>
                                 <option value='Medium'>M - (4" x 4") Palm-sized</option>
@@ -90,6 +156,8 @@ export default function AppointmentForm() {
                                     cols='40'
                                     rows='10'
                                     placeholder="Describe your tattoo here..."
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 />
                             </div>
                             <div className="appt-form-color-container">
@@ -115,11 +183,24 @@ export default function AppointmentForm() {
                         </div>
                         <div className="appt-form-image-upload-container">
                             <div className="add-image-refs">Add image references</div>
-                            <label>
-                                <input
-                                    type='file'
-                                />
-                            </label>
+                            <div className="file-input-images-container">
+                                <label className='image-file-label'>
+                                    <img className="plus-sign" src={plusSign} alt='plus sign' />
+                                    <input
+                                        className="image-file-input"
+                                        id='image-input'
+                                        type='file'
+                                        multiple
+                                        onChange={updateImgRef}
+                                    />
+                                </label>
+                                {images.length > 0 && imgRefPreview.map((img, idx) => (
+                                    <div className="appt-form-image-container" key={idx}>
+                                        <img className="test" id='blah' src={img} alt=''/>
+                                        <button type='text' className="remove-image-btn" onClick={removeImg}>X</button>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         <div className="appt-form-date-container">
                             <div className="when-get">When do you want to get this tattoo?</div>
@@ -128,7 +209,7 @@ export default function AppointmentForm() {
                                 onChange={setDate}
                             />
                         </div>
-                        <button className="appt-form-submit-btn">Submit</button>
+                        <button type='submit' className="appt-form-submit-btn">Submit</button>
                     </form>
                 </div>
                 <div className="appt-form-page-image-container">

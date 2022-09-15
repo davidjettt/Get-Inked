@@ -40,6 +40,21 @@ export const loadApptsThunk = () => async (dispatch) => {
     }
 }
 
+export const createApptThunk = (formData) => async (dispatch) => {
+    const response = await fetch('/api/appointments/', {
+        method: 'POST',
+        body: formData
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(createAppt(data))
+    } else {
+        const badData = await response.json()
+        if (badData.errors) return badData.errors
+    }
+}
+
 const initialState = {}
 
 export default function appointmentsReducer(state = initialState, action) {
