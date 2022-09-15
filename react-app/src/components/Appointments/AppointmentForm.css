@@ -153,3 +153,53 @@
     margin-top: 20px;
     padding: 8px;
 }
+
+.file-input-images-container {
+    display: flex;
+}
+
+.image-file-label {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.image-file-input {
+    display: none;
+}
+
+.plus-sign {
+    width: 30px;
+    height: 30px;
+}
+
+.appt-form-image-container {
+    width: 83px;
+    height: 83px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.test {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
