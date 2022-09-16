@@ -3,6 +3,7 @@
 .appt-form-main {
     display: flex;
     justify-content: space-between;
+    height: 90vh;
 }
 
 .appt-form-title {
@@ -20,6 +21,8 @@
     /* border: 1px solid red; */
     background-color: #fafafa;
     overflow-y: auto;
+    padding-bottom: 50px;
+    height: 100%;
 }
 
 .placement-size-container {
@@ -34,6 +37,7 @@
     font-family: 'Inter';
     padding: 10px;
     border-color: #dbdbdb;
+    margin-bottom: 15px;
 }
 
 .appt-form-color-container {
@@ -108,7 +112,7 @@
 }
 
 .appt-form-page-image-container {
-    height: 100vh;
+    height: 100%;
     width: 50%;
 }
 
@@ -126,6 +130,12 @@
     font-weight: 575;
     margin-bottom: 15px;
     font-size: 18px;
+}
+
+.short-description,
+.add-image-refs,
+.when-get {
+    margin-top: 15px;
 }
 
 .appt-form-size-select,
@@ -176,6 +186,10 @@
 .plus-sign {
     width: 30px;
     height: 30px;
+}
+
+.appt-form-image-upload-container {
+    width: 100%;
 }
 
 .appt-form-image-container {

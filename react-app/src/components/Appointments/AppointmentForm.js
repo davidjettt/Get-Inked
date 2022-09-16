@@ -3,9 +3,10 @@ import Calendar from 'react-calendar'
 import './AppointmentForm.css'
 import 'react-calendar/dist/Calendar.css';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createApptThunk } from "../../store/appointments";
 import plusSign from '../../Images/plus-sign.svg'
+import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
 
 export default function AppointmentForm() {
     const dispatch = useDispatch()
@@ -55,7 +56,7 @@ export default function AppointmentForm() {
 
     const updateImgRef = (e) => {
         setErrors([])
-
+        console.log('UPDATE IMG', imgRefPreview)
         const file = e.target.files[0]
         if (file) {
             const fileType = allowedTypes.find(type => file.type.includes(type))
@@ -74,12 +75,6 @@ export default function AppointmentForm() {
                 setErrors(['Invalid image file type'])
             }
         }
-    }
-
-    const removeImg = (idx) => {
-        setErrors([])
-        imgRefPreview.splice(idx, 1)
-        images.splice(idx, 1)
     }
 
     // console.log('DATE', date)
@@ -197,7 +192,7 @@ export default function AppointmentForm() {
                                 {images.length > 0 && imgRefPreview.map((img, idx) => (
                                     <div className="appt-form-image-container" key={idx}>
                                         <img className="test" id='blah' src={img} alt=''/>
-                                        <button type='text' className="remove-image-btn" onClick={removeImg}>X</button>
+                                        <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} />
                                     </div>
                                 ))}
                             </div>
