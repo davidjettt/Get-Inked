@@ -199,6 +199,8 @@ class Appointment(db.Model):
     color = db.Column(db.Boolean, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_references = db.Column(db.String(255))
+    image_references2 = db.Column(db.String(255))
+    image_references3 = db.Column(db.String(255))
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     studio_id = db.Column(db.Integer, db.ForeignKey('studios.id'), nullable=False)
@@ -212,15 +214,18 @@ class Appointment(db.Model):
 
 
     def appt_to_dict(self):
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         return {
             'id': self.id,
             'placement': self.placement,
             'size': self.size,
             'color': self.color,
             'description': self.description,
-            'imageReferences': self.image_references,
+            'imageReferences': [self.image_references, self.image_references2, self.image_references3],
             'origDateFormat': self.date,
             'date': {
+                # 'monthNumber': self.date.strftime('%m').replace('0',''),
+                'monthNumber': months.index(self.date.strftime('%B')),
                 'month': self.date.strftime('%B'),
                 'day': self.date.strftime('%d'),
                 'year': self.date.strftime('%Y')
@@ -234,9 +239,3 @@ class Appointment(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }
-
-
-# class Bookmark(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-#     studio_id = db.Column(db.Integer, db.)

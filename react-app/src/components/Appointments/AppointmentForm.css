@@ -1,9 +1,11 @@
 
 
 .appt-form-main {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    height: 90vh;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 .appt-form-title {
