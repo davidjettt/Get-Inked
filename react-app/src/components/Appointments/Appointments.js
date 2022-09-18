@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import AppointmentOptionsModal from './AppointmentOptionsModal'
 import './Appointments.css'
 
 export default function Appointments() {
@@ -7,6 +8,7 @@ export default function Appointments() {
     const { userId } = useParams()
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
+
 
     return (
         <>
@@ -19,7 +21,11 @@ export default function Appointments() {
                         {userAppts.map((appt) => (
                             <div className='single-appt' key={appt.id}>
                                 <div className='single-appt-header'>
+                                    <div></div>
                                     Appointment with {appt.studio.name} on {appt.date.month} {appt.date.day}, {appt.date.year}
+                                    <div>
+                                        <AppointmentOptionsModal apptId={appt.id} />
+                                    </div>
                                 </div>
                                 <div className='single-appt-body'>
                                     <div className='single-appt-left'>
@@ -44,7 +50,11 @@ export default function Appointments() {
                                         <div className='single-appt-image-container'>
                                             <span className='property'>References: </span>
                                             <span>
-                                                <img className='single-appt-image' src={appt.imageReferences} alt='reference' />
+                                                {appt.imageReferences.length > 0 && appt.imageReferences.map((img, idx) => (
+                                                    <>
+                                                        {img && <img key={idx} className='single-appt-image' src={img} alt='reference' />}
+                                                    </>
+                                                ))}
                                             </span>
                                         </div>
                                     </div>

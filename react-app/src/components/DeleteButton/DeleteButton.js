@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
+import { deleteApptThunk } from "../../store/appointments"
 import { deleteReviewThunk } from "../../store/reviews"
 import { deleteStudioThunk, loadStudiosThunk } from "../../store/studios"
 import { deleteTattooThunk, loadTattoosThunk } from "../../store/tattoos"
 import './DeleteButton.css'
 
-export default function DeleteButton({ studio, setShowModal, tattoo, review }) {
+export default function DeleteButton({ studio, setShowModal, tattoo, review, appt }) {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -18,6 +19,9 @@ export default function DeleteButton({ studio, setShowModal, tattoo, review }) {
         else if (review) {
             await dispatch(deleteReviewThunk(review))
             await dispatch(loadStudiosThunk())
+        }
+        else if (appt) {
+            await dispatch(deleteApptThunk(appt))
         }
         else {
             await dispatch(deleteTattooThunk(tattoo))

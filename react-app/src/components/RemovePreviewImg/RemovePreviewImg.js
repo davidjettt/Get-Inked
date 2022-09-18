@@ -3,15 +3,16 @@
 
 export default function RemovePreviewImg({ idx, imgRefPreview, images }) {
 
-    const removeImg = () => {
+    const removeImg = (e) => {
         // setErrors([])
+        // e.preventDefault()
         imgRefPreview.splice(idx, 1)
         images.splice(idx, 1)
     }
 
     return (
         <>
-            <button type='text' className="remove-image-btn" onClick={removeImg}>X</button>
+            <button className="remove-image-btn" onClick={removeImg}>X</button>
         </>
     )
 }

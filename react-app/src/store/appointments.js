@@ -1,7 +1,15 @@
+const GET_APPT = 'appointments/getOne'
 const LOAD_APPTS = '/appointments/load'
 const CREATE_APPT = '/appointments/create'
 const UPDATE_APPT = '/appointments/update'
 const DELETE_APPT = '/appointments/delete'
+
+const getOneAppointment = (appt) => {
+    return {
+        type: GET_APPT,
+        appt
+    }
+}
 
 const loadAppts = (appts) => {
     return {
@@ -55,6 +63,51 @@ export const createApptThunk = (formData) => async (dispatch) => {
     }
 }
 
+export const updateApptThunk = (appt, apptId) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${apptId}`, {
+        method: 'PUT',
+        body: appt
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(updateAppt(data))
+    } else {
+        const badData = await response.json()
+        if (badData.errors) return badData.errors
+    }
+}
+
+export const deleteApptThunk = (appt) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${appt.id}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        dispatch(deleteAppt(appt))
+    }
+}
+
+export const updateImgRefs = (formData, apptId) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${apptId}/images`, {
+        method: 'PUT',
+        body: formData
+    })
+    if (response.ok) {
+        return
+    } else {
+        const badData = await response.json()
+        if (badData.errors) return badData.errors
+    }
+}
+
+// Fetches the appointment with the updated image references
+export const getOneAppointmentThunk = (apptId) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${apptId}/one`)
+    const data = await response.json()
+    dispatch(getOneAppointment(data))
+}
+
 const initialState = {}
 
 export default function appointmentsReducer(state = initialState, action) {
@@ -69,17 +122,22 @@ export default function appointmentsReducer(state = initialState, action) {
         }
         case CREATE_APPT: {
             newState = JSON.parse(JSON.stringify(state))
-            newState[action.appt.id] = action.appt
+            newState[action.appt.appointment.id] = action.appt.appointment
             return newState
         }
         case UPDATE_APPT: {
             newState = JSON.parse(JSON.stringify(state))
-            newState[action.appt.id] = action.appt
+            newState[action.appt.appointment.id] = action.appt.appointment
             return newState
         }
         case DELETE_APPT: {
             newState = JSON.parse(JSON.stringify(state))
             delete newState[action.appt.id]
+            return newState
+        }
+        case GET_APPT: {
+            newState = JSON.parse(JSON.stringify(state))
+            newState[action.appt.appointment.id] = action.appt.appointment
             return newState
         }
         default:

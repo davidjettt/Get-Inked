@@ -21,6 +21,7 @@ import NotFound from './components/NotFound/NotFound';
 import { loadApptsThunk } from './store/appointments';
 import Appointments from './components/Appointments/Appointments';
 import AppointmentForm from './components/Appointments/AppointmentForm';
+import EditAppointmentForm from './components/Appointments/EditAppointmentForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -74,6 +75,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios/:studioId/appointment'>
             <AppointmentForm />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/appointments/:appointmentId/edit'>
+            <EditAppointmentForm />
           </ProtectedRoute>
           <ProtectedRoute exact path='/tattoos'>
             <Tattoos />

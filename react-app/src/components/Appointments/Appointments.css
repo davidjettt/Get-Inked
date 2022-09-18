@@ -38,6 +38,12 @@
     text-align: center;
     border-bottom: 1px solid #202159;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.appt-three-dots {
+    cursor: pointer;
 }
 
 .single-appt-body {
