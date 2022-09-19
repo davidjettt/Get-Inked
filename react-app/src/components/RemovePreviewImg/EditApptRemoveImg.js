@@ -9,7 +9,6 @@ export default function EditApptRemoveImg({ imgId, apptId, setImgPreviews }) {
         await dispatch(deleteAppointmentImageThunk(imgId))
         const updatedAppt = await dispatch(getOneAppointmentThunk(apptId))
         setImgPreviews(updatedAppt.appt.appointment.apptImages)
-        // await dispatch(loadApptsThunk())
     }
 
     return (

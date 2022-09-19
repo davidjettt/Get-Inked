@@ -88,26 +88,26 @@ export const deleteApptThunk = (appt) => async (dispatch) => {
     }
 }
 
-export const updateImgRefs = (formData, apptId) => async (dispatch) => {
-    const response = await fetch(`/api/appointments/${apptId}/images`, {
-        method: 'PUT',
-        body: formData
-    })
-    if (response.ok) {
-        return
-    } else {
-        const badData = await response.json()
-        if (badData.errors) return badData.errors
-    }
-}
+// export const updateImgRefs = (formData, apptId) => async (dispatch) => {
+//     const response = await fetch(`/api/appointments/${apptId}/images`, {
+//         method: 'PUT',
+//         body: formData
+//     })
+//     if (response.ok) {
+//         return
+//     } else {
+//         const badData = await response.json()
+//         if (badData.errors) return badData.errors
+//     }
+// }
 
-export const deleteImgRefs = (appt) => async (dispatch) => {
-    const response = await fetch(`/api/appointments/${appt.id}/images/remove`, {
-        method: 'PUT'
-    })
+// export const deleteImgRefs = (appt) => async (dispatch) => {
+//     const response = await fetch(`/api/appointments/${appt.id}/images/remove`, {
+//         method: 'PUT'
+//     })
 
-    if (response.ok) return
-}
+//     if (response.ok) return
+// }
 
 export const postAppointmentImageThunk = (imageData, apptId) => async (dispatch) => {
     const response = await fetch(`/api/appointments/${apptId}/images`, {

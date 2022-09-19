@@ -19,13 +19,10 @@ export default function AppointmentForm() {
     const [ size, setSize ] = useState('')
     const [ description, setDescription ] = useState('')
     const [ color, setColor ] = useState(false)
-    const [ imageRef, setImageRef ] = useState('')
-    // const [ imgRefPreview, setImgRefPreview ] = useState(null)
     const [ imgRefPreview, setImgRefPreview ] = useState([])
     const [ images, setImages ] = useState([])
     const [ date, setDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
-    // const [ validDate, setValidDate ] = useState(date)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -54,7 +51,7 @@ export default function AppointmentForm() {
             if (data.errors) {
                 setErrors(data.errors)
             } else {
-                console.log('DATA', data.appt.appointment.id)
+                // console.log('DATA', data.appt.appointment.id)
                 const imageData = new FormData()
                 // imageData.append('appt_id', data.appointment.id)
                 images.forEach(image => imageData.append('ref_images', image))
