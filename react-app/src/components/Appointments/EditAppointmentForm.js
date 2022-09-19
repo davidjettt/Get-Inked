@@ -1,11 +1,11 @@
-import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
+
 import Calendar from 'react-calendar'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import plusSign from '../../Images/plus-sign.svg'
 import 'react-calendar/dist/Calendar.css';
-import { getOneAppointmentThunk, postAppointmentImageThunk, updateApptThunk, updateImgRefs } from "../../store/appointments";
+import { getOneAppointmentThunk, postAppointmentImageThunk, updateApptThunk } from "../../store/appointments";
 import EditApptRemoveImg from "../RemovePreviewImg/EditApptRemoveImg";
 
 export default function EditAppointmentForm() {
@@ -14,7 +14,7 @@ export default function EditAppointmentForm() {
     const history = useHistory()
     const { appointmentId } = useParams()
     const appt = useSelector(state => state.appointments[+appointmentId])
-    console.log('APPT', appt)
+    // console.log('APPT', appt)
     const imageReferences = appt.imageReferences.filter(img => img !== null)
     // const apptImages = appt.apptImages.map(obj => obj.image)
     // console.log('APPT IAMGES', apptImages)
@@ -26,11 +26,11 @@ export default function EditAppointmentForm() {
     const [ description, setDescription ] = useState(appt.description)
     const [ color, setColor ] = useState(appt.color)
     const [ imgPreviews, setImgPreviews ] = useState(appt.apptImages)
-    const [ images, setImages ] = useState(imageReferences)
+    // const [ images, setImages ] = useState(imageReferences)
     const [ date, setDate ] = useState(new Date(appt.date.year, appt.date.monthNumber, appt.date.day))
     const [ errors, setErrors ] = useState([])
 
-    console.log('IMG Previews', imgPreviews)
+    // console.log('IMG Previews', imgPreviews)
 
 
     const handleSubmit = async (e) => {
@@ -88,18 +88,8 @@ export default function EditAppointmentForm() {
                     setErrors(badData)
                 } else {
                     const updatedAppt = await dispatch(getOneAppointmentThunk(appt.id))
-                    console.log('UPDATED APPT', updatedAppt)
                     setImgPreviews(updatedAppt.appt.appointment.apptImages)
                 }
-                // const formData = new FormData()
-                // formData.append('ref_images', file)
-
-                // const badData = await dispatch(updateImgRefs(formData, appt.id))
-                // if (badData) {
-                //     setErrors(badData)
-                // } else {
-                //     dispatch(getOneAppointmentThunk(appt.id))
-                // }
             } else {
                 setErrors(['Invalid image'])
             }
@@ -247,7 +237,6 @@ export default function EditAppointmentForm() {
                                 {imgPreviews.length > 0 && imgPreviews.map((img, idx) => (
                                     img && <div className="appt-form-image-container" key={idx}>
                                         <img className="test" id='blah' src={img.image} alt=''/>
-                                        {/* <RemovePreviewImg idx={idx} imgRefPreview={imgPreviews} images={images} /> */}
                                         <EditApptRemoveImg imgId={img.id} apptId={appt.id} setImgPreviews={setImgPreviews} />
                                     </div>
                                 ))}
@@ -258,7 +247,6 @@ export default function EditAppointmentForm() {
                             <Calendar
                                 value={date}
                                 onChange={setDate}
-                                // activeStartDate={new Date(2022, 8, 18)}
                             />
                         </div>
                         <button type='submit' className="appt-form-submit-btn">Submit</button>

@@ -79,7 +79,7 @@ useEffect(() => {
               <div className='your-profile-container'>Your Profile</div>
               <div className='your-profile-settings-container'>Profile Settings</div>
               <div className='appointments-container'>
-                <Link to={`/users/${sessionUserId}/appointments`}>Appointments</Link>
+                <Link className='appointments-link' to={`/users/${sessionUserId}/appointments`}>Appointments</Link>
               </div>
               <div className='bookmarks-container'>Your Bookmarks</div>
               <LogoutButton />

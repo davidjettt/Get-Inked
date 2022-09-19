@@ -65,3 +65,15 @@
 .property {
     font-weight: 550;
 }
+
+.appt-page-img-references {
+    display: flex;
+    gap: 10px;
+}
+
+.appt-page-img-references > img {
+    border-radius: 8px;
+    max-width: 300px;
+    max-height: 300px;
+    width: 60%;
+}
