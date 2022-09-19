@@ -50,9 +50,9 @@ export default function Appointments() {
                                         <div className='single-appt-image-container'>
                                             <span className='property'>References: </span>
                                             <span>
-                                                {appt.imageReferences.length > 0 && appt.imageReferences.map((img, idx) => (
+                                                {appt.apptImages.length > 0 && appt.apptImages.map((img, idx) => (
                                                     <>
-                                                        {img && <img key={idx} className='single-appt-image' src={img} alt='reference' />}
+                                                        {img && <img key={idx} className='single-appt-image' src={img.image} alt='reference' />}
                                                     </>
                                                 ))}
                                             </span>
