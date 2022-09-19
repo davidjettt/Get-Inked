@@ -56,10 +56,10 @@ export const createApptThunk = (formData) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        dispatch(createAppt(data))
+        return dispatch(createAppt(data))
     } else {
         const badData = await response.json()
-        if (badData.errors) return badData.errors
+        if (badData.errors) return badData
     }
 }
 
@@ -101,11 +101,43 @@ export const updateImgRefs = (formData, apptId) => async (dispatch) => {
     }
 }
 
+export const deleteImgRefs = (appt) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${appt.id}/images/remove`, {
+        method: 'PUT'
+    })
+
+    if (response.ok) return
+}
+
+export const postAppointmentImageThunk = (imageData, apptId) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${apptId}/images`, {
+        method: 'POST',
+        body: imageData
+    })
+
+    if (response.ok) {
+        return
+    } else {
+        const badData = await response.json()
+        if (badData.errors) return badData.errors
+    }
+}
+
+export const deleteAppointmentImageThunk = (imageId) => async (dispatch) => {
+    const response = await fetch(`/api/appointments/${imageId}/images`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        return
+    }
+}
+
 // Fetches the appointment with the updated image references
 export const getOneAppointmentThunk = (apptId) => async (dispatch) => {
     const response = await fetch(`/api/appointments/${apptId}/one`)
     const data = await response.json()
-    dispatch(getOneAppointment(data))
+    return dispatch(getOneAppointment(data))
 }
 
 const initialState = {}

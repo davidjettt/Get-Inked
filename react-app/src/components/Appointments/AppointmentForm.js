@@ -4,7 +4,7 @@ import './AppointmentForm.css'
 import 'react-calendar/dist/Calendar.css';
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { createApptThunk } from "../../store/appointments";
+import { createApptThunk, getOneAppointmentThunk, postAppointmentImageThunk } from "../../store/appointments";
 import plusSign from '../../Images/plus-sign.svg'
 import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
 
@@ -37,23 +37,47 @@ export default function AppointmentForm() {
         }
         else if (date.getTime() < today.getTime()) {
             setErrors(["Can't pick a day in the past!"])
-        } else {
+        }
+        else if (imgRefPreview.length < 1) {
+            setErrors(['At least one image reference is required.'])
+        }
+        else {
             const formData = new FormData()
             formData.append('placement', placement)
             formData.append('size', size)
             formData.append('color', color)
             formData.append('description', description)
-            // formData.append('date', date.getTime())
             formData.append('date', date.toUTCString())
             formData.append('studio_id', studioId)
-            images.forEach(image => formData.append('ref_images', image))
 
-            const badData = await dispatch(createApptThunk(formData))
-            if (badData) {
-                setErrors(badData)
+            const data = await dispatch(createApptThunk(formData))
+            if (data.errors) {
+                setErrors(data.errors)
             } else {
-                history.push('/studios')
+                console.log('DATA', data.appt.appointment.id)
+                const imageData = new FormData()
+                // imageData.append('appt_id', data.appointment.id)
+                images.forEach(image => imageData.append('ref_images', image))
+                await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
+                await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
+                history.push(`/studios/${studio.id}`)
             }
+
+            // const formData = new FormData()
+            // formData.append('placement', placement)
+            // formData.append('size', size)
+            // formData.append('color', color)
+            // formData.append('description', description)
+            // formData.append('date', date.toUTCString())
+            // formData.append('studio_id', studioId)
+            // images.forEach(image => formData.append('ref_images', image))
+
+            // const badData = await dispatch(createApptThunk(formData))
+            // if (badData) {
+            //     setErrors(badData)
+            // } else {
+            //     history.push('/studios')
+            // }
         }
     }
 
