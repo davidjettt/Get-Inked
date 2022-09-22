@@ -1,42 +1,49 @@
-import { useHistory, useParams } from "react-router-dom";
-import Calendar from 'react-calendar'
-import './AppointmentForm.css'
-import 'react-calendar/dist/Calendar.css';
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { createApptThunk, getOneAppointmentThunk, postAppointmentImageThunk } from "../../store/appointments";
-import plusSign from '../../Images/plus-sign.svg'
-import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
 
-export default function AppointmentForm() {
-    const history = useHistory()
-    const dispatch = useDispatch()
-    const { studioId } = useParams()
+import Calendar from 'react-calendar'
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory, useParams } from "react-router-dom"
+import plusSign from '../../Images/plus-sign.svg'
+import 'react-calendar/dist/Calendar.css';
+import { getOneAppointmentThunk, postAppointmentImageThunk, updateApptThunk } from "../../store/appointments";
+import EditApptRemoveImg from "../RemovePreviewImg/EditApptRemoveImg";
+
+export default function EditAppointmentForm() {
     const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
-    const studio = useSelector(state => state.studios[+studioId])
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const { appointmentId } = useParams()
+    const appt = useSelector(state => state.appointments[+appointmentId])
+    // console.log('APPT', appt)
+    const imageReferences = appt.imageReferences.filter(img => img !== null)
+    // const apptImages = appt.apptImages.map(obj => obj.image)
+    // console.log('APPT IAMGES', apptImages)
+
+    const studio = useSelector(state => state.studios[+appt.studioId])
     const studioName = studio.name
-    const [ placement, setPlacement ] = useState('')
-    const [ size, setSize ] = useState('')
-    const [ description, setDescription ] = useState('')
-    const [ color, setColor ] = useState(false)
-    const [ imgRefPreview, setImgRefPreview ] = useState([])
-    const [ images, setImages ] = useState([])
-    const [ date, setDate ] = useState(null)
+    const [ placement, setPlacement ] = useState(appt.placement)
+    const [ size, setSize ] = useState(appt.size)
+    const [ description, setDescription ] = useState(appt.description)
+    const [ color, setColor ] = useState(appt.color)
+    const [ imgPreviews, setImgPreviews ] = useState(appt.apptImages)
+    // const [ images, setImages ] = useState(imageReferences)
+    const [ date, setDate ] = useState(new Date(appt.date.year, appt.date.monthNumber, appt.date.day))
     const [ errors, setErrors ] = useState([])
+
+    // console.log('IMG Previews', imgPreviews)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
 
         const today = new Date()
-        if (!date) {
-            setErrors(['Date is required'])
-        }
-        else if (date.getTime() < today.getTime()) {
+
+        if (date.getTime() < today.getTime()) {
             setErrors(["Can't pick a day in the past!"])
         }
-        else if (imgRefPreview.length < 1) {
-            setErrors(['At least one image reference is required.'])
+        else if (imgPreviews.length < 1) {
+            setErrors(['At least one image reference is required'])
         }
         else {
             const formData = new FormData()
@@ -45,71 +52,97 @@ export default function AppointmentForm() {
             formData.append('color', color)
             formData.append('description', description)
             formData.append('date', date.toUTCString())
-            formData.append('studio_id', studioId)
-
-            const data = await dispatch(createApptThunk(formData))
-            if (data.errors) {
-                setErrors(data.errors)
-            } else {
-                // console.log('DATA', data.appt.appointment.id)
-                const imageData = new FormData()
-                // imageData.append('appt_id', data.appointment.id)
-                images.forEach(image => imageData.append('ref_images', image))
-                await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
-                await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
-                history.push(`/studios/${studio.id}`)
-            }
-
-            // const formData = new FormData()
-            // formData.append('placement', placement)
-            // formData.append('size', size)
-            // formData.append('color', color)
-            // formData.append('description', description)
-            // formData.append('date', date.toUTCString())
-            // formData.append('studio_id', studioId)
+            formData.append('studio_id', appt.studioId)
             // images.forEach(image => formData.append('ref_images', image))
 
-            // const badData = await dispatch(createApptThunk(formData))
-            // if (badData) {
-            //     setErrors(badData)
-            // } else {
-            //     history.push('/studios')
-            // }
+            const badData = await dispatch(updateApptThunk(formData, appt.id))
+            if (badData) {
+                setErrors(badData)
+            } else {
+                history.push('/studios')
+            }
         }
     }
 
     const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
 
-    const updateImgRef = (e) => {
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
+    }
+
+    const updateImgRef = async (e) => {
         setErrors([])
-        console.log('UPDATE IMG', imgRefPreview)
         const file = e.target.files[0]
+
         if (file) {
-            const fileType = allowedTypes.find(type => file.type.includes(type))
-
-            if (fileType) {
-                const test = document.getElementById('blah')
-
-                if (file && imgRefPreview.length < 3) {
-                    // test.src = URL.createObjectURL(file)
-                    setImgRefPreview([...imgRefPreview, URL.createObjectURL(file)])
-                    setImages([...images, file])
+            if (await isImgUrl(URL.createObjectURL(file))) {
+                const formData = new FormData()
+                formData.append('ref_images', file)
+                const badData = await dispatch(postAppointmentImageThunk(formData, appt.id))
+                if (badData) {
+                    setErrors(badData)
                 } else {
-                    setErrors(['Max 3 images'])
+                    const updatedAppt = await dispatch(getOneAppointmentThunk(appt.id))
+                    setImgPreviews(updatedAppt.appt.appointment.apptImages)
                 }
             } else {
-                setErrors(['Invalid image file type'])
+                setErrors(['Invalid image'])
             }
         }
     }
 
+    // const updateImgRef = (e) => {
+    //     setErrors([])
+
+    //     const file = e.target.files[0]
+    //     if (file) {
+    //         const fileType = allowedTypes.find(type => file.type.includes(type))
+
+    //         if (fileType) {
+    //             if (imgPreviews.length < 3) {
+    //                 setImgPreviews([...imgPreviews, URL.createObjectURL(file)])
+    //                 setImages([...images, file])
+    //             } else {
+    //                 setErrors(['Max 3 images'])
+    //             }
+    //         } else {
+    //             setErrors(['Invalid images file type'])
+    //         }
+    //     }
+    // }
+
+    // const updateImgRef = async (e) => {
+    //     setErrors([])
+    //     const file = e.target.files[0]
+
+    //     if (file) {
+    //         if (await isImgUrl(URL.createObjectURL(file))) {
+    //             const formData = new FormData()
+    //             formData.append('ref_images', file)
+
+    //             const badData = await dispatch(updateImgRefs(formData, appt.id))
+    //             if (badData) {
+    //                 setErrors(badData)
+    //             } else {
+    //                 dispatch(getOneAppointmentThunk(appt.id))
+    //             }
+    //         } else {
+    //             setErrors(['Invalid image'])
+    //         }
+    //     }
+    // }
 
     return (
         <>
             <div className="appt-form-main">
                 <div className="appt-form-container">
                     <div className="appt-form-title">
-                        Set up an appointment with {studioName}
+                        Update appointment with {studioName}
                     </div>
                     <div className="errors-tattoo-form">
                         {errors.map((error, ind) => (
@@ -201,10 +234,10 @@ export default function AppointmentForm() {
                                         onChange={updateImgRef}
                                     />
                                 </label>
-                                {images.length > 0 && imgRefPreview.map((img, idx) => (
-                                    <div className="appt-form-image-container" key={idx}>
-                                        <img className="test" id='blah' src={img} alt=''/>
-                                        <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} />
+                                {imgPreviews.length > 0 && imgPreviews.map((img, idx) => (
+                                    img && <div className="appt-form-image-container" key={idx}>
+                                        <img className="test" id='blah' src={img.image} alt=''/>
+                                        <EditApptRemoveImg imgId={img.id} apptId={appt.id} setImgPreviews={setImgPreviews} />
                                     </div>
                                 ))}
                             </div>
@@ -220,7 +253,7 @@ export default function AppointmentForm() {
                     </form>
                 </div>
                 <div className="appt-form-page-image-container">
-                    {/* <img className="appt-form-page-image" src={formImage} alt='' /> */}
+                    <img className="appt-form-page-image" src={formImage} alt='' />
                 </div>
             </div>
         </>

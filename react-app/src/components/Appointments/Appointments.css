@@ -51,6 +51,12 @@
     text-align: center;
     border-bottom: 1px solid #202159;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.appt-three-dots {
+    cursor: pointer;
 }
 
 .single-appt-body {
@@ -71,4 +77,16 @@
 
 .property {
     font-weight: 550;
+}
+
+.appt-page-img-references {
+    display: flex;
+    gap: 10px;
+}
+
+.appt-page-img-references > img {
+    border-radius: 8px;
+    max-width: 300px;
+    max-height: 300px;
+    width: 60%;
 }

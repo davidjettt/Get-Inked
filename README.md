@@ -1,5 +1,6 @@
 # Welcome to GET INKED
 
+
 Get Inked is a web app where authenticated users can create or join a tattoo studio and can post images of their work to draw in more clients. Users will be able to view the portfolio of a studio or artist and schedule an appointment for their next art piece on their body.
 
 

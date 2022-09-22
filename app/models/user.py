@@ -199,6 +199,8 @@ class Appointment(db.Model):
     color = db.Column(db.Boolean, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_references = db.Column(db.String(255))
+    image_references2 = db.Column(db.String(255))
+    image_references3 = db.Column(db.String(255))
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     studio_id = db.Column(db.Integer, db.ForeignKey('studios.id'), nullable=False)
@@ -209,18 +211,22 @@ class Appointment(db.Model):
     # RELATIONSHIPS
     user = db.relationship('User', back_populates='user_appointments')   # An appointment can only belong to one user
     studio = db.relationship('Studio', back_populates='studio_appointments')  # An appointment can only be at one studio
-
+    appt_images = db.relationship('AppointmentImage', back_populates='appt', cascade='all, delete')
 
     def appt_to_dict(self):
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         return {
             'id': self.id,
             'placement': self.placement,
             'size': self.size,
             'color': self.color,
             'description': self.description,
-            'imageReferences': self.image_references,
+            'apptImages': [ image.image_to_dict() for image in self.appt_images ],
+            'imageReferences': [self.image_references, self.image_references2, self.image_references3],
             'origDateFormat': self.date,
             'date': {
+                # 'monthNumber': self.date.strftime('%m').replace('0',''),
+                'monthNumber': months.index(self.date.strftime('%B')),
                 'month': self.date.strftime('%B'),
                 'day': self.date.strftime('%d'),
                 'year': self.date.strftime('%Y')
@@ -236,7 +242,21 @@ class Appointment(db.Model):
         }
 
 
-# class Bookmark(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-#     studio_id = db.Column(db.Integer, db.)
+class AppointmentImage(db.Model):
+    __tablename__ = 'appointment_images'
+
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.String, nullable=False)
+    appt_id = db.Column(db.Integer, db.ForeignKey('appointments.id'), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, onupdate=func.now())
+
+    # RELATIONSHIPS
+    appt = db.relationship('Appointment', back_populates='appt_images')
+
+    def image_to_dict(self):
+        return {
+            'id': self.id,
+            'image': self.image,
+            'apptId': self.appt_id
+        }

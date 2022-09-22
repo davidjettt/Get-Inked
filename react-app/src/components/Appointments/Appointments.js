@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import AppointmentOptionsModal from './AppointmentOptionsModal'
 import './Appointments.css'
 import { compareAsc } from 'date-fns'
 
@@ -10,6 +11,7 @@ export default function Appointments() {
     const { userId } = useParams()
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
+
 
     const today = new Date()
     const upcomingAppts = userAppts.filter((appt) => {
@@ -71,7 +73,11 @@ export default function Appointments() {
                         {!past && upcomingAppts.map((appt) => (
                             <div className='single-appt' key={appt.id}>
                                 <div className='single-appt-header'>
+                                    <div></div>
                                     Appointment with {appt.studio.name} on {appt.date.month} {appt.date.day}, {appt.date.year}
+                                    <div>
+                                        <AppointmentOptionsModal apptId={appt.id} />
+                                    </div>
                                 </div>
                                 <div className='single-appt-body'>
                                     <div className='single-appt-left'>
@@ -95,9 +101,11 @@ export default function Appointments() {
                                         </div>
                                         <div className='single-appt-image-container'>
                                             <span className='property'>References: </span>
-                                            <span>
-                                                <img className='single-appt-image' src={appt.imageReferences} alt='reference' />
-                                            </span>
+                                            <div className='appt-page-img-references'>
+                                                {appt.apptImages.length > 0 && appt.apptImages.map((img, idx) => (
+                                                        img && <img key={idx} className='single-appt-image' src={img.image} alt='reference' />
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
