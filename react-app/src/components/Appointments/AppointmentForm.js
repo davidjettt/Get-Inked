@@ -77,20 +77,6 @@ export default function AppointmentForm() {
         }
     }
 
-    // console.log('DATE', date)
-    // const today = new Date()
-    // // let validDate
-    // useEffect(() => {
-    //     if (date && date.getTime() < today.getTime()) {
-    //         setErrors(["Can't pick a day in the past!"])
-    //     } else {
-    //         // validDate = date
-    //         setErrors([])
-    //     }
-
-    // }, [date])
-
-    // console.log('VALID DATE', validDate)
 
     return (
         <>
@@ -208,7 +194,7 @@ export default function AppointmentForm() {
                     </form>
                 </div>
                 <div className="appt-form-page-image-container">
-                    <img className="appt-form-page-image" src={formImage} alt='' />
+                    {/* <img className="appt-form-page-image" src={formImage} alt='' /> */}
                 </div>
             </div>
         </>
