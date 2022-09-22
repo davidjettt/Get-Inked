@@ -11,6 +11,19 @@
     margin: 15px 0;
 }
 
+.appt-tabs button {
+    background-color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.upcoming {
+    box-shadow: 0 1px black;
+    font-weight: 575;
+}
+
 .user-appts-secondary {
     width: 50vw;
     /* border: 1px solid blue; */
