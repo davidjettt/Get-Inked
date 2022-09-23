@@ -3,10 +3,11 @@ import Calendar from 'react-calendar'
 import './AppointmentForm.css'
 import 'react-calendar/dist/Calendar.css';
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createApptThunk, getOneAppointmentThunk, postAppointmentImageThunk } from "../../store/appointments";
 import plusSign from '../../Images/plus-sign.svg'
 import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
+import xImg from '../../Images/image-remove-x.svg'
 
 export default function AppointmentForm() {
     const history = useHistory()
@@ -23,6 +24,7 @@ export default function AppointmentForm() {
     const [ images, setImages ] = useState([])
     const [ date, setDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
+    // const [ test, setTest ] = useState(0)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -73,10 +75,10 @@ export default function AppointmentForm() {
         setErrors([])
         const file = e.target.files[0]
         if (file) {
-            if (await isImgUrl(file) ) {
+            if (await isImgUrl(URL.createObjectURL(file)) ) {
                 // const test = document.getElementById('blah')
 
-                if (file && imgRefPreview.length < 3) {
+                if (imgRefPreview.length < 3) {
                     // test.src = URL.createObjectURL(file)
                     setImgRefPreview([...imgRefPreview, URL.createObjectURL(file)])
                     setImages([...images, file])
@@ -89,6 +91,11 @@ export default function AppointmentForm() {
         }
     }
 
+    // useEffect(() => {
+    //     console.log('APPT', imgRefPreview)
+    //     setTest((test) => test + 1)
+
+    // }, [imgRefPreview.length])
 
     return (
         <>
@@ -187,7 +194,7 @@ export default function AppointmentForm() {
                                         onChange={updateImgRef}
                                     />
                                 </label>
-                                {images.length > 0 && imgRefPreview.map((img, idx) => (
+                                {imgRefPreview.map((img, idx) => (
                                     <div className="appt-form-image-container" key={idx}>
                                         <img className="test" id='blah' src={img} alt=''/>
                                         <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} />
