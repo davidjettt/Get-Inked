@@ -1,7 +1,7 @@
 
 
-.reviews-container {
-    /* border: 1px solid red; */
+.reviews-main {
+    margin-top: 20px;
 }
 
 .reviews-header-container {
@@ -33,6 +33,7 @@
     gap: 200px;
     padding: 15px;
     border-bottom: 1px solid #dbdbdb;
+    position: relative;
 }
 
 .review {
@@ -45,6 +46,8 @@
 .review-image {
     width: 300px;
     margin-top: 15px;
+    max-height: 500px;
+    border-radius: 11px;
 }
 
 .user-review-stars {
@@ -70,6 +73,7 @@
     margin-right: 1rem;
 }
 
-.review-options-container > img {
-
+.review-options-container  {
+    position: absolute;
+    right: 0;
 }

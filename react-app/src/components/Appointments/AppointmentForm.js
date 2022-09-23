@@ -51,44 +51,30 @@ export default function AppointmentForm() {
             if (data.errors) {
                 setErrors(data.errors)
             } else {
-                // console.log('DATA', data.appt.appointment.id)
                 const imageData = new FormData()
-                // imageData.append('appt_id', data.appointment.id)
                 images.forEach(image => imageData.append('ref_images', image))
                 await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
                 await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
                 history.push(`/studios/${studio.id}`)
             }
-
-            // const formData = new FormData()
-            // formData.append('placement', placement)
-            // formData.append('size', size)
-            // formData.append('color', color)
-            // formData.append('description', description)
-            // formData.append('date', date.toUTCString())
-            // formData.append('studio_id', studioId)
-            // images.forEach(image => formData.append('ref_images', image))
-
-            // const badData = await dispatch(createApptThunk(formData))
-            // if (badData) {
-            //     setErrors(badData)
-            // } else {
-            //     history.push('/studios')
-            // }
         }
     }
 
-    const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
+    }
 
-    const updateImgRef = (e) => {
+    const updateImgRef = async (e) => {
         setErrors([])
-        console.log('UPDATE IMG', imgRefPreview)
         const file = e.target.files[0]
         if (file) {
-            const fileType = allowedTypes.find(type => file.type.includes(type))
-
-            if (fileType) {
-                const test = document.getElementById('blah')
+            if (await isImgUrl(file) ) {
+                // const test = document.getElementById('blah')
 
                 if (file && imgRefPreview.length < 3) {
                     // test.src = URL.createObjectURL(file)
