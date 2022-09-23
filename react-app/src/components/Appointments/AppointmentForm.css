@@ -4,7 +4,7 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    /* height: 100vh; */
+    height: 90vh;
 }
 
 .appt-form-title {
@@ -115,7 +115,7 @@
 .appt-form-page-image-container {
     /* height: 100%;
     width: 50%; */
-    height: auto;
+    height: 106%;
     width: 50%;
     background-image: url('../../Images/foral-snake-model.jpeg');
     background-size: cover;

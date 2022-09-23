@@ -53,7 +53,6 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <div className='tattoos-image-container'>
-                            {/* <img className='artists-image' src={studioImage} alt='' /> */}
                             <img className='tat1' src={tattoo1} alt='' />
                             <img className='tat2' src={tattoo2} alt='' />
                             <img className='tat3' src={tattoo3} alt='' />

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal'
 import SingleTattoo from './SIngleTattoo'
 import './Tattoos.css'
+import '../../context/Modal.css'
 
 export default function SingleTattooModal({ tattooId, studioPortfolio, small, medium }) {
     const cardClasses = [ 'small', 'medium', 'large' ]
@@ -20,7 +21,7 @@ export default function SingleTattooModal({ tattooId, studioPortfolio, small, me
             <div className={studioPortfolio ? 'studio-portfolio-image-container' : `tattoo-card ${small || medium}`} onClick={handleShowModal}>
                 <img className={studioPortfolio ? 'studio-portfolio-image' : 'tattoo-image'} src={tattoo.imageUrl} alt='tattoo' />
             </div>
-            {showModal && <Modal onClose={() => setShowModal(false)}>
+            {showModal && <Modal closeTimeoutMS={2000} onClose={() => setShowModal(false)}>
                 <SingleTattoo studioPortfolio={studioPortfolio} tattooId={tattooId} />
             </Modal>}
         </>
