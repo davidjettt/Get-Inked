@@ -11,7 +11,6 @@ export default function Appointments() {
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
 
-
     const today = new Date()
     const upcomingAppts = userAppts.filter((appt) => {
         return today.getTime() < new Date (appt.origDateFormat)
@@ -31,7 +30,6 @@ export default function Appointments() {
     pastAppts.sort((objA, objB) => {
         return new Date(objA.origDateFormat) - new Date(objB.origDateFormat)
     })
-
 
 
     const handleUpcoming = () => {

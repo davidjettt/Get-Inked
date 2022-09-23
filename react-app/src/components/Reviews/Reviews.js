@@ -17,7 +17,7 @@ export default function Reviews({ studioId }) {
         <>
             <div className="reviews-main">
                 <div className="reviews-header-container">
-                    <h2>Reviews</h2>
+                    <h2>Reviews ({reviews.length})</h2>
                     {studioOwnerId !== sessionUserId && <ReviewFormModal studioId={studioId} />}
                 </div>
                 <div className="reviews-container">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createStudioThunk, updateStudioThunk } from "../../store/studios";
+import { createStudioThunk } from "../../store/studios";
 import './StudioFormPage.css'
 
 export default function StudioForm({ studio, formType }) {
@@ -87,37 +87,15 @@ export default function StudioForm({ studio, formType }) {
                 setErrors(['Not a valid header image file type'])
             }
         }
-
-        // const reader = new FileReader()
-        // reader.onload = () => {
-        //     if (reader.readyState === 2) {
-        //         // console.log('READER RESULT', reader.result)
-        //         if (isImage(file.name)) {
-        //             setHeaderPreview(reader.result)
-        //             setHeaderImage(file);
-        //         } else {
-        //             setErrors(['Not a valid header image file type'])
-        //         }
-        //     }
-        // }
-        // // console.log('FILES', e.target.files)
-        // if (e.target.files[0]) {
-        //     reader.readAsDataURL(e.target.files[0])
-        // }
     }
 
     const updateAvatarImage = (e) => {
         setErrors([])
 
         const file = e.target.files[0];
-        // console.log('AVATAR FILE', file)
         if (file) {
             const fileType = allowedTypes.find((type) => {
                 return file.type.includes(type)
-                // const split = file.type.split('/')
-                // console.log('SPLIT', split)
-                // split[split.length - 1].includes(type)
-                // split[split.length - 1] === type
             })
 
             if (fileType) {
@@ -137,22 +115,6 @@ export default function StudioForm({ studio, formType }) {
                 setErrors(['Not a valid avatar image file type'])
             }
         }
-        // const reader = new FileReader()
-        // reader.onload = () => {
-        //     if (reader.readyState === 2) {
-        //         // console.log('READER RESULT', reader.result)
-        //         if (isImage(file.name)) {
-        //             setAvatarPreview(reader.result)
-        //             setAvatar(file);
-        //         } else {
-        //             setErrors(['Not a valid avatar image file type'])
-        //         }
-        //     }
-        // }
-        // // console.log('FILES', e.target.files)
-        // if (e.target.files[0]) {
-        //     reader.readAsDataURL(e.target.files[0])
-        // }
     }
 
     return (
@@ -169,6 +131,7 @@ export default function StudioForm({ studio, formType }) {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
+                <div className="studio-images-container">
                     <div className="studio-form-avatar-container">
                         <label className="studio-form-custom-file-upload-avatar">
                             <input
@@ -184,18 +147,6 @@ export default function StudioForm({ studio, formType }) {
                             {avatarPreview && <img className="studio-form-avatar-preview" src={avatarPreview} alt='' />}
                         </div>
                     </div>
-                    <div className="studio-name-container">
-                        <label className="custom">
-                            <input name='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-                            <span className="placeholder">Name</span>
-                        </label>
-                    </div>
-                    <div className="studio-description-container">
-                        <label className="custom-textarea">
-                            <textarea placeholder="Studio description here..." name='description' className="studio-description-textarea" cols='59' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
-                            {/* <span className="placeholder-textarea">Description</span> */}
-                        </label>
-                    </div>
                     <div className="studio-header-upload-container">
                         <label className="studio-form-custom-file-upload">
                             <input
@@ -210,6 +161,19 @@ export default function StudioForm({ studio, formType }) {
                         <div className="studio-form-header-preview-container">
                             {headerPreview && <img className="studio-form-header-preview" src={headerPreview} alt='' />}
                         </div>
+                    </div>
+                </div>
+                    <div className="studio-name-container">
+                        <label className="custom">
+                            <input name='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                            <span className="placeholder">Name</span>
+                        </label>
+                    </div>
+                    <div className="studio-description-container">
+                        <label className="custom-textarea">
+                            <textarea placeholder="Studio description here..." name='description' className="studio-description-textarea" cols='59' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            {/* <span className="placeholder-textarea">Description</span> */}
+                        </label>
                     </div>
                     {/* <div className="studio-tattoo-style-container">
                         <input name='tattoo_style' type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />

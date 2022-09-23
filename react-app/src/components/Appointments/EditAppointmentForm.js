@@ -14,11 +14,6 @@ export default function EditAppointmentForm() {
     const history = useHistory()
     const { appointmentId } = useParams()
     const appt = useSelector(state => state.appointments[+appointmentId])
-    // console.log('APPT', appt)
-    const imageReferences = appt.imageReferences.filter(img => img !== null)
-    // const apptImages = appt.apptImages.map(obj => obj.image)
-    // console.log('APPT IAMGES', apptImages)
-
     const studio = useSelector(state => state.studios[+appt.studioId])
     const studioName = studio.name
     const [ placement, setPlacement ] = useState(appt.placement)
@@ -26,12 +21,8 @@ export default function EditAppointmentForm() {
     const [ description, setDescription ] = useState(appt.description)
     const [ color, setColor ] = useState(appt.color)
     const [ imgPreviews, setImgPreviews ] = useState(appt.apptImages)
-    // const [ images, setImages ] = useState(imageReferences)
     const [ date, setDate ] = useState(new Date(appt.date.year, appt.date.monthNumber, appt.date.day))
     const [ errors, setErrors ] = useState([])
-
-    // console.log('IMG Previews', imgPreviews)
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -53,18 +44,15 @@ export default function EditAppointmentForm() {
             formData.append('description', description)
             formData.append('date', date.toUTCString())
             formData.append('studio_id', appt.studioId)
-            // images.forEach(image => formData.append('ref_images', image))
 
             const badData = await dispatch(updateApptThunk(formData, appt.id))
             if (badData) {
                 setErrors(badData)
             } else {
-                history.push('/studios')
+                history.push(`/users/${appt.userId}/appointments`)
             }
         }
     }
-
-    const allowedTypes = ["png", "jpg", "jpeg", "gif", "webp"]
 
     function isImgUrl(url) {
         const img = new Image();

@@ -120,8 +120,8 @@ export default function StudioDetails() {
                                 <div className="avg-rating" >
                                     {avgRating}
                                 </div>
-                                <div>
-                                    See all reviews {studio?.reviews.length}
+                                <div className="see-all-reviews">
+                                    See all reviews ({studio?.reviews.length})
                                 </div>
                             </div> : <div>No reviews yet</div>}
                             <div className="studio-details-header-reviews-right">

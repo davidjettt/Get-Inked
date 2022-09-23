@@ -45,6 +45,10 @@ body {
     width: 98%;
 }
 
+.studio-details-location-container {
+    margin-top: 3px;
+}
+
 .studio-details-location {
     font-size: 14px;
     color: #202125;
@@ -203,4 +207,13 @@ body {
 
 .dropdown-off {
     display: none;
+}
+
+.studio-details-header-reviews-left {
+    display: flex;
+    gap: 10px;
+}
+
+.see-all-reviews {
+    color: #20212599;
 }

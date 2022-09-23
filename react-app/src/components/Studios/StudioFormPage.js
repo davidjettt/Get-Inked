@@ -1,3 +1,4 @@
+import Footer from "../Footer/Footer";
 import StudioForm from "./StudioForm";
 import './StudioFormPage.css'
 
@@ -7,12 +8,15 @@ export default function StudioFormPage({ studio, formType }) {
 
     return (
         // <div className="studio-form-page">
+        <>
             <div className="studio-form-page-main-container">
                 <StudioForm studio={studio} formType={formType} />
                 <div className="studio-form-page-image-container">
-                    <img className="studio-image" src={studioImage} alt='studio' />
+                    {/* <img className="studio-image" src={studioImage} alt='studio' /> */}
                 </div>
             </div>
+            {/* <Footer /> */}
+        </>
         // </div>
     )
 }

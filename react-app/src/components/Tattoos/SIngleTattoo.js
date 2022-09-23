@@ -21,6 +21,11 @@ export default function SingleTattoo({ tattooId, studioPortfolio }) {
         }
     }, [overflow]);
 
+    useEffect(() => {
+        const modalBackground = document.getElementById('modal-background')
+        modalBackground.style.backgroundColor = 'rgb(248,248,248)'
+    }, [])
+
 
     return (
         <div className="tattoo-modal-container">
