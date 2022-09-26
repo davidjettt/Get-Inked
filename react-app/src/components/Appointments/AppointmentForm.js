@@ -1,19 +1,20 @@
 import { useHistory, useParams } from "react-router-dom";
-import Calendar from 'react-calendar'
-import './AppointmentForm.css'
-import 'react-calendar/dist/Calendar.css';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createApptThunk, getOneAppointmentThunk, postAppointmentImageThunk } from "../../store/appointments";
+import Calendar from 'react-calendar'
+import './ReactCalendar.css'
+import './AppointmentForm.css'
 import plusSign from '../../Images/plus-sign.svg'
 import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
-import xImg from '../../Images/image-remove-x.svg'
 
 export default function AppointmentForm() {
     const history = useHistory()
     const dispatch = useDispatch()
     const { studioId } = useParams()
     const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
+    const appts = useSelector(state => Object.values(state.appointments).map(appt => new Date(appt.origDateFormat).getTime()))
+    // const appts = useSelector(state => Object.values(state.appointments).map(appt => appt.origDateFormat))
     const studio = useSelector(state => state.studios[+studioId])
     const studioName = studio.name
     const [ placement, setPlacement ] = useState('')
@@ -24,7 +25,8 @@ export default function AppointmentForm() {
     const [ images, setImages ] = useState([])
     const [ date, setDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
-    // const [ test, setTest ] = useState(0)
+
+    // console.log('APPTS', appts)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +37,7 @@ export default function AppointmentForm() {
             setErrors(['Date is required'])
         }
         else if (date.getTime() < today.getTime()) {
-            setErrors(["Can't pick a day in the past!"])
+            setErrors(["Appointment must be a day in the future!"])
         }
         else if (imgRefPreview.length < 1) {
             setErrors(['At least one image reference is required.'])
@@ -90,12 +92,6 @@ export default function AppointmentForm() {
             }
         }
     }
-
-    // useEffect(() => {
-    //     console.log('APPT', imgRefPreview)
-    //     setTest((test) => test + 1)
-
-    // }, [imgRefPreview.length])
 
     return (
         <>
@@ -197,7 +193,7 @@ export default function AppointmentForm() {
                                 {imgRefPreview.map((img, idx) => (
                                     <div className="appt-form-image-container" key={idx}>
                                         <img className="test" id='blah' src={img} alt=''/>
-                                        <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} />
+                                        <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} setImages={setImages} setImgRefPreview={setImgRefPreview} />
                                     </div>
                                 ))}
                             </div>
@@ -207,6 +203,9 @@ export default function AppointmentForm() {
                             <Calendar
                                 value={date}
                                 onChange={setDate}
+                                minDetail='year'
+                                minDate={new Date()}
+                                tileDisabled={({date}) => appts.includes(date.getTime())}
                             />
                         </div>
                         <button type='submit' className="appt-form-submit-btn">Submit</button>

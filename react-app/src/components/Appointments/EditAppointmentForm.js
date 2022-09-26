@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import plusSign from '../../Images/plus-sign.svg'
-import 'react-calendar/dist/Calendar.css';
+import './ReactCalendar.css'
 import { getOneAppointmentThunk, postAppointmentImageThunk, updateApptThunk } from "../../store/appointments";
 import EditApptRemoveImg from "../RemovePreviewImg/EditApptRemoveImg";
 
@@ -14,6 +14,7 @@ export default function EditAppointmentForm() {
     const history = useHistory()
     const { appointmentId } = useParams()
     const appt = useSelector(state => state.appointments[+appointmentId])
+    const appts = useSelector(state => Object.values(state.appointments).map(appt => new Date(appt.origDateFormat).getTime()))
     const studio = useSelector(state => state.studios[+appt.studioId])
     const studioName = studio.name
     const [ placement, setPlacement ] = useState(appt.placement)
@@ -31,7 +32,7 @@ export default function EditAppointmentForm() {
         const today = new Date()
 
         if (date.getTime() < today.getTime()) {
-            setErrors(["Can't pick a day in the past!"])
+            setErrors(["Appointment must be a day in the future!"])
         }
         else if (imgPreviews.length < 1) {
             setErrors(['At least one image reference is required'])
@@ -83,47 +84,6 @@ export default function EditAppointmentForm() {
             }
         }
     }
-
-    // const updateImgRef = (e) => {
-    //     setErrors([])
-
-    //     const file = e.target.files[0]
-    //     if (file) {
-    //         const fileType = allowedTypes.find(type => file.type.includes(type))
-
-    //         if (fileType) {
-    //             if (imgPreviews.length < 3) {
-    //                 setImgPreviews([...imgPreviews, URL.createObjectURL(file)])
-    //                 setImages([...images, file])
-    //             } else {
-    //                 setErrors(['Max 3 images'])
-    //             }
-    //         } else {
-    //             setErrors(['Invalid images file type'])
-    //         }
-    //     }
-    // }
-
-    // const updateImgRef = async (e) => {
-    //     setErrors([])
-    //     const file = e.target.files[0]
-
-    //     if (file) {
-    //         if (await isImgUrl(URL.createObjectURL(file))) {
-    //             const formData = new FormData()
-    //             formData.append('ref_images', file)
-
-    //             const badData = await dispatch(updateImgRefs(formData, appt.id))
-    //             if (badData) {
-    //                 setErrors(badData)
-    //             } else {
-    //                 dispatch(getOneAppointmentThunk(appt.id))
-    //             }
-    //         } else {
-    //             setErrors(['Invalid image'])
-    //         }
-    //     }
-    // }
 
     return (
         <>
@@ -210,7 +170,7 @@ export default function EditAppointmentForm() {
                             </div>
                         </div>
                         <div className="appt-form-image-upload-container">
-                            <div className="add-image-refs">Add image references</div>
+                            <div className="add-image-refs">Update image references</div>
                             <div className="file-input-images-container">
                                 <label className='image-file-label'>
                                     <img className="plus-sign" src={plusSign} alt='plus sign' />
@@ -235,6 +195,9 @@ export default function EditAppointmentForm() {
                             <Calendar
                                 value={date}
                                 onChange={setDate}
+                                minDetail='year'
+                                minDate={new Date()}
+                                tileDisabled={({date}) => appts.includes(date.getTime())}
                             />
                         </div>
                         <button type='submit' className="appt-form-submit-btn">Submit</button>
