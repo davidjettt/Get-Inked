@@ -111,6 +111,13 @@ def seed_tattoo_images():
         studio_id=2,
         user_id=5
     )
+    tattoo7 = TattooImage(
+        description='Hannya with katana in mouth arm sleeve',
+        tattoo_style='Neo Japanese',
+        studio_id=1,
+        user_id=4
+    )
+
 
     db.session.add(tattoo1)
     db.session.add(tattoo2)
