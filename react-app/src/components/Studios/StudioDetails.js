@@ -11,6 +11,8 @@ import { Rating } from 'react-simple-star-rating'
 import DeleteButton from "../DeleteButton/DeleteButton"
 import Footer from "../Footer/Footer"
 import Reviews from "../Reviews/Reviews"
+import Map from "../Map/Map"
+
 
 export default function StudioDetails() {
     const [ showDropdown, setShowDropdown ] = useState(false)
@@ -71,6 +73,8 @@ export default function StudioDetails() {
         history.push('/studios')
     }
 
+    // console.log('DROp', showDropdown)
+
     return (
         <div className="studio-details-main">
             <div className="studio-details-header-container">
@@ -121,7 +125,7 @@ export default function StudioDetails() {
                                     {avgRating}
                                 </div>
                                 <div className="see-all-reviews">
-                                    See all reviews ({studio?.reviews.length})
+                                    {/* See all reviews ({studio?.reviews.length}) */}
                                 </div>
                             </div> : <div>No reviews yet</div>}
                             <div className="studio-details-header-reviews-right">
@@ -159,8 +163,7 @@ export default function StudioDetails() {
                                 {studio?.description}
                             </div>
                         </div>
-                        <div className="map">
-                        </div>
+                        {/* <Map /> */}
                     </div>
                     <div className="studio-portfolio-container">
                         <div className="studio-portfolio-header-container">

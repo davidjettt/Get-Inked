@@ -77,7 +77,7 @@ useEffect(() => {
             {showDropdown &&
             <div className='nav-dropdown-container'>
               <div className='your-profile-container'>Profile</div>
-              <div className='your-profile-settings-container'>Profile Settings</div>
+              {/* <div className='your-profile-settings-container'>Profile Settings</div> */}
               <Link className='appts-link' to={`/users/${sessionUserId}/appointments`}>Appointments</Link>
               <div className='bookmarks-container'>Bookmarks</div>
               <LogoutButton />

@@ -164,11 +164,15 @@ body {
 
 .about-the-studio-container {
     padding: 20px 0;
-    width: 50%;
+    /* width: 80%; */
     display: flex;
     margin-bottom: 50px;
+    height: auto;
 }
 
+.about-the-studio {
+    width: 50%;
+}
 
 .studio-portfolio-main {
     display: flex;
