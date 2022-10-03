@@ -62,7 +62,8 @@
     width: 60vw;
     min-height: 500px;
     height: 80vh;
-    max-height: 800px;
+    /* max-height: 800px; */
+    max-height: 1000px;
     display: flex;
     /* overflow-y: auto; */
     border: 1px solid rgb(225,225,225);
@@ -110,8 +111,8 @@
 
 .tattoo-modal-image-container {
     width: 70%;
-    height: 100%;
-    /* height: auto; */
+    /* height: 100%; */
+    height: auto;
 }
 
 .tattoo-modal-image {

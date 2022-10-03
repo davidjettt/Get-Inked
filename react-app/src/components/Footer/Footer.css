@@ -3,13 +3,21 @@ body {
     padding: 0;
 }
 
+html{
+    position: relative;
+}
+
 .footer-container-main {
     height: 110px;
     background-color: rgb(31,33,37);
     display: flex;
     justify-content: center;
     /* width: 100vw; */
+    /* position: absolute;
+    bottom: 0;
+    width: 100%; */
 }
+
 
 .footer-container-secondary {
     width: 85%;
