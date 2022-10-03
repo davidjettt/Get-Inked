@@ -4,7 +4,10 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    height: 90vh;
+    /* height: 90vh; */
+    height: 95vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .appt-form-title {
