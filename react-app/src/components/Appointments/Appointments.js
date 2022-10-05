@@ -7,7 +7,8 @@ import './Appointments.css'
 
 export default function Appointments() {
     const [ past, setPast ] = useState(false)
-    const { userId } = useParams()
+    // const { userId } = useParams()
+    const userId = useSelector(state => state.session.user.id)
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
 

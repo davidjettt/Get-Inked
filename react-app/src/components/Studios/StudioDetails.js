@@ -35,20 +35,24 @@ export default function StudioDetails() {
 
     let starCount = 0
     let avgRating
-    if (studio?.reviews.length > 0) {
-        studio.reviews.forEach((review) => {
-            starCount += review.stars
-        })
-        avgRating = (starCount / studio.reviews.length).toFixed(1)
+
+
+    if (studio) {
+        if (studio.reviews?.length > 0) {
+            studio.reviews.forEach((review) => {
+                starCount += review.stars
+            })
+            avgRating = (starCount / studio.reviews.length).toFixed(1)
+        }
     }
 
-    let className
-    const description = studio?.description
-    if (description?.indexOf(' ') === -1) {
-        className = 'word-break'
-    } else {
-        className = 'studio-description'
-    }
+    // let className
+    // const description = studio?.description
+    // if (description?.indexOf(' ') === -1) {
+    //     className = 'word-break'
+    // } else {
+    //     className = 'studio-description'
+    // }
 
     const handleDropdown = () => {
         if (showDropdown) return
@@ -77,7 +81,7 @@ export default function StudioDetails() {
 
     return (
         <>
-            <div className="studio-details-main">
+            {studio && <div className="studio-details-main">
                 <div className="studio-details-header-container">
                     <img className="studio-details-header-image" src={studio?.headerImage || defaultStudioImage} alt='header' />
                 </div>
@@ -160,7 +164,7 @@ export default function StudioDetails() {
                                 <div>
                                     <h2>About the Studio</h2>
                                 </div>
-                                <div className={className}>
+                                <div className='studio-description'>
                                     {studio?.description}
                                 </div>
                             </div>
@@ -176,7 +180,7 @@ export default function StudioDetails() {
                         <Reviews studioId={studioId} />
                     </div>
                 </div>
-            </div>
+            </div>}
             {/* <Footer /> */}
         </>
     )

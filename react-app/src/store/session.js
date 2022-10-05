@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const BOOKMARK_TATTOO = 'session/bookmarkTattoo'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -10,6 +11,13 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 })
+
+const bookmarkTattoo = (user) => {
+  return {
+    type: BOOKMARK_TATTOO,
+    user
+  }
+}
 
 const initialState = { user: null };
 
@@ -98,12 +106,27 @@ export const signUp = (name, username, email, password) => async (dispatch) => {
   }
 }
 
+export const bookmarkTattooThunk = (tattooId) => async (dispatch) => {
+  const response = await fetch(`/api/tattoos/${tattooId}/bookmark`, {
+      method: 'POST'
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(bookmarkTattoo(data))
+    return data
+  }
+
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case BOOKMARK_TATTOO:
+      return { user: action.user }
     default:
       return state;
   }

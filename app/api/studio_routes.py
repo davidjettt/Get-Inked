@@ -243,3 +243,28 @@ def create_tattoo(id):
         return { 'tattoo': new_tattoo_image.tattoo_to_dict() }
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+
+# Bookmark a studio
+@studio_routes.post('<int:id>/bookmark')
+@login_required
+def bookmark_studio(id):
+    studio = Studio.query.get(id)
+
+    if current_user not in studio.studio_bookmarks:
+        studio.studio_bookmarks.append(current_user)
+        db.session.commit()
+    else:
+        studio.studio_bookmarks.remove(current_user)
+        db.session.commit()
+        return { 'studio': studio.studio_to_dict() }
+
+# Unbookmark a studio
+@studio_routes.put('<int:id>/unbookmark')
+@login_required
+def unbookmark_studio(id):
+    studio = Studio.query.get(id)
+
+    studio.studio_bookmarks.remove(current_user)
+    db.session.commit()
+    return { 'studio': studio.studio_to_dict() }

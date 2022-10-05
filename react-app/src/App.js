@@ -22,6 +22,8 @@ import { loadApptsThunk } from './store/appointments';
 import Appointments from './components/Appointments/Appointments';
 import AppointmentForm from './components/Appointments/AppointmentForm';
 import EditAppointmentForm from './components/Appointments/EditAppointmentForm';
+import Bookmarks from './components/Bookmarks/Bookmarks';
+import Profile from './components/Profile/Profile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -61,6 +63,12 @@ function App() {
           <ProtectedRoute path='/users/:userId' exact={true} >
             <User />
           </ProtectedRoute> */}
+          <ProtectedRoute exact path='/users/:userId/profile'>
+            <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/bookmarks'>
+            <Bookmarks />
+          </ProtectedRoute>
           <ProtectedRoute exact path='/studios'>
             <Studios />
           </ProtectedRoute>
@@ -85,7 +93,7 @@ function App() {
           <ProtectedRoute path='/home' exact={true} >
             <HomePage />
           </ProtectedRoute>
-          <ProtectedRoute exact path='/users/:userId/appointments'>
+          <ProtectedRoute exact path='/appointments'>
             <Appointments />
           </ProtectedRoute>
           <ProtectedRoute path='/not-found'>

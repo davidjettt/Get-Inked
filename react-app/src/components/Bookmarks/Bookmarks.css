@@ -1,0 +1,13 @@
+
+
+.bookmarks-main {
+    display: flex;
+    justify-content: center;
+    height: 95vh;
+}
+
+.bookmarks-title {
+    font-size: 24px;
+    padding: 15px 0;
+    letter-spacing: 3px;
+}

@@ -25,6 +25,8 @@
 .tattoo-card {
     /* width: 300px; */
     margin: 5px;
+    position: relative;
+    z-index: 11;
 }
 
 /* .tattoo-card.small {
@@ -57,6 +59,76 @@
     /* margin: 5px; */
 }
 
+.heart-icon-background {
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    z-index: 12;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.tattoo-unbookmark {
+    background-color: #20212599;
+}
+
+.tattoo-bookmark {
+    background-color: rgb(244, 82, 82);
+}
+
+.tattoo-card-profile-image {
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+}
+
+.bottom-overlay {
+    padding: 5px 0;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    cursor: pointer;
+    /* transition: .3s ease-in; */
+    /* transform: translateY(-5px); */
+}
+
+.tattoo-card:hover .bottom-overlay{
+    opacity: 1;
+    transform: translateY(-1%);
+    transition: .5s;
+}
+
+.tattoo-card:hover .heart-icon-background {
+    opacity: 1;
+    transform: translateX(-15px);
+    transition: .5s;
+}
+
+.tattoo-card-owner {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tattoo-card-location {
+    /* color: #20212599; */
+    /* color: #a5a2a2; */
+    color: rgb(193, 188, 188);
+    font-size: 14px;
+    font-weight: 500;
+}
 
 .tattoo-modal-container {
     width: 60vw;

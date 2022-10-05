@@ -138,7 +138,8 @@
 .home-page-tattoos-secondary {
     display: flex;
     gap: 150px;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
+    /* justify-content: center; */
 }
 
 .artists-heading,
