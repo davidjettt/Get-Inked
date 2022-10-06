@@ -69,8 +69,8 @@ class User(db.Model, UserMixin):
             'tattooStyle': self.tattoo_style,
             'appointments': [ appt.appt_to_dict() for appt in self.user_appointments ],
             'tattooBookmarks': [ tattoo.tattoo_to_dict() for tattoo in self.user_tattoo_image_bookmarks ],
-            'studioBookmarks': [ studio.studio_to_dict() for studio in self.user_studio_bookmarks ]
-            # 'studio': [studio.studio_to_dict() for studio in self.studio]
+            'studioBookmarks': [ studio.studio_to_dict() for studio in self.user_studio_bookmarks ],
+            'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
 

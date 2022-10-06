@@ -36,7 +36,7 @@ export default function SingleTattoo({ tattooId, studioPortfolio }) {
                 <div className="tattoo-modal-user-avatar-container">
                     <div className="tattoo-modal-avatar-container">
                         <div className="tattoo-modal-owner-info">
-                            <img className="single-post-profile-image" src={defaultUserProfilePic} alt='' />
+                            <img className="single-post-profile-image" src={tattoo.ownerAvatar || defaultUserProfilePic} alt='' />
                             <span className="tattoo-owner-name-text">{tattoo.owner}</span>
                         </div>
                         <div className="tattoo-modal-threedots-container">

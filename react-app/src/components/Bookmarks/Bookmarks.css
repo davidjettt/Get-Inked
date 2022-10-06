@@ -11,3 +11,37 @@
     padding: 15px 0;
     letter-spacing: 3px;
 }
+
+
+.MuiImageListItem-root {
+    position: relative;
+    z-index: 11;
+    cursor: pointer;
+}
+
+
+.MuiImageListItem-root:hover .bottom-overlay-profile {
+    opacity: 1;
+    /* transform: translateY(-10%); */
+    transition: .5s;
+}
+
+.MuiImageListItem-root:hover .heart-icon-background {
+    opacity: 1;
+    transform: translateX(-15px);
+    transition: .5s;
+}
+
+
+.bottom-overlay-profile {
+    padding: 5px 0;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    cursor: pointer;
+}

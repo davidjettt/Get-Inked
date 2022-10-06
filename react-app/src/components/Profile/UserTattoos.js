@@ -1,21 +1,26 @@
-
 import { useSelector } from "react-redux"
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
-import '../Tattoos/Tattoos.css'
-import './Bookmarks.css'
-import TattooBookmark from './TattooBookmark';
+import TattooBookmark from "../Bookmarks/TattooBookmark";
 
 
-export default function TattooBookmarks() {
-    const sessionUserTattooBookmarks = useSelector(state => state.session.user.tattooBookmarks)
+
+
+
+
+export default function UserTattoos() {
+    const sessionUser = useSelector(state => state.session.user)
+
+    const sessionUserTattoos = useSelector(state => Object.values(state.tattoos)
+                                .filter(tattoo => +tattoo.userId === +sessionUser.id))
+
 
     return (
         <>
-            <div className="tattoo-bookmarks-main">
+            <div className="user-tattoos-main">
                 <Box sx={{ width: '100%', height: 'auto', overflowY: 'hidden' }}>
                     <ImageList variant="masonry" cols={3} gap={8}>
-                        {sessionUserTattooBookmarks.map((item) => (
+                        {sessionUserTattoos.map((item) => (
                                 <TattooBookmark item={item} />
                             ))}
                     </ImageList>
