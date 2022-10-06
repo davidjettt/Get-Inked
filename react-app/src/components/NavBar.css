@@ -79,7 +79,7 @@
 
 .nav-dropdown-container {
     width: 250px;
-    height: 200px;
+    height: 150px;
     /* box-shadow: 2px 2px 2px 2px lightgray; */
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, .2);
     border-radius: 8px;
@@ -98,12 +98,14 @@
     text-decoration: none;
     color: black;
     width: 100%;
-    height: 20%;
+    height: 33%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.profile-link:hover,
+.logout-button:hover,
 .appts-link:hover {
     background-color: #ddd;
 }
@@ -111,14 +113,22 @@
 .logout-button {
     cursor: pointer;
     width: 100%;
-    height: 20%;
+    height: 33%;
     background-color: white;
     border: none;
     font-size: 16px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
-.logout-button:hover {
-    background-color: #ddd;
+.profile-link {
+    width: 100%;
+    height: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
 @media screen and (max-width: 700px) {

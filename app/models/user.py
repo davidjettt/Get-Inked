@@ -67,8 +67,10 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'avatar': self.avatar,
             'tattooStyle': self.tattoo_style,
-            'appointments': [ appt.appt_to_dict() for appt in self.user_appointments ]
-            # 'studio': [studio.studio_to_dict() for studio in self.studio]
+            'appointments': [ appt.appt_to_dict() for appt in self.user_appointments ],
+            'tattooBookmarks': [ tattoo.tattoo_to_dict() for tattoo in self.user_tattoo_image_bookmarks ],
+            'studioBookmarks': [ studio.studio_to_dict() for studio in self.user_studio_bookmarks ],
+            'studio': [studio.studio_to_dict() for studio in self.studio]
         }
 
 
@@ -116,7 +118,8 @@ class Studio(db.Model):
             'studioImages': [ image.image_url for image in self.tattoo_images ],
             'reviews': [ review.review_to_dict() for review in self.studio_reviews ],
             'studioArtists': [user.id for user in self.studio_users],
-            'appointmentDates': [appt.date for appt in self.studio_appointments]
+            'appointmentDates': [appt.date for appt in self.studio_appointments],
+            # 'bookmarks': [ user.id for user in self.studio_bookmarks ]
         }
 
 
@@ -155,6 +158,7 @@ class TattooImage(db.Model):
                 'state': Studio.query.get(self.studio_id).state,
                 'avatar': Studio.query.get(self.studio_id).avatar
             },
+            # 'bookmarks': [ user.id for user in self.tattoo_image_bookmarks ],
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }

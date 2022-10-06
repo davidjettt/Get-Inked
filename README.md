@@ -23,6 +23,7 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 ![](https://img.shields.io/badge/-SQLite-003B57?logo=sqlite&logoColor=white&style=for-the-badge)
 ![](https://img.shields.io/badge/-NPM-CB3837?logo=npm&logoColor=white&style=for-the-badge)
 ![](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=for-the-badge)
+![](https://img.shields.io/badge/-Material%20UI-007FFF?logo=mui&logoColor=white&style=for-the-badge)
 
 # Wiki Links
 - [Database Schema](https://github.com/davidjettt/Get-Inked/wiki/Database-Schema)
