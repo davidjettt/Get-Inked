@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
 import './Profile.css'
-import { useState } from "react"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
 import UserTattoos from "./UserTattoos"
 import TattooBookmarks from "../Bookmarks/TattooBookmarks"
-import { useHistory } from "react-router-dom"
+import { theme } from '../../styles/styles'
+import { ThemeProvider } from '@mui/material'
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -114,30 +116,30 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-                <div className="profile-container-right">
-                    <div className="profile-container-right-tab">
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tabs textColor="inherit" TabIndicatorProps={{style: {background: 'black'}}} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab  label=" Your Tattoos" {...a11yProps(0)} />
-                                <Tab label="Bookmarked Tattoos" {...a11yProps(1)} />
-                                <Tab label="Bookmarked Studios" {...a11yProps(2)} />
-                                <Tab label="Profile Settings" {...a11yProps(3)} />
-                            </Tabs>
-                            </Box>
-                            <TabPanel value={value} index={0}>
-                                <UserTattoos />
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                                <TattooBookmarks />
-                            </TabPanel>
-                            <TabPanel value={value} index={2}>
-                            Coming Soon!
-                            </TabPanel>
-                            <TabPanel value={value} index={3}>
-                            Coming Soon!
-                            </TabPanel>
-                    </div>
-                </div>
+                <ThemeProvider theme={theme}>
+                        <div className="profile-container-right">
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs textColor="inherit" TabIndicatorProps={{style: {background: 'black'}}} value={value} onChange={handleChange} aria-label="basic tabs example">
+                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label=" Your Tattoos" {...a11yProps(0)} />
+                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Bookmarked Tattoos" {...a11yProps(1)} />
+                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Bookmarked Studios" {...a11yProps(2)} />
+                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Profile Settings" {...a11yProps(3)} />
+                                </Tabs>
+                                </Box>
+                                <TabPanel value={value} index={0}>
+                                    <UserTattoos />
+                                </TabPanel>
+                                <TabPanel value={value} index={1}>
+                                    <TattooBookmarks />
+                                </TabPanel>
+                                <TabPanel value={value} index={2}>
+                                Coming Soon!
+                                </TabPanel>
+                                <TabPanel value={value} index={3}>
+                                Coming Soon!
+                                </TabPanel>
+                        </div>
+                </ThemeProvider>
             </div>}
         </>
     )

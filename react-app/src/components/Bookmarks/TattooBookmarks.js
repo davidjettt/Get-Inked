@@ -13,7 +13,7 @@ export default function TattooBookmarks() {
     return (
         <>
             <div className="tattoo-bookmarks-main">
-                <Box sx={{ width: '100%', height: 'auto', overflowY: 'hidden' }}>
+                <Box sx={{ width: '100%', height: 'auto', overflowY: 'auto' }}>
                     <ImageList variant="masonry" cols={3} gap={8}>
                         {sessionUserTattooBookmarks.map((item) => (
                                 <TattooBookmark item={item} />
