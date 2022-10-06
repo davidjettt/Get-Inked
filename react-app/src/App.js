@@ -27,6 +27,7 @@ import Profile from './components/Profile/Profile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  // const [ height, setHeight ] = useState(window.innerWidth)
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user)
 
@@ -44,6 +45,17 @@ function App() {
   // useEffect(() => {
   //   dispatch(loadStudiosThunk())
   // }, [dispatch])
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setHeight(window.innerWidth)
+  //   }
+  //   window.addEventListener('resize', handleResize)
+
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize)
+  //   }
+  // }, [])
 
   if (!loaded) {
     return null;

@@ -1,6 +1,10 @@
 
+body {
+    background-color: #f8f8f8;
+}
+
 .profile-main {
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
     background-color: #f8f8f8;
     display: flex;
     /* height: auto;
@@ -10,8 +14,8 @@
     /* overflow-y: hidden; */
     padding-top: 50px;
     /* align-items: center; */
-    height: 100vh;
-    overflow: hidden;
+    /* height: 100vh; */
+    /* overflow: hidden; */
 }
 
 .profile-container-left {
@@ -57,8 +61,8 @@
 }
 
 .profile-container-right {
-    width: 70%;
-    padding-right: 50px;
+    width: 100%;
+    /* padding-right: 50px; */
     padding-bottom: 50px;
 }
 
@@ -106,4 +110,22 @@
 .profile-studio-location {
     font-size: 14px;
     color: #20212599;
+}
+
+
+@media screen and (max-width: 1130px) {
+    .profile-main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-container-right {
+        margin-top: 20px;
+    }
+
+    .MuiTab-labelIcon {
+        font-size: 12px;
+    }
+
+
 }

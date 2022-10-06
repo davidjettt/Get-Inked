@@ -18,7 +18,7 @@ export default function UserTattoos() {
     return (
         <>
             <div className="user-tattoos-main">
-                <Box sx={{ width: '100%', height: 'auto', overflowY: 'hidden' }}>
+                <Box sx={{ width: '100%', height: 'auto', overflowY: 'auto' }}>
                     <ImageList variant="masonry" cols={3} gap={8}>
                         {sessionUserTattoos.map((item) => (
                                 <TattooBookmark item={item} />
