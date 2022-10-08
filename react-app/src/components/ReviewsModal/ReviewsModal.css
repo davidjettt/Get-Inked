@@ -60,3 +60,8 @@
     border: 1px solid #dbdbdb;
     cursor: pointer;
 }
+
+.modal-review {
+    font-size: 14px;
+    color: #20212599;
+}

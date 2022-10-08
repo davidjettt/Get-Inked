@@ -96,8 +96,8 @@ export default function ReviewsModal({ studioId, reviews, reviewsComponent }) {
                                         <span>{review.user.name}</span>
                                     </div>
                                 </div>
-                                <div className="modal-review">
-                                    <div>{review.review}</div>
+                                <div className="modal-review-container">
+                                    <div className='modal-review'>{review.review}</div>
                                     <div>
                                         {review.reviewImage &&
                                         <img className="review-image" src={review.reviewImage}  alt='review' />}

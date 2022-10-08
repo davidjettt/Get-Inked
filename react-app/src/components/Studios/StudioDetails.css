@@ -200,6 +200,7 @@ body {
 }
 
 .studio-description {
+    color: #20212599;
     word-break: break-word;
     /* word-wrap: break-word; */
 }
