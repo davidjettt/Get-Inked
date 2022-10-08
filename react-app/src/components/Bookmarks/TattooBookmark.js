@@ -53,7 +53,7 @@ export default function TattooBookmark({ item }) {
                     </div>
                 </div>
             </ImageListItem>
-            {showModal && <Modal closeTimeoutMS={500} onClose={() => setShowModal(false)}>
+            {showModal && <Modal onClose={() => setShowModal(false)}>
                 <SingleTattoo tattooId={item.id} />
             </Modal>}
         </>

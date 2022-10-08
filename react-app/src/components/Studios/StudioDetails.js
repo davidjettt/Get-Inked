@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, useHistory, useParams } from "react-router-dom"
-import { deleteStudioThunk } from "../../store/studios"
 import threedots from '../../Images/three-dots.svg'
 import './StudioDetails.css'
 import StudioPortfolio from "./StudioPortfolio"
@@ -9,9 +8,10 @@ import TattooFormModal from "../Tattoos/TattooFormModal"
 import { Modal } from "../../context/Modal"
 import { Rating } from 'react-simple-star-rating'
 import DeleteButton from "../DeleteButton/DeleteButton"
-import Footer from "../Footer/Footer"
+// import Footer from "../Footer/Footer"
 import Reviews from "../Reviews/Reviews"
-import Map from "../Map/Map"
+// import Map from "../Map/Map"
+import ReviewsModal from "../ReviewsModal/ReviewsModal"
 
 
 export default function StudioDetails() {
@@ -20,7 +20,6 @@ export default function StudioDetails() {
     const [ menuClassName, setMenuClassName ] = useState(false)
     const defaultAvatarImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662073397/dragon-heads-tattoo_xrpoon.jpg'
     const defaultStudioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662048156/TATTOO-MAKING-818x490_e2z4y3.jpg'
-    const dispatch = useDispatch()
     const history = useHistory()
     const { studioId }  = useParams()
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
@@ -72,13 +71,6 @@ export default function StudioDetails() {
         return () => document.removeEventListener("click", closeDropdown);
     }, [showDropdown])
 
-    const handleDelete = () => {
-        dispatch(deleteStudioThunk(studio))
-        history.push('/studios')
-    }
-
-    // console.log('DROp', showDropdown)
-
     return (
         <>
             {studio && <div className="studio-details-main">
@@ -94,7 +86,6 @@ export default function StudioDetails() {
                                     {showDropdown && <Link className="update-studio-button" to={`/studios/${studioId}/edit`}>
                                         Update Studio
                                     </Link>}
-                                    {/* <button className="delete-studio-button" onClick={handleDelete}>Delete Studio</button> */}
                                     {showDropdown && <button className="delete-studio-button" onClick={() => setShowModal(true)}>Delete Studio</button>}
                                     {showModal && <Modal onClose={() => setShowModal(false)}>
                                         <DeleteButton studio={{...studio}} setShowModal={setShowModal} />
@@ -131,6 +122,7 @@ export default function StudioDetails() {
                                     </div>
                                     <div className="see-all-reviews">
                                         {/* See all reviews ({studio?.reviews.length}) */}
+                                        <ReviewsModal studioId={studioId} />
                                     </div>
                                 </div> : <div>No reviews yet</div>}
                                 <div className="studio-details-header-reviews-right">
