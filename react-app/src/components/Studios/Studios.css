@@ -135,3 +135,29 @@
     font-size: 14px;
     font-weight: 550;
 }
+
+.studio-card-bottom-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 9px;
+    width: 96%;
+    margin-left: 10px;
+}
+
+.studio-card-bottom-container img {
+    width: 13px;
+}
+
+.studio-card-bottom-container span {
+    color: black;
+    font-size: 14px;
+}
+
+.studios-booking-button {
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 7px;
+    color: white;
+    background-color: black;
+    padding: 3px 8px;
+}

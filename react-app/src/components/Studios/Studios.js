@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { loadTattoosThunk } from '../../store/tattoos'
+import goldStar from '../../Images/gold-star.svg'
 import './Studios.css'
 
 export default function Studios() {
@@ -43,12 +43,16 @@ export default function Studios() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='studio-reviews-container'>
-                                    {/* <span>star </span>
-                                    <span>average rating</span> */}
-                                    {/* <div className='booking-button-container'>
-                                        <button className='book-button-studios-page'>Book</button>
-                                    </div> */}
+                                <div className='studio-card-bottom-container'>
+                                    <div className='studio-card-reviews-container'>
+                                        <img src={goldStar} alt='gold star' />
+                                        <span> { studio.reviews.length > 0 ? (studio.reviews.reduce((acc, review) => {
+                                            return acc + review.stars
+                                        }, 0) / studio.reviews.length).toFixed(1) : 'No reviews yet'}</span>
+                                    </div>
+                                    <div className='booking-button-container'>
+                                        <Link to={`/studios/${studio.id}/appointment`} className='studios-booking-button'>Book</Link>
+                                    </div>
                                 </div>
                             </div>
                         </Link>
