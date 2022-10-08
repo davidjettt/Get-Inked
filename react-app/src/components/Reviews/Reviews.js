@@ -25,7 +25,7 @@ export default function Reviews({ studioId }) {
                     </div>
                 </div>
                 <div className="reviews-container">
-                    {firstThreeReviews.map((review) => (
+                    {firstThreeReviews && firstThreeReviews.map((review) => (
                         <div key={review.id} className="user-review-main">
                             <div className="user-info-review">
                                 <img className="review-profile-image" src={defaultUserProfilePic} alt='' />
@@ -33,7 +33,7 @@ export default function Reviews({ studioId }) {
                                     <Rating
                                             // className='user-review-stars'
                                             size={20}
-                                            ratingValue={review.stars * 20}
+                                            ratingValue={review?.stars * 20}
                                             // initialValue={0}
                                             // onClick={newRating}
                                             fillColor='#1F2125'
