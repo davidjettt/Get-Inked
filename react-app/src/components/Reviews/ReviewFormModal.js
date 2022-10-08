@@ -15,7 +15,7 @@ export default function ReviewFormModal({ studioId }) {
 
     return (
         <>
-            <button onClick={handleOpenModal}>Write a review</button>
+            <button className="write-a-review" onClick={handleOpenModal}>Write a review</button>
             {openModal && <Modal onClose={() => setOpenModal(false)}>
                 <ReviewForm setOpenModal={setOpenModal} studioId={studioId} />
             </Modal>}

@@ -49,7 +49,7 @@ export default function SingleTattooModal({ tattooId, studioPortfolio, small, me
                     </div>
                 </div>
             </div>
-            {showModal && <Modal closeTimeoutMS={500} onClose={() => setShowModal(false)}>
+            {showModal && <Modal onClose={() => setShowModal(false)}>
                 <SingleTattoo studioPortfolio={studioPortfolio} tattooId={tattooId} />
             </Modal>}
         </>

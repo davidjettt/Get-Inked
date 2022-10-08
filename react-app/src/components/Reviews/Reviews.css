@@ -51,10 +51,6 @@
     border-radius: 11px;
 }
 
-.user-review-stars {
-    /* width: 40px; */
-}
-
 .user-info-review {
     display: flex;
 }
@@ -77,4 +73,26 @@
 .review-options-container  {
     position: absolute;
     right: 0;
+}
+
+
+.reviews-btns-container {
+    display: flex;
+}
+
+.reviews-view-all-btn,
+.write-a-review {
+    background-color: #fafafa;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    height: 40px;
+    font-family: 'Inter';
+    border-radius: 7px;
+    margin-right: 5px;
+}
+
+.reviews-view-all-btn:hover,
+.write-a-review:hover {
+    background-color: black;
+    color: white;
 }
