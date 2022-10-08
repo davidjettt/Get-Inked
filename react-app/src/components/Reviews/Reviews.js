@@ -14,11 +14,18 @@ export default function Reviews({ studioId }) {
 
     let firstThreeReviews = []
 
-    for (let i = 0; i < 3; i++) {
-        if (reviews.length) {
-            firstThreeReviews.push(reviews[i])
+    if (reviews.length > 3) {
+        for (let i = 0; i < 3; i++) {
+            if (reviews.length) {
+                firstThreeReviews.push(reviews[i])
+            }
         }
+    } else {
+        firstThreeReviews = [...reviews]
     }
+
+
+    // console.log(firstThreeReviews)
 
 
     return (
@@ -32,33 +39,33 @@ export default function Reviews({ studioId }) {
                     </div>
                 </div>
                 <div className="reviews-container">
-                    {firstThreeReviews.map((review) => (
-                        <div key={review.id} className="user-review-main">
+                    {firstThreeReviews.length > 0 && firstThreeReviews?.map((review) => (
+                        <div key={review?.id} className="user-review-main">
                             <div className="user-info-review">
                                 <img className="review-profile-image" src={defaultUserProfilePic} alt='' />
                                 <div className='stars-user-name'>
                                     <Rating
                                             // className='user-review-stars'
                                             size={20}
-                                            ratingValue={review.stars * 20}
+                                            ratingValue={review?.stars * 20}
                                             // initialValue={0}
                                             // onClick={newRating}
                                             fillColor='#1F2125'
                                             readonly={true}
                                             // transition={true}
                                         />
-                                    <span>{review.user?.name}</span>
+                                    <span>{review?.user.name}</span>
                                 </div>
                             </div>
                             <div className="review">
-                                <div>{review.review}</div>
+                                <div>{review?.review}</div>
                                 <div>
-                                    {review.reviewImage &&
-                                    <img className="review-image" src={review.reviewImage}  alt='review' />}
+                                    {review?.reviewImage &&
+                                    <img className="review-image" src={review?.reviewImage}  alt='review' />}
                                 </div>
                             </div>
                             <div className='review-options-container'>
-                                <ReviewOptionsModal reviewId={review.id} />
+                                <ReviewOptionsModal reviewId={review?.id} />
                             </div>
                         </div>
                     ))}
