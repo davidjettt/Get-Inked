@@ -12,7 +12,14 @@ export default function Reviews({ studioId }) {
     const sessionUserId = useSelector(state => state.session.user.id)
     const studioOwnerId = useSelector(state => state.studios[+studioId].ownerId)
 
-    const firstThreeReviews = [reviews[0], reviews[1], reviews[2]]
+    let firstThreeReviews = []
+
+    for (let i = 0; i < 3; i++) {
+        if (reviews.length) {
+            firstThreeReviews.push(reviews[i])
+        }
+    }
+
 
     return (
         <>
@@ -25,7 +32,7 @@ export default function Reviews({ studioId }) {
                     </div>
                 </div>
                 <div className="reviews-container">
-                    {firstThreeReviews && firstThreeReviews.map((review) => (
+                    {firstThreeReviews.map((review) => (
                         <div key={review.id} className="user-review-main">
                             <div className="user-info-review">
                                 <img className="review-profile-image" src={defaultUserProfilePic} alt='' />
@@ -33,14 +40,14 @@ export default function Reviews({ studioId }) {
                                     <Rating
                                             // className='user-review-stars'
                                             size={20}
-                                            ratingValue={review?.stars * 20}
+                                            ratingValue={review.stars * 20}
                                             // initialValue={0}
                                             // onClick={newRating}
                                             fillColor='#1F2125'
                                             readonly={true}
                                             // transition={true}
                                         />
-                                    <span>{review.user.name}</span>
+                                    <span>{review.user?.name}</span>
                                 </div>
                             </div>
                             <div className="review">
