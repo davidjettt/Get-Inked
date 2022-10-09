@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
 import './Profile.css'
@@ -99,6 +99,7 @@ export default function Profile() {
                         <div className="user-workplaces-container">
                             <div className="workplaces-text">Workplaces</div>
                             {userStudios.map((studio) => (
+                                <Link className='workplaces-link' to={`/studios/${studio.id}`}>
                                     <div className="profile-studio-container" key={studio.id}>
                                         <div className="profile-studio-avatar-container">
                                             <Avatar src={studio.avatar || defaultProfilePic} />
@@ -112,6 +113,7 @@ export default function Profile() {
                                             </div>
                                         </div>
                                     </div>
+                                </Link>
                                 ))}
                         </div>
                     </div>
