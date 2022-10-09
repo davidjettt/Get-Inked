@@ -94,6 +94,12 @@ body {
     display: flex;
     gap: 15px;
     margin-bottom: 10px;
+    padding: 5px 5px 5px 8px;
+}
+
+.profile-studio-container:hover {
+    background-color: #dbdbdb;
+    border-radius: 8px;
 }
 
 .profile-studio-right-container {
@@ -102,9 +108,14 @@ body {
     justify-content: center;
 }
 
+.workplaces-link {
+    text-decoration: none;
+}
+
 .profile-studio-name {
     font-weight: 500;
     word-break: break-word;
+    color: black;
 }
 
 .profile-studio-location {
