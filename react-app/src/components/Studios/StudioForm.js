@@ -44,6 +44,8 @@ export default function StudioForm({ studio, formType }) {
         if (badData) {
             setErrors(badData)
         } else {
+            const studioBtn = document.getElementsByClassName('studio-form-button')[0]
+            studioBtn.disabled = true
             history.push('/studios')
         }
     }
