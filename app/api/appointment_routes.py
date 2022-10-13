@@ -90,7 +90,7 @@ def post_ref_image(id):
 
     for img in uploaded_ref_images:
         if not allowed_file(img.filename):
-            return { 'errors': ['file type not permitted'] }, 400
+            return { 'errors': ['File type not permitted'] }, 400
 
         img.filename = get_unique_filename(img.filename)
         upload_img = upload_file_to_s3(img)

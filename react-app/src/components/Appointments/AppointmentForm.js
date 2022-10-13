@@ -7,12 +7,13 @@ import './ReactCalendar.css'
 import './AppointmentForm.css'
 import plusSign from '../../Images/plus-sign.svg'
 import RemovePreviewImg from "../RemovePreviewImg/RemovePreviewImg";
+import LoadingBackdrop from "../Backdrop/Backdrop";
 
 export default function AppointmentForm() {
     const history = useHistory()
     const dispatch = useDispatch()
     const { studioId } = useParams()
-    const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
+    // const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
     const appts = useSelector(state => Object.values(state.appointments).map(appt => new Date(appt.origDateFormat).getTime()))
     // const appts = useSelector(state => Object.values(state.appointments).map(appt => appt.origDateFormat))
     const studio = useSelector(state => state.studios[+studioId])
@@ -25,8 +26,8 @@ export default function AppointmentForm() {
     const [ images, setImages ] = useState([])
     const [ date, setDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
+    const [ loading, setLoading ] = useState(false)
 
-    // console.log('APPTS', appts)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -51,15 +52,23 @@ export default function AppointmentForm() {
             formData.append('date', date.toUTCString())
             formData.append('studio_id', studioId)
 
+            setLoading(true)
             const data = await dispatch(createApptThunk(formData))
             if (data.errors) {
                 setErrors(data.errors)
+                setLoading(false)
             } else {
                 const imageData = new FormData()
                 images.forEach(image => imageData.append('ref_images', image))
-                await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
-                await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
-                history.push(`/studios/${studio.id}`)
+                const badData = await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
+                if (badData) {
+                    setErrors(badData)
+                    setLoading(false)
+                }
+                else {
+                    await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
+                    history.push(`/studios/${studio.id}`)
+                }
             }
         }
     }
@@ -192,7 +201,7 @@ export default function AppointmentForm() {
                                 </label>
                                 {imgRefPreview.map((img, idx) => (
                                     <div className="appt-form-image-container" key={idx}>
-                                        <img className="test" id='blah' src={img} alt=''/>
+                                        <img className="appt-form-image" id='blah' src={img} alt=''/>
                                         <RemovePreviewImg idx={idx} imgRefPreview={imgRefPreview} images={images} setImages={setImages} setImgRefPreview={setImgRefPreview} />
                                     </div>
                                 ))}
@@ -215,6 +224,7 @@ export default function AppointmentForm() {
                     {/* <img className="appt-form-page-image" src={formImage} alt='' /> */}
                 </div>
             </div>
+            {loading && <LoadingBackdrop />}
         </>
     )
 }

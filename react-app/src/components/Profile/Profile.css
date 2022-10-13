@@ -26,9 +26,6 @@ body {
     justify-content: center;
     height: auto;
     min-height: 400px;
-    /* position: sticky;
-    top: 0; */
-    /* background-attachment: scroll; */
 }
 
 .profile-container-left-sub {
@@ -40,6 +37,9 @@ body {
     border-radius: 17px;
     background-color: white;
     height: 500px;
+    /* position: sticky;
+    top: 80px; */
+    /* background-attachment: scroll; */
 }
 
 .user-info-container {
@@ -83,6 +83,7 @@ body {
 
 .user-workplaces-container {
     width: 70%;
+    overflow-y: auto;
 }
 
 .workplaces-text {

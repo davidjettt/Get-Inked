@@ -16,15 +16,12 @@
 }
 
 .appt-tabs button {
-    background-color: white;
+    background-color: #f8f8f8;
     border: none;
     font-size: 15px;
     cursor: pointer;
 }
 
-/* body {
-    overflow-x: hidden;
-} */
 
 .upcoming {
     box-shadow: 0 1px black;

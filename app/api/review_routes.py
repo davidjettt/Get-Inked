@@ -24,6 +24,9 @@ def get_all_reviews():
 def create_studio_review():
     # if 'review_image' not in request.files:
     #     return { 'errors': ['Review image required'] }, 400
+    user_review = StudioReview.query.filter_by(user_id=current_user.id, studio_id=request.form.get('studio_id')).first()
+    if user_review:
+        return { 'errors': ['You can only have 1 review per studio'] }, 400
     url = ''
 
     if 'review_image' in request.files:
@@ -51,11 +54,6 @@ def create_studio_review():
             review_image=url,
             user_id=current_user.id,
             studio_id=request.form.get('studio_id')
-            # review=form.data['review'],
-            # stars=form.data['stars'],
-            # review_image=url,
-            # user_id=current_user.id,
-            # studio_id=form.data['studio_id']
         )
         db.session.add(new_review)
         db.session.commit()

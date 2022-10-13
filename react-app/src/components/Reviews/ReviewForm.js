@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Rating } from 'react-simple-star-rating'
