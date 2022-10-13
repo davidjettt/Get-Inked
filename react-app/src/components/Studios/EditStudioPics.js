@@ -32,32 +32,18 @@ export default function EditStudioPics({ studioId }) {
 
                         const data = await dispatch(updateAvatarThunk(formData, studio.id))
                         if (data) {
-                            // console.log('HERE')
                             setErrors(data)
                         } else {
                             dispatch(getStudioThunk(studioId))
                             // window.alert('Successfully changed avatar image')
                         }
                     } else {
-                        // console.log('ELSE')
                         setErrors(['Invalid avatar image'])
                     }
                 }
             }
             reader.readAsDataURL(file)
         }
-
-        // if (isImage(file?.name)) {
-        //     console.log('HERE')
-        //     const formData = new FormData()
-        //     formData.append('avatar', file)
-
-        //     dispatch(updateAvatarThunk(formData, studio.id))
-        //         .then(() => dispatch(getStudioThunk(studioId)))
-        // } else {
-        //     console.log('NOT IMAGE')
-        //     setErrors(['Not a valid avatar image file type'])
-        // }
     }
     const submitHeader = async (e) => {
         setErrors([])
@@ -85,22 +71,6 @@ export default function EditStudioPics({ studioId }) {
             }
             reader.readAsDataURL(file)
         }
-        // let file
-        // if (e.target.files[0]) {
-        //     file = e.target.files[0]
-        //     console.log(file)
-        // }
-        // if (isImage(file.name)) {
-        //     console.log('HERE')
-        //     const formData = new FormData()
-        //     formData.append('header', file)
-
-        //     dispatch(updateHeaderThunk(formData, studio.id))
-        //         .then(() => dispatch(getStudioThunk(studioId)))
-        // } else {
-        //     console.log('NOT IMAGE')
-        //     setErrors(['Not a valid header image file type'])
-        // }
     }
 
     return (

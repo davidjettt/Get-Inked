@@ -5,7 +5,7 @@ from datetime import datetime
 def seed_users():
     demo = User(
         name='Demo User',
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', email='demo@aa.io', password='Getinkedapp690@')
     marnie = User(
         name='Marnie Smith',
         username='marnie', email='marnie@aa.io', password='password')

@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   const handleDemo = () => {
     setEmail('demo@aa.io')
-    setPassword('password')
+    setPassword('Getinkedapp690@')
   }
 
   return (

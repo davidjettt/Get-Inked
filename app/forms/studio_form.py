@@ -24,16 +24,22 @@ def city_length(form, field):
     city = field.data
     if len(city) > 17:
         raise ValidationError('City of studio cannot exceed 17 characters')
+    elif len(city) < 3:
+        raise ValidationError('City of studio must be at least 3 characters')
 
 def address_length(form, field):
     address = field.data
     if len(address) > 50:
         raise ValidationError('Address of studio cannot exceed 50 characters')
+    elif len(address) < 10:
+        raise ValidationError('Address of studio must be at least 10 characters')
 
 def description_length(form, field):
     description = field.data
     if len(description) > 1000:
         raise ValidationError('Description of studio cannot exceed 1000 characters')
+    elif len(description) < 10:
+        raise ValidationError('Description of studio must be at least 10 characters')
 
 
 class StudioForm(FlaskForm):

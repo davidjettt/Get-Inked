@@ -57,11 +57,9 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
 
     const updateTattooImage = (e) => {
         setErrors([])
-        const allowedTypes = [ "png", "jpg", "jpeg", "gif", "webp" ]
+        const allowedTypes = [ "png", "jpg", "jpeg", "webp" ]
         const file = e.target.files[0];
 
-        // console.log('FILE', file)
-        // console.log('ERROR', image)
         if (file) {
             const fileType = allowedTypes.find(type => file.type.includes(type))
 
@@ -84,11 +82,6 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 setErrors(['Not a valid image file type'])
             }
         }
-        // if (errors.length) {
-        //     console.log('HERE')
-        //     setTattooImage(null)
-        //     setTattooPreview('')
-        // }
     }
 
     const handleXButton = () => {
@@ -114,15 +107,21 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                     ))}
                 </div>
                 <div className="tattoo-style-input-container">
-                    <label className="custom">
-                        <input
-                            style={{ width: 340 }}
-                            type='text'
-                            value={tattooStyle}
-                            onChange={(e) => setTattooStyle(e.target.value)}
-                        />
-                        <span className="placeholder">Tattoo Style</span>
-                    </label>
+                    <select className="tattoo-style-select-field" value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)}>
+                        <option value='' defaultValue>Tattoo Style</option>
+                        <option value='Traditional'>Traditional</option>
+                        <option value='Old School'>Old School</option>
+                        <option value='Neo Traditional'>Neo Traditional</option>
+                        <option value='Fineline'>Fineline</option>
+                        <option value='Geometric'>Geometric</option>
+                        <option value='Neo Japanese'>Neo Japanese</option>
+                        <option value='Traditional Japanese'>Traditional Japanese</option>
+                        <option value='Tribal'>Tribal</option>
+                        <option value='Watercolor'>Watercolor</option>
+                        <option value='Realism'>Realism</option>
+                        <option value='Black & Grey'>Black & Grey</option>
+                        <option value='Portrait'>Portrait</option>
+                    </select>
                 </div>
                 <div className="tattoo-form-description-container">
                     <label className="custom-textarea">
@@ -135,7 +134,6 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                             onChange={(e) => setDescription(e.target.value)}
                         >
                         </textarea>
-                        {/* <span className="placeholder-textarea">Description</span> */}
                     </label>
                 </div>
                 <div className="tattoo-form-image-upload-container">

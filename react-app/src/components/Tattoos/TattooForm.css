@@ -26,6 +26,16 @@
     align-items: center;
 }
 
+.tattoo-style-select-field {
+    outline: none;
+    border-color: #aaa;
+    cursor: pointer;
+    width: 350px;
+    padding: 5px;
+    margin: 5px 0 10px 0;
+    border-radius: 6px;
+}
+
 .tattoo-form-textarea {
     outline: none;
     resize: none;
@@ -57,6 +67,7 @@
     /* width: 100px;
     height: 100px; */
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .custom-file-upload {

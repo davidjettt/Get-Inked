@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
 import './Profile.css'
 import PropTypes from 'prop-types';
@@ -72,7 +71,6 @@ export default function Profile() {
                 <div className="profile-container-left">
                     <div className='profile-container-left-sub'>
                         <div className="edit-profile-button">
-                            {/* <Button variant='outlined' >Edit Profile</Button> */}
                         </div>
                         <div className="user-info-container">
                             <div className="profile-pic-container">

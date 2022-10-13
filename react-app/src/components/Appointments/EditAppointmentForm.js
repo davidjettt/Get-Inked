@@ -50,7 +50,7 @@ export default function EditAppointmentForm() {
             if (badData) {
                 setErrors(badData)
             } else {
-                history.push(`/users/${appt.userId}/appointments`)
+                history.push(`/appointments`)
             }
         }
     }
@@ -184,7 +184,7 @@ export default function EditAppointmentForm() {
                                 </label>
                                 {imgPreviews.length > 0 && imgPreviews.map((img, idx) => (
                                     img && <div className="appt-form-image-container" key={idx}>
-                                        <img className="test" id='blah' src={img.image} alt=''/>
+                                        <img className="appt-form-image" id='blah' src={img.image} alt=''/>
                                         <EditApptRemoveImg imgId={img.id} apptId={appt.id} setImgPreviews={setImgPreviews} />
                                     </div>
                                 ))}
