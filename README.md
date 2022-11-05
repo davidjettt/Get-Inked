@@ -1,15 +1,13 @@
 # Welcome to GET INKED
 
-
 Get Inked is a web app where authenticated users can create or join a tattoo studio and can post images of their work to draw in more clients. Users will be able to view the portfolio of a studio or artist and schedule an appointment for their next art piece on their body.
-
 
 <h3 align='center'>
  <a target='_blank' href="https://get-inked-app.herokuapp.com">» Check out the live site here «</a>
 </h3>
 
-
 # Technologies Used
+
 ![](https://user-images.githubusercontent.com/94085979/187011760-2ab7d8fe-2020-40d8-84a1-3e463ae6718e.svg)
 ![](https://user-images.githubusercontent.com/94085979/187011776-0d845678-5763-439f-a668-eda3fb7221c2.svg)
 ![](https://user-images.githubusercontent.com/94085979/187011810-b9378e1a-8d2d-49ea-8d3d-eb3e83447c13.svg)
@@ -26,43 +24,64 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 ![](https://img.shields.io/badge/-Material%20UI-007FFF?logo=mui&logoColor=white&style=for-the-badge)
 
 # Wiki Links
+
 - [Database Schema](https://github.com/davidjettt/Get-Inked/wiki/Database-Schema)
 - [MVP Features](https://github.com/davidjettt/Get-Inked/wiki/MVP-Features)
 - [User Stories](https://github.com/davidjettt/Get-Inked/wiki/User-Stories)
 
 # Splash/Landing Page
+
 ![](react-app/src/Images/app-screenshots/get-inked-splash-page.png)
 
 # Home Page (top)
+
 ![](react-app/src/Images/app-screenshots/get-inked-homepage-top.png)
 
 # Home Page (bottom)
+
 ![](react-app/src/Images/app-screenshots/get-inked-homepage-bottom.png)
 
+# User Profile
+
+![](react-app/src/Images/app-screenshots/get-inked-user-profile.png)
+
+# Appointment Form
+
+![](react-app/src/Images/app-screenshots/get-inked-appt-form.png)
+
 # Studio Form
+
 ![](react-app/src/Images/app-screenshots/get-inked-studio-form.png)
 
 # Tattoos Page
+
 ![](react-app/src/Images/app-screenshots/get-inked-tattoos-2.png)
 
+# Single Tattoo
+
+![](react-app/src/Images/app-screenshots/get-inked-single-tattoo.png)
+
 ## Getting started
+
 1. Clone this repository (only this branch)
 
    HTTPS:
+
    ```bash
    git clone https://github.com/davidjettt/Get-Inked.git
    ```
 
    SSH:
+
    ```bash
    git clone git@github.com:davidjettt/Get-Inked.git
    ```
 
 2. Install dependencies
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+   ```bash
+   pipenv install -r requirements.txt
+   ```
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
@@ -87,7 +106,6 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
    ```
 
 6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
 
 <br>
 
