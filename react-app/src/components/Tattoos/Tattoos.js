@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import {  useSelector } from "react-redux";
+// import {  useSelector } from "react-redux";
 import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 
