@@ -17,7 +17,7 @@ export default function Tattoos() {
                 data.tats.forEach(tat => newTattoos.push(tat))
                 setTattoos(prevTattoos => [...prevTattoos, ...newTattoos])
             })
-        offset += 10
+        offset += 20
     }
 
     const handleScroll = (e) => {
