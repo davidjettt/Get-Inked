@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import {  useSelector } from "react-redux";
+// import {  useSelector } from "react-redux";
 import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 
@@ -17,7 +17,7 @@ export default function Tattoos() {
                 data.tats.forEach(tat => newTattoos.push(tat))
                 setTattoos(prevTattoos => [...prevTattoos, ...newTattoos])
             })
-        offset += 10
+        offset += 20
     }
 
     const handleScroll = (e) => {
