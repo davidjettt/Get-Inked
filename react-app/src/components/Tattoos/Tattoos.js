@@ -1,13 +1,36 @@
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import {  useSelector } from "react-redux";
 import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 
 export default function Tattoos() {
+    let offset = 0
     const tattoosHeaderImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662605953/Tattoo-master-puts-tattoo-in-form-of-flower-on-arm-1296x728-header_qkrn6j.jpg'
+    const [ tattoos, setTattoos ] = useState([])
+    // const tattoos = useSelector(state => Object.values(state.tattoos))
 
+    const loadMoreTattoos = () => {
+        axios.get(`/api/tattoos/paginate?limit=20&offset=${offset}`)
+            .then(({ data }) => {
+                const newTattoos = []
+                data.tats.forEach(tat => newTattoos.push(tat))
+                setTattoos(prevTattoos => [...prevTattoos, ...newTattoos])
+            })
+        offset += 10
+    }
 
+    const handleScroll = (e) => {
+        if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
+            loadMoreTattoos()
+        }
+    }
 
-    const tattoos = useSelector(state => Object.values(state.tattoos))
+    useEffect(() => {
+        loadMoreTattoos()
+        window.addEventListener('scroll', handleScroll)
+    },[])
+
 
     return (
         <div className="tattoos-page-main">
