@@ -17,6 +17,24 @@ def get_all_studios():
     all_studios_list = [ studio.studio_to_dict() for studio in all_studios ]
     return { 'allStudios': all_studios_list }
 
+# Pagination for studio tattoos
+@studio_routes.get('/<int:id>')
+def studio_tattoos_paginate(id):
+    page = request.args.get('page', 1, type=int)
+    size = request.args.get('size', 6, type=int)
+
+    studio_tattoos = TattooImage.query.filter_by(studio_id=id).paginate(page, size)
+
+    results = {
+        "studioTattoos": [tattoo.tattoo_to_dict() for tattoo in studio_tattoos.items],
+        "pagination": {
+            "count": studio_tattoos.total,
+            "page": page,
+            "size": size,
+            "pages": studio_tattoos.pages
+        }
+    }
+    return jsonify(results)
 
 # Create a new studio
 @studio_routes.post('/')
