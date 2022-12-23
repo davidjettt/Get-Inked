@@ -15,6 +15,14 @@ def get_all_tattoos():
     all_tattoos_list = [ tattoo.tattoo_to_dict() for tattoo in all_tattoos ]
     return { 'allTattoos': all_tattoos_list }
 
+# Pagination for all tattoos
+@tattoo_routes.get('/paginate')
+def get_some_tatts():
+    limit_num = request.args.get('limit', 20, type=int)
+    offset_num = request.args.get('offset', 0, type=int)
+    tats = TattooImage.query.limit(limit_num).offset(offset_num).all()
+    tats_list = [tat.tattoo_to_dict() for tat in tats]
+    return {'tats': tats_list}
 
 # Create a new tattoo image
 # @tattoo_routes.post('/')

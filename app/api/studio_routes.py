@@ -15,7 +15,6 @@ studio_routes = Blueprint('studios', __name__)
 def get_all_studios():
     all_studios = Studio.query.all()
     all_studios_list = [ studio.studio_to_dict() for studio in all_studios ]
-    # print('ALL STUDIOS', all_studios_list)
     return { 'allStudios': all_studios_list }
 
 
