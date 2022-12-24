@@ -47,9 +47,9 @@ export default function Tattoos() {
                     ))} */}
                     {tattoos.map((tattoo, idx) => {
                         if (idx % 2 === 0) {
-                            return <SingleTattooModal key={tattoo.id} tattooId={tattoo.id} small='small' />
+                            return <SingleTattooModal fromTattoos={true} key={tattoo.id} tattooId={tattoo.id} small='small' />
                         } else {
-                            return <SingleTattooModal key={tattoo.id} tattooId={tattoo.id} medium='medium' />
+                            return <SingleTattooModal fromTattoos={true} key={tattoo.id} tattooId={tattoo.id} medium='medium' />
                         }
                     }
                     )}

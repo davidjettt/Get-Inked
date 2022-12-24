@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { loadStudiosThunk } from "../../store/studios"
 import { createTattooThunk } from "../../store/tattoos"
+import Backdrop from "../Backdrop/Backdrop"
 import './TattooForm.css'
 
 
@@ -12,6 +13,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
     const [ tattooImage, setTattooImage ] = useState('')
     const [ tattooPreview, setTattooPreview ] = useState(null)
     const [ errors, setErrors ] = useState([])
+    const [ loading, setLoading ] = useState(false)
 
 
     const handleSubmit = async (e) => {
@@ -23,13 +25,14 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
         formData.append('description', description)
         formData.append('image_url', tattooImage)
         formData.append('studio_id', studioId)
-
+        setLoading(true)
         const badData = await dispatch(createTattooThunk(formData, studioId))
         if (badData) {
             setErrors(badData)
         } else {
             await dispatch(loadStudiosThunk())
             setShowTattooFormModal(false)
+            setLoading(false)
         }
     }
 
@@ -154,6 +157,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                 </div>
                 <button className="tattoo-form-submit-button">Submit</button>
             </form>
+            {loading && <Backdrop />}
         </div>
     )
 }
