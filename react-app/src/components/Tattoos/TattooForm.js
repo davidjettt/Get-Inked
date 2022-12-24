@@ -121,6 +121,7 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                         <option value='Realism'>Realism</option>
                         <option value='Black & Grey'>Black & Grey</option>
                         <option value='Portrait'>Portrait</option>
+                        <option value='Anime'>Anime</option>
                     </select>
                 </div>
                 <div className="tattoo-form-description-container">
