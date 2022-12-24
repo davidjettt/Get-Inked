@@ -32,7 +32,7 @@ export default function StudioPortfolio({ studioId }) {
 
     useEffect(() => {
         loadTattoos()
-    }, [numTattoos])
+    }, [])
 
 
     return (
