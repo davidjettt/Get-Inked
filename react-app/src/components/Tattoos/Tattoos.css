@@ -6,9 +6,23 @@
 
 .tattoos-page-secondary {
     width: 80vw;
+    margin-top: 20px;
+}
+
+.tattoos-page-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80vw;
+}
+
+.filtering-inputs {
+    display: flex;
+    gap: 10px;
 }
 
 .tattoo-cards-container-main {
+    margin-top: 20px;
     flex: 1;
     box-sizing: border-box;
     display: grid;
@@ -19,6 +33,7 @@
     height: auto;
     justify-content: center;
     /* margin-top: 10px; */
+    width: 80vw;
 
 }
 
