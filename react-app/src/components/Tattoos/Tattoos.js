@@ -44,18 +44,19 @@ export default function Tattoos() {
                     <img className='studio-page-header-image' src={tattoosHeaderImage} alt='tattoos-header'/>
                 </div> */}
                 <div className='tattoos-page-header'>
-                    <div style={{fontSize: 50}}>
+                    <div style={{fontSize: 50, marginBottom: 15}}>
                         Explore Tattoos
                     </div>
                     <div className='filtering-inputs'>
-                        <TextField />
-                        <FilterButtons />
+                        <TextField setTattoos={setTattoos} />
+                        {/* <FilterButtons /> */}
                     </div>
                 </div>
                 <div className="tattoo-cards-container-main">
                     {/* {tattoos.map((tattoo, idx) => (
                         <SingleTattooModal key={tattoo.id} tattooId={tattoo.id} />
                     ))} */}
+                    {!tattoos.length && <h1>We can't find what you are looking for...Try again!</h1>}
                     {tattoos.map((tattoo, idx) => {
                         if (idx % 2 === 0) {
                             return <SingleTattooModal fromTattoos={true} key={tattoo.id} tattooId={tattoo.id} small='small' />
