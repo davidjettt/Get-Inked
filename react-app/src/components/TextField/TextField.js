@@ -3,7 +3,7 @@ import {useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function FullWidthTextField({ setTattoos }) {
+export default function FullWidthTextField({ setTattoos, loadMoreTattoos, offset }) {
   const [ searchInput, setSearchInput ] = useState('')
   const styles = [
     'Traditional',
@@ -29,6 +29,10 @@ export default function FullWidthTextField({ setTattoos }) {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     // console.log('word', searchInput)
+    // if (!searchInput) {
+    //   loadMoreTattoos()
+    //   return
+    // }
     for(let i = 0; i < styles.length; i++) {
       if (styles[i].toLowerCase() === searchInput.toLowerCase()) {
         axios.get(`/api/tattoos/paginate?style=${searchInput}`)
