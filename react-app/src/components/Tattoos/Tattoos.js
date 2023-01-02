@@ -37,26 +37,26 @@ export default function Tattoos() {
     return (
         <div className="tattoos-page-main">
             <div className="tattoos-page-secondary">
-                {/* <div className='studios-page-header-container'>
+                <div className='studios-page-header-container'>
                     <div className='header-text-container'>
                         <h3 className='header-text'>Find your inspiration</h3>
                     </div>
                     <img className='studio-page-header-image' src={tattoosHeaderImage} alt='tattoos-header'/>
-                </div> */}
-                <div className='tattoos-page-header'>
+                </div>
+                {/* <div className='tattoos-page-header'>
                     <div style={{fontSize: 50, marginBottom: 15}}>
                         Explore Tattoos
                     </div>
                     <div className='filtering-inputs'>
-                        <TextField setTattoos={setTattoos} />
+                        <TextField setTattoos={setTattoos} loadMoreTattoos={loadMoreTattoos} offset={offset} /> */}
                         {/* <FilterButtons /> */}
-                    </div>
-                </div>
+                    {/* </div>
+                </div> */}
                 <div className="tattoo-cards-container-main">
                     {/* {tattoos.map((tattoo, idx) => (
                         <SingleTattooModal key={tattoo.id} tattooId={tattoo.id} />
                     ))} */}
-                    {!tattoos.length && <h1>We can't find what you are looking for...Try again!</h1>}
+                    {/* {!tattoos.length && <h1>We can't find what you are looking for...Try again!</h1>} */}
                     {tattoos.map((tattoo, idx) => {
                         if (idx % 2 === 0) {
                             return <SingleTattooModal fromTattoos={true} key={tattoo.id} tattooId={tattoo.id} small='small' />
