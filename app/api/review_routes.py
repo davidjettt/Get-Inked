@@ -22,11 +22,10 @@ def get_all_reviews():
 @review_routes.post('/')
 @login_required
 def create_studio_review():
-    # if 'review_image' not in request.files:
-    #     return { 'errors': ['Review image required'] }, 400
     user_review = StudioReview.query.filter_by(user_id=current_user.id, studio_id=request.form.get('studio_id')).first()
     if user_review:
         return { 'errors': ['You can only have 1 review per studio'] }, 400
+
     url = ''
 
     if 'review_image' in request.files:

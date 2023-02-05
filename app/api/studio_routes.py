@@ -42,7 +42,6 @@ def studio_tattoos_paginate(id):
 def create_studio():
 
     if "avatar" not in request.files:
-        # print('FIRST IF')
         return {"errors": ["Avatar image required"]}, 400
     elif "header_image" not in request.files:
         return { "errors": ["Header image required"] }, 400
@@ -52,7 +51,6 @@ def create_studio():
     avatar_image = request.files["avatar"]
 
     if not allowed_file(header_image.filename) or not allowed_file(avatar_image.filename):
-        # print('SECOND IF')
         return {"errors": ["File type not permitted"]}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
@@ -62,7 +60,6 @@ def create_studio():
     upload_avatar = upload_file_to_s3(avatar_image)
 
     if "url" not in upload_header:
-        # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
@@ -81,7 +78,6 @@ def create_studio():
             name=request.form.get('name'),
             description=request.form.get('description'),
             header_image=url,
-            # tattoo_style=request.form.get('tattoo_style'),
             address=request.form.get('address'),
             city=request.form.get('city'),
             state=request.form.get('state'),
@@ -108,13 +104,11 @@ def update_avatar(id):
     studio = Studio.query.get(id)
 
     if "avatar" not in request.files:
-        # print('FIRST IF')
         return {"errors": ["Avatar image required"]}, 400
 
     avatar_image = request.files["avatar"]
 
     if not allowed_file(avatar_image.filename):
-        # print('SECOND IF')
         return {"errors": ["File type for avatar not permitted"]}, 400
 
     avatar_image.filename = get_unique_filename(avatar_image.filename)
@@ -122,7 +116,6 @@ def update_avatar(id):
     upload_avatar = upload_file_to_s3(avatar_image)
 
     if "url" not in upload_avatar:
-        # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
@@ -142,13 +135,11 @@ def update_header(id):
     studio = Studio.query.get(id)
 
     if "header" not in request.files:
-        # print('FIRST IF')
         return {"errors": ["Header image required"]}, 400
 
     header_image = request.files["header"]
 
     if not allowed_file(header_image.filename):
-        # print('SECOND IF')
         return {"errors": ["File type for header not permitted"]}, 400
 
     header_image.filename = get_unique_filename(header_image.filename)
@@ -156,7 +147,6 @@ def update_header(id):
     upload_header = upload_file_to_s3(header_image)
 
     if "url" not in upload_header:
-        # print('THIRD IF')
         # if the dictionary doesn't have a filename key
         # it means that there was an error when we tried to upload
         # so we send back that error message
@@ -181,7 +171,6 @@ def update_studio(id):
     if form.validate_on_submit():
         studio.name=request.form.get('name')
         studio.description=request.form.get('description')
-        # studio.tattoo_style=request.form.get('tattoo_style')
         studio.address=request.form.get('address')
         studio.city=request.form.get('city')
         studio.state=request.form.get('state')

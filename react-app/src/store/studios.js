@@ -1,4 +1,3 @@
-
 const GET_STUDIO = '/studios/getOne'
 const LOAD_STUDIOS = '/studios/load'
 const CREATE_STUDIO = '/studios/create'
@@ -41,14 +40,6 @@ const deleteStudio = (studio) => {
 }
 
 export const loadStudiosThunk = () => async (dispatch) => {
-    // try {
-    //     const response = await axios.get('/api/studios/')
-    //     console.log(response)
-    //     dispatch(loadStudios(response))
-    // }
-    // catch(e){
-    //     return e
-    // }
     const response = await fetch('/api/studios/')
     if (response.ok) {
         const data = await response.json()
@@ -69,7 +60,6 @@ export const createStudioThunk = (studio) => async (dispatch) => {
         dispatch(createStudio(data))
     } else {
         const badData = await response.json()
-        // console.log('THUNK', badData.errors)
         if(badData.errors) return badData.errors
     }
 }
@@ -78,8 +68,6 @@ export const updateStudioThunk = (studio, studioId) => async (dispatch) => {
     const response = await fetch(`/api/studios/${studioId}`, {
         method: 'PUT',
         body: studio
-        // headers: { 'Content-Type': 'application/json' },
-        // body: JSON.stringify(studio)
     })
 
     if (response.ok) {
@@ -116,7 +104,6 @@ export const updateAvatarThunk = (formData, studioId) => async (dispatch) => {
         return
     } else {
         const badData = await response.json()
-        // console.log('DATA THUNK', badData)
         if (badData.errors) return badData.errors
     }
 }
@@ -131,7 +118,6 @@ export const updateHeaderThunk = (formData, studioId) => async (dispatch) => {
         return
     } else {
         const badData = await response.json()
-        // console.log('DATA THUNK', badData)
         if (badData.errors) return badData.errors
     }
 }
