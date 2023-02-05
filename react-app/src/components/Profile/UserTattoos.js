@@ -3,17 +3,11 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import TattooBookmark from "../Bookmarks/TattooBookmark";
 
-
-
-
-
-
 export default function UserTattoos() {
     const sessionUser = useSelector(state => state.session.user)
 
     const sessionUserTattoos = useSelector(state => Object.values(state.tattoos)
                                 .filter(tattoo => +tattoo.userId === +sessionUser.id))
-
 
     return (
         <>

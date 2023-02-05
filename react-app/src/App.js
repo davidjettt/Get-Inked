@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
 import { loadStudiosThunk } from './store/studios';
 import Studios from './components/Studios/Studios';
@@ -22,7 +20,6 @@ import { loadApptsThunk } from './store/appointments';
 import Appointments from './components/Appointments/Appointments';
 import AppointmentForm from './components/Appointments/AppointmentForm';
 import EditAppointmentForm from './components/Appointments/EditAppointmentForm';
-import Bookmarks from './components/Bookmarks/Bookmarks';
 import Profile from './components/Profile/Profile';
 
 function App() {
@@ -69,17 +66,8 @@ function App() {
           <Route path='/' exact={true}>
             <SplashPage />
           </Route>
-          {/* <ProtectedRoute path='/users' exact={true} >
-            <UsersList/>
-          </ProtectedRoute>
-          <ProtectedRoute path='/users/:userId' exact={true} >
-            <User />
-          </ProtectedRoute> */}
           <ProtectedRoute exact path='/users/:userId/profile'>
             <Profile />
-          </ProtectedRoute>
-          <ProtectedRoute exact path='/bookmarks'>
-            <Bookmarks />
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios'>
             <Studios />

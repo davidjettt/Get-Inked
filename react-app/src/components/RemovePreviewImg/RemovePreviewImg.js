@@ -1,6 +1,4 @@
-
 import xImg from '../../Images/image-remove-x.svg'
-
 
 export default function RemovePreviewImg({ idx, imgRefPreview, images, setImages, setImgRefPreview }) {
     const removeImg = () => {

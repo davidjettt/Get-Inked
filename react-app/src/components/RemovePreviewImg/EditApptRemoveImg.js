@@ -1,8 +1,6 @@
 import { useDispatch } from "react-redux"
 import { deleteAppointmentImageThunk, getOneAppointmentThunk } from "../../store/appointments"
 
-
-
 export default function EditApptRemoveImg({ imgId, apptId, setImgPreviews }) {
     const dispatch = useDispatch()
     const handleClick = async () => {

@@ -88,7 +88,6 @@ class Studio(db.Model):
     state = db.Column(db.String(100), nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)
     owner_id = db.Column(db.Integer, nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
@@ -102,7 +101,6 @@ class Studio(db.Model):
     studio_bookmarks = db.relationship('User', secondary=studio_bookmarks, back_populates='user_studio_bookmarks')
 
     def studio_to_dict(self):
-        # print('STUDIO USER', self.studio_users.to_dict())
         return {
             'id': self.id,
             'name': self.name,

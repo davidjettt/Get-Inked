@@ -2,8 +2,6 @@ const LOAD_TATTOOS = 'tattoos/load'
 const CREATE_TATTOO = 'tattoos/create'
 const UPDATE_TATTOO = 'tattoos/update'
 const DELETE_TATTOO = 'tattoos/delete'
-const BOOKMARK_TATTOO = 'tattoos/bookmark'
-const UNBOOKMARK_TATTOO = 'tattoos/unbookmark'
 
 const loadTattoos = (tattoos) => {
     return {
@@ -29,13 +27,6 @@ const updateTattoo = (tattoo) => {
 const deleteTattoo = (tattoo) => {
     return {
         type: DELETE_TATTOO,
-        tattoo
-    }
-}
-
-const bookmarkTattoo = (tattoo) => {
-    return {
-        type: BOOKMARK_TATTOO,
         tattoo
     }
 }
@@ -91,20 +82,11 @@ export const deleteTattooThunk = (tattoo) => async (dispatch) => {
     }
 }
 
-// export const bookmarkTattooThunk = (tattooId) => async (dispatch) => {
-//     const response = await fetch(`/api/tattoos/${tattooId}/bookmark`, {
-//         method: 'POST'
-//     })
-
-
-// }
-
 const initialState = {}
 export default function tattoosReducer (state = initialState, action) {
     let newState
     switch(action.type) {
         case LOAD_TATTOOS: {
-            // newState = JSON.parse(JSON.stringify(state))
             newState = {}
             action.tattoos.allTattoos.forEach((tattoo) => {
                 newState[tattoo.id] = tattoo

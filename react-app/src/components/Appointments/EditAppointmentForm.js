@@ -1,12 +1,12 @@
-
 import Calendar from 'react-calendar'
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import plusSign from '../../Images/plus-sign.svg'
 import './ReactCalendar.css'
 import { getOneAppointmentThunk, postAppointmentImageThunk, updateApptThunk } from "../../store/appointments";
 import EditApptRemoveImg from "../RemovePreviewImg/EditApptRemoveImg";
+import LoadingBackdrop from "../Backdrop/Backdrop";
 
 export default function EditAppointmentForm() {
     const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
@@ -23,7 +23,20 @@ export default function EditAppointmentForm() {
     const [ color, setColor ] = useState(appt.color)
     const [ imgPreviews, setImgPreviews ] = useState(appt.apptImages)
     const [ date, setDate ] = useState(new Date(appt.date.year, appt.date.monthNumber, appt.date.day))
+    const [ loading, setLoading ] = useState(false)
     const [ errors, setErrors ] = useState([])
+    const imageBtn = useRef(null)
+
+    useEffect(() => {
+        setErrors([])
+        if (imgPreviews.length === 4) {
+            imageBtn.current.disabled = true
+
+            setErrors(['Can only have a max of 4 image references'])
+        } else {
+            imageBtn.current.disabled = false
+        }
+    },[imgPreviews.length])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -46,9 +59,11 @@ export default function EditAppointmentForm() {
             formData.append('date', date.toUTCString())
             formData.append('studio_id', appt.studioId)
 
+            setLoading(true)
             const badData = await dispatch(updateApptThunk(formData, appt.id))
             if (badData) {
                 setErrors(badData)
+                setLoading(false)
             } else {
                 history.push(`/appointments`)
             }
@@ -67,6 +82,11 @@ export default function EditAppointmentForm() {
     const updateImgRef = async (e) => {
         setErrors([])
         const file = e.target.files[0]
+
+        if (imgPreviews.length > 3) {
+            setErrors(['Can only have a max of 4 image references'])
+            return
+        }
 
         if (file) {
             if (await isImgUrl(URL.createObjectURL(file))) {
@@ -180,6 +200,7 @@ export default function EditAppointmentForm() {
                                         type='file'
                                         multiple
                                         onChange={updateImgRef}
+                                        ref={imageBtn}
                                     />
                                 </label>
                                 {imgPreviews.length > 0 && imgPreviews.map((img, idx) => (
@@ -207,6 +228,7 @@ export default function EditAppointmentForm() {
                     <img className="appt-form-page-image" src={formImage} alt='' />
                 </div>
             </div>
+            {loading && <LoadingBackdrop />}
         </>
     )
 }

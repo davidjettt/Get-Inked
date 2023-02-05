@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 // import {  useSelector } from "react-redux";
-import TextField from '../TextField/TextField';
-import FilterButtons from './FilterButtons';
+// import TextField from '../TextField/TextField';
+// import FilterButtons from './FilterButtons';
 import SingleTattooModal from "./SingleTattooModal";
 import './Tattoos.css'
 

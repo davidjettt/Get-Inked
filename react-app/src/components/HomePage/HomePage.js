@@ -3,22 +3,13 @@ import Footer from '../Footer/Footer'
 import tattoo1 from '../../Images/collage/collage-tattoo-1.jpg'
 import tattoo2 from '../../Images/collage/collage-tattoo-2.jpeg'
 import tattoo3 from '../../Images/collage/collage-tattoo-3.jpeg'
-// import tattoo4 from '../../Images/collage/collage-tattoo-4.jpeg'
 import tattoo5 from '../../Images/collage/collage-tattoo-5.jpeg'
 import tattoo6 from '../../Images/collage/collage-tattoo-6.jpeg'
 import './HomePage.css'
-// import { useEffect, useState } from 'react'
-// import LoadingBackdrop from '../Backdrop/Backdrop'
 
 export default function HomePage() {
     const mainHomePageImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662587273/332474_uh4kq5.jpg'
     const studioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662107273/737e3063f926dc54367f44b51e7fdc29_p1ynfi.jpg'
-
-    // const [ loading, setLoading] = useState(true)
-
-    // useEffect(() => {
-    //     setLoading(false)
-    // }, [])
 
     return (
         <>
