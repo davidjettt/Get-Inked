@@ -14,7 +14,7 @@ export default function StudioPortfolio({ studioId }) {
                     .filter(tattoo => +studioId === +tattoo.studioId)).length
     const numPages = Math.ceil(numTattoos / 6)
 
-    const handlePageChange = (e, value) => {
+    const handlePageChange = (value) => {
         setPage(value)
         pageNum = value
         loadTattoos()
@@ -27,7 +27,6 @@ export default function StudioPortfolio({ studioId }) {
                 data.studioTattoos.forEach(tatt => newTattoos.push(tatt))
                 setTattoos([...newTattoos])
             })
-            // .catch((err) => console.log(err))
     }
 
     useEffect(() => {
@@ -40,9 +39,6 @@ export default function StudioPortfolio({ studioId }) {
         <>
             <div className="studio-portfolio-main">
                 {tattoos.map((tattoo) => (
-                    // <div className="studio-portfolio-image-container" key={tattoo.id}>
-                    //     <img className="studio-portfolio-image" src={tattoo.imageUrl} alt='' />
-                    // </div>
                     <SingleTattooModal studioPortfolio={true} key={tattoo.id} tattooId={tattoo.id} />
                 ))}
             </div>

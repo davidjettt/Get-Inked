@@ -1,18 +1,3 @@
-// import { useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
-// import StudioFormPage from "./StudioFormPage";
-
-
-
-// export default function UpdateStudioForm() {
-//     const { studioId } = useParams()
-//     const studio = useSelector(state => state.studios[studioId])
-
-
-//     return (
-//         <StudioFormPage studio={studio} formType='Update Studio' />
-//     )
-// }
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
@@ -23,21 +8,17 @@ import './StudioFormPage.css'
 import './UpdateStudioForm.css'
 
 export default function UpdateStudioForm() {
-    const studioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662062264/20190405_av9GsLc9CqNfUPO_uuv912.jpg'
     const dispatch = useDispatch()
     const history = useHistory()
     const { studioId } = useParams()
     const studio = useSelector(state => state.studios[+studioId])
-
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
-    // const [ tattooStyle, setTattooStyle ] = useState('')
     const [ address, setAddress ] = useState(studio?.address || '')
     const [ city, setCity ] = useState(studio?.city || '')
     const [ state, setState ] = useState(studio?.state || '')
     const [ zipCode, setZipCode ] = useState(studio?.zipCode || '')
     const [ errors, setErrors ] = useState([])
-
 
     if (!studio) {
         return <Redirect to='/not-found' />
@@ -48,8 +29,7 @@ export default function UpdateStudioForm() {
         setErrors([])
 
         const formData = new FormData()
-        // formData.append('header_image', headerImage)
-        // formData.append('avatar', avatar)
+
         formData.append('name', name)
         formData.append('description', description)
         formData.append('address', address)
@@ -64,11 +44,10 @@ export default function UpdateStudioForm() {
             await dispatch(loadTattoosThunk())
             history.push('/studios')
         }
-
     }
 
     return (
-        <div className="new-edit-studio-form-main">
+        <>
             <div className="studio-form-container">
                 <form className="studio-form" onSubmit={handleSubmit}>
                     <div>
@@ -92,7 +71,6 @@ export default function UpdateStudioForm() {
                         <div className="studio-description-container">
                             <label className="custom-textarea">
                                 <textarea placeholder="Studio description here..." name='description' className="studio-description-textarea" cols='59' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
-                                {/* <span className="placeholder-textarea">Description</span> */}
                             </label>
                         </div>
                         <div className="studio-form-location-container">
@@ -174,9 +152,6 @@ export default function UpdateStudioForm() {
                         </div>
                 </form>
             </div>
-            <div className="studio-form-page-image-container">
-                    <img className="studio-image" src={studioImage} alt='studio' />
-            </div>
-        </div>
+        </>
     )
 }

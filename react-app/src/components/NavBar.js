@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
@@ -40,21 +39,6 @@ useEffect(() => {
               </div>
             </NavLink>
           </div>
-          {/* <div className='login-link-container'>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-          </div>
-          <div className='signup-link-container'>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-          </div> */}
-          {/* <div>
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>
-          </div> */}
           <div className='studios-link-container'>
             <NavLink className='nav-studios-link' to='/studios' exact={true} activeClassName='active'>
               Studios
@@ -77,9 +61,7 @@ useEffect(() => {
             {showDropdown &&
             <div className='nav-dropdown-container'>
               <Link className='profile-link' to={`/users/${sessionUserId}/profile`}>Profile</Link>
-              {/* <div className='your-profile-settings-container'>Profile Settings</div> */}
               <Link className='appts-link' to='/appointments'>Appointments</Link>
-              {/* <Link className='appts-link' to='/bookmarks'>Bookmarks</Link> */}
               <LogoutButton />
             </div>}
           </div>

@@ -112,7 +112,6 @@ const SignUpForm = ({ setShowSignUp }) => {
               name='repeat_password'
               onChange={updateRepeatPassword}
               value={repeatPassword}
-              // required={true}
             />
             <span className='placeholder'>Repeat Password</span>
           </label>

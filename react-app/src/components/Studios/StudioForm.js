@@ -5,13 +5,12 @@ import { createStudioThunk } from "../../store/studios";
 import Backdrop from "../Backdrop/Backdrop";
 import './StudioFormPage.css'
 
-export default function StudioForm({ studio, formType }) {
+export default function StudioForm({ studio }) {
     const dispatch = useDispatch()
     const history = useHistory()
     const [ name, setName ] = useState(studio?.name || '')
     const [ description, setDescription ] = useState(studio?.description || '')
     const [ headerImage, setHeaderImage ] = useState(studio?.headerImage || '')
-    // const [ tattooStyle, setTattooStyle ] = useState('')
     const [ avatar, setAvatar ] = useState(studio?.avatar || '')
     const [ address, setAddress ] = useState(studio?.address || '')
     const [ city, setCity ] = useState(studio?.city || '')
@@ -35,12 +34,7 @@ export default function StudioForm({ studio, formType }) {
         formData.append('city', city)
         formData.append('state', state)
         formData.append('zip_code', zipCode)
-        // formData.append('tattoo_style', tattooStyle)
 
-        // console.log('FORM DATA', formData)
-        // for (var [key, value] of formData.entries()) {
-        //     console.log(key, value);
-        // }
         setLoading(true)
         const badData = await dispatch(createStudioThunk(formData))
         if (badData) {
@@ -51,10 +45,6 @@ export default function StudioForm({ studio, formType }) {
             history.push('/studios')
         }
     }
-
-    // const isImage = (url) => {
-    //     return /\.(jpg|jpeg|png|webp|gif)$/.test(url.toLowerCase());
-    // }
 
     function isImgUrl(url) {
         const img = new Image();
@@ -177,12 +167,8 @@ export default function StudioForm({ studio, formType }) {
                         <div className="studio-description-container">
                             <label className="custom-textarea">
                                 <textarea placeholder="Studio description here..." name='description' className="studio-description-textarea" cols='59' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} />
-                                {/* <span className="placeholder-textarea">Description</span> */}
                             </label>
                         </div>
-                        {/* <div className="studio-tattoo-style-container">
-                            <input name='tattoo_style' type='text' placeholder='tattoo style' value={tattooStyle} onChange={(e) => setTattooStyle(e.target.value)} />
-                        </div> */}
                         <div className="studio-form-location-container">
                             <div>
                                 <label className="custom">

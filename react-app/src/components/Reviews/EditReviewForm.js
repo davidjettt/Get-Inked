@@ -57,7 +57,6 @@ export default function EditReviewForm({ reviewId, setShowOptionsModal }) {
                 <form className='edit-review-form' onSubmit={handleSubmit}>
                     <div className="edit-review-stars-container">
                     <Rating
-                            // className='user-review-stars'
                             ratingValue={rating}
                             size={20}
                             initialValue={0}

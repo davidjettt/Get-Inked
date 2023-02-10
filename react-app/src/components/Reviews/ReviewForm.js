@@ -87,7 +87,6 @@ export default function ReviewForm({ setOpenModal , studioId }) {
                 <form onSubmit={handleSubmit} className='review-modal-form'>
                     <div className='review-form-star-container'>
                         <Rating
-                            // className='user-review-stars'
                             ratingValue={rating}
                             size={25}
                             initialValue={0}

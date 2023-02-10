@@ -40,15 +40,6 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
     //     return /\.(jpg|jpeg|png|webp|gif|pdf)$/.test(url);
     // }
 
-    // function isImageUrl(url) {
-    //     const img = new Image()
-    //     img.src = url
-    //     if (img.onerror === false) {
-    //         return false
-    //     } else {
-    //         return true
-    //     }
-    // }
     function isImgUrl(url) {
         const img = new Image();
         img.src = url;
@@ -72,7 +63,6 @@ export default function TattooForm({ studioId, setShowTattooFormModal }) {
                     if (reader.readyState === 2) {
 
                         if ( await isImgUrl(reader.result)) {
-                            // console.log('IMAGE VAL', await isImgUrl(reader.result))
                             setTattooPreview(reader.result)
                             setTattooImage(file)
                         } else {
