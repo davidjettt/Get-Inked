@@ -1,22 +1,23 @@
-import Footer from "../Footer/Footer";
 import StudioForm from "./StudioForm";
+import UpdateStudioForm from "./UpdateStudioForm";
 import './StudioFormPage.css'
 
-
 export default function StudioFormPage({ studio, formType }) {
-    const studioImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1662062264/20190405_av9GsLc9CqNfUPO_uuv912.jpg'
+    let form
+
+    if (formType == 'Create Studio') {
+        form = <StudioForm studio={studio} />
+    } else {
+        form = <UpdateStudioForm studio={studio} />
+    }
 
     return (
-        // <div className="studio-form-page">
         <>
             <div className="studio-form-page-main-container">
-                <StudioForm studio={studio} formType={formType} />
+                {form}
                 <div className="studio-form-page-image-container">
-                    {/* <img className="studio-image" src={studioImage} alt='studio' /> */}
                 </div>
             </div>
-            {/* <Footer /> */}
         </>
-        // </div>
     )
 }

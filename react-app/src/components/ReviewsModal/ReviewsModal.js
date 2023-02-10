@@ -84,11 +84,8 @@ export default function ReviewsModal({ studioId, reviews, reviewsComponent }) {
                                     <img className="review-profile-image" src={defaultUserProfilePic} alt='' />
                                     <div className='stars-user-name'>
                                         <Rating
-                                                // className='user-review-stars'
                                                 size={20}
                                                 ratingValue={review.stars * 20}
-                                                // initialValue={0}
-                                                // onClick={newRating}
                                                 fillColor='#1F2125'
                                                 readonly={true}
                                                 // transition={true}

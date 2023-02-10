@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import AppointmentOptionsModal from './AppointmentOptionsModal'
 import './Appointments.css'
 
 
 export default function Appointments() {
     const [ past, setPast ] = useState(false)
-    // const { userId } = useParams()
     const userId = useSelector(state => state.session.user.id)
     const userAppts = useSelector(state => Object.values(state.appointments)
                         .filter(appt => +appt.userId === +userId))
@@ -20,9 +18,6 @@ export default function Appointments() {
     const pastAppts = userAppts.filter((appt) => {
         return today.getTime() > new Date (appt.origDateFormat)
     })
-
-    // console.log('UPCOMING', upcomingAppts)
-    // console.log('PAST', pastAppts)
 
     upcomingAppts.sort((objA, objB) => {
         return new Date(objA.origDateFormat) - new Date(objB.origDateFormat)

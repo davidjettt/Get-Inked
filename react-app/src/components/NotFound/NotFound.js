@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
-import Footer from "../Footer/Footer";
 import notFoundImage from '../../Images/404-image.webp'
 import './NotFound.css'
 
 export default function NotFound() {
-
-
     return (
         <>
             <div className="not-found-main">
@@ -26,7 +23,6 @@ export default function NotFound() {
                     <img className="not-found-image" src={notFoundImage} alt='not-found' />
                 </div>
             </div>
-            {/* <Footer /> */}
         </>
     )
 }

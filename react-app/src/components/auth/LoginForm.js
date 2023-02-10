@@ -39,13 +39,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {/* <div className='login-all-fields-required'>
-        All fields are required.
-      </div> */}
       <form className='login-form' onSubmit={onLogin}>
-        {/* <div className='login-header-container'>
-          <h1>GET INKED</h1>
-        </div> */}
         <div className='errors-login'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
@@ -54,10 +48,8 @@ const LoginForm = () => {
         <div>
           <label className='custom' htmlFor='email'>
             <input
-              // required
               name='email'
               type='text'
-              // placeholder='Email'
               value={email}
               onChange={updateEmail}
             />
@@ -69,7 +61,6 @@ const LoginForm = () => {
             <input
               name='password'
               type='password'
-              // placeholder='Password'
               value={password}
               onChange={updatePassword}
             />

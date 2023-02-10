@@ -1,15 +1,10 @@
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-// import { useHistory } from "react-router-dom"
-// import { loadStudiosThunk } from "../../store/studios"
-// import { deleteTattooThunk } from "../../store/tattoos"
+import {  useSelector } from "react-redux"
 import DeleteButton from "../DeleteButton/DeleteButton"
 import EditTattooForm from "./EditTattooForm"
 import './TattooOptions.css'
 
 export default function TattooOptions({ tattooId, setShowTattooOptionsModal }) {
-    // const dispatch = useDispatch()
-    // const history = useHistory()
     const [ showEditTattooModal, setShowTattooEditModal ] = useState(false)
     const [ showModal, setShowModal ] = useState(false)
     const tattoo = useSelector(state => state.tattoos[+tattooId])
@@ -21,11 +16,6 @@ export default function TattooOptions({ tattooId, setShowTattooOptionsModal }) {
     const handleClick = () => {
         setShowTattooEditModal(true)
     }
-
-    // const handleTattooDelete = () => {
-    //     dispatch(deleteTattooThunk(tattoo))
-    //     dispatch(loadStudiosThunk())
-    // }
 
     const handleDeleteModal = () => {
         setShowModal(true)

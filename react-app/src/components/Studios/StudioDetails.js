@@ -25,15 +25,14 @@ export default function StudioDetails() {
     const studio = useSelector(state => Object.values(state.studios).find(studio => +studio.id === +studioId))
     const studioOwnerId = studio?.ownerId
     const sessionUserId = useSelector(state => state.session.user.id)
+    let starCount = 0
+    let avgRating
 
     useEffect(() => {
         if (!studio) {
             history.push('/studios')
         }
     }, [studio])
-
-    let starCount = 0
-    let avgRating
 
 
     if (studio) {
@@ -44,14 +43,6 @@ export default function StudioDetails() {
             avgRating = (starCount / studio.reviews.length).toFixed(1)
         }
     }
-
-    // let className
-    // const description = studio?.description
-    // if (description?.indexOf(' ') === -1) {
-    //     className = 'word-break'
-    // } else {
-    //     className = 'studio-description'
-    // }
 
     const handleDropdown = () => {
         if (showDropdown) return

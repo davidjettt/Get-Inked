@@ -7,7 +7,6 @@ import { authenticate } from './store/session';
 import { loadStudiosThunk } from './store/studios';
 import Studios from './components/Studios/Studios';
 import StudioDetails from './components/Studios/StudioDetails';
-import UpdateStudioForm from './components/Studios/UpdateStudioForm';
 import HomePage from './components/HomePage/HomePage';
 import SplashPage from './components/SplashPage/SplashPage';
 import StudioFormPage from './components/Studios/StudioFormPage';
@@ -40,10 +39,6 @@ function App() {
   }, [dispatch]);
 
   // useEffect(() => {
-  //   dispatch(loadStudiosThunk())
-  // }, [dispatch])
-
-  // useEffect(() => {
   //   const handleResize = () => {
   //     setHeight(window.innerWidth)
   //   }
@@ -73,13 +68,13 @@ function App() {
             <Studios />
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios/new'>
-            <StudioFormPage />
+            <StudioFormPage formType='Create Studio' />
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios/:studioId'>
             <StudioDetails />
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios/:studioId/edit'>
-            <UpdateStudioForm />
+            <StudioFormPage formType='Update Studio' />
           </ProtectedRoute>
           <ProtectedRoute exact path='/studios/:studioId/appointment'>
             <AppointmentForm />

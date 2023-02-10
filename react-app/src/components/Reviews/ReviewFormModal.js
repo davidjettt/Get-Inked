@@ -2,16 +2,12 @@ import { useState } from "react";
 import { Modal } from "../../context/Modal";
 import ReviewForm from "./ReviewForm";
 
-
-
 export default function ReviewFormModal({ studioId }) {
     const [ openModal, setOpenModal ] = useState(false)
-
 
     const handleOpenModal = () => {
         setOpenModal(true)
     }
-
 
     return (
         <>
