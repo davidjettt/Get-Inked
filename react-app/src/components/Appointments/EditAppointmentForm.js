@@ -100,7 +100,7 @@ export default function EditAppointmentForm() {
                     setImgPreviews(updatedAppt.appt.appointment.apptImages)
                 }
             } else {
-                setErrors(['Invalid image'])
+                setErrors(['Invalid image file type'])
             }
         }
     }

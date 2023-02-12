@@ -5,7 +5,7 @@ import './StudioFormPage.css'
 export default function StudioFormPage({ studio, formType }) {
     let form
 
-    if (formType == 'Create Studio') {
+    if (formType === 'Create Studio') {
         form = <StudioForm studio={studio} />
     } else {
         form = <UpdateStudioForm studio={studio} />

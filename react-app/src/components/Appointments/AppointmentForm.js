@@ -1,7 +1,7 @@
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { createApptThunk, getOneAppointmentThunk, postAppointmentImageThunk } from "../../store/appointments";
+import { createApptThunk, postAppointmentImageThunk } from "../../store/appointments";
 import Calendar from 'react-calendar'
 import './ReactCalendar.css'
 import './AppointmentForm.css'
@@ -14,8 +14,11 @@ export default function AppointmentForm() {
     const dispatch = useDispatch()
     const { studioId } = useParams()
     // const formImage = 'https://res.cloudinary.com/dtjyf5kpn/image/upload/v1663128799/5804024663e1ddff8e125720c07b87f2_oocxlo.jpg'
-    const appts = useSelector(state => Object.values(state.appointments).map(appt => new Date(appt.origDateFormat).getTime()))
-    // const appts = useSelector(state => Object.values(state.appointments).map(appt => appt.origDateFormat))
+    const appts = useSelector((state) => {
+        return Object.values(state.appointments)
+                    .filter(appt => +appt.studioId === +studioId)
+                    .map(appt => new Date(appt.origDateFormat).getTime())
+    })
     const studio = useSelector(state => state.studios[+studioId])
     const studioName = studio.name
     const [ placement, setPlacement ] = useState('')
@@ -28,47 +31,36 @@ export default function AppointmentForm() {
     const [ errors, setErrors ] = useState([])
     const [ loading, setLoading ] = useState(false)
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
 
-        const today = new Date()
-        if (!date) {
-            setErrors(['Date is required'])
-        }
-        else if (date.getTime() < today.getTime()) {
-            setErrors(["Appointment must be a day in the future!"])
-        }
-        else if (imgRefPreview.length < 1) {
-            setErrors(['At least one image reference is required.'])
-        }
-        else {
-            const formData = new FormData()
-            formData.append('placement', placement)
-            formData.append('size', size)
-            formData.append('color', color)
-            formData.append('description', description)
-            formData.append('date', date.toUTCString())
-            formData.append('studio_id', studioId)
+        const formData = new FormData()
+        formData.append('placement', placement)
+        formData.append('size', size)
+        formData.append('color', color)
+        formData.append('description', description)
+        formData.append('date', date?.toUTCString() || '')
+        formData.append('studio_id', studioId)
+        formData.append('image', images ? images[0] : null)
 
-            setLoading(true)
-            const data = await dispatch(createApptThunk(formData))
-            if (data.errors) {
-                setErrors(data.errors)
+        setLoading(true)
+        const data = await dispatch(createApptThunk(formData))
+
+        if (data.errors) {
+            setErrors(data.errors)
+            setLoading(false)
+        } else {
+            const imageData = new FormData()
+            images.forEach(image => imageData.append('ref_images', image))
+            const badData = await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
+            if (badData) {
+                setErrors(badData)
                 setLoading(false)
-            } else {
-                const imageData = new FormData()
-                images.forEach(image => imageData.append('ref_images', image))
-                const badData = await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
-                if (badData) {
-                    setErrors(badData)
-                    setLoading(false)
-                }
-                else {
-                    await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
-                    history.push(`/studios/${studio.id}`)
-                }
+            }
+            else {
+                // await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
+                history.push(`/studios/${studio.id}`)
             }
         }
     }
@@ -89,12 +81,12 @@ export default function AppointmentForm() {
             if (await isImgUrl(URL.createObjectURL(file)) ) {
                 // const test = document.getElementById('blah')
 
-                if (imgRefPreview.length < 3) {
+                if (imgRefPreview.length < 4) {
                     // test.src = URL.createObjectURL(file)
                     setImgRefPreview([...imgRefPreview, URL.createObjectURL(file)])
                     setImages([...images, file])
                 } else {
-                    setErrors(['Max 3 images'])
+                    setErrors(['Max 4 images'])
                 }
             } else {
                 setErrors(['Invalid image file type'])
