@@ -96,7 +96,8 @@ export const postAppointmentImageThunk = (imageData, apptId) => async (dispatch)
     })
 
     if (response.ok) {
-        return
+        const data = await response.json()
+        dispatch(getOneAppointment(data))
     } else {
         const badData = await response.json()
         if (badData.errors) return badData.errors

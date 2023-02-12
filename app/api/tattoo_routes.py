@@ -70,7 +70,6 @@ def bookmark_tattoo(id):
         tattoo.tattoo_image_bookmarks.remove(current_user)
         db.session.commit()
 
-        # return { 'tattoo': tattoo.tattoo_to_dict() }
     return user.to_dict()
 
 # Unbookmark a tattoo

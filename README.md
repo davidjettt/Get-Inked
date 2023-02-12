@@ -29,39 +29,70 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 - [MVP Features](https://github.com/davidjettt/Get-Inked/wiki/MVP-Features)
 - [User Stories](https://github.com/davidjettt/Get-Inked/wiki/User-Stories)
 
-# Splash/Landing Page
+# Challenges/Code Sample
+```Javascript
+      const data = await dispatch(createApptThunk(formData))
+      if (data.errors) {
+            setErrors(data.errors)
+            setLoading(false)
+      } else {
+            const imageData = new FormData()
+            images.forEach(image => imageData.append('ref_images', image))
+            const badData = await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
+            if (badData) {
+               setErrors(badData)
+               setLoading(false)
+            }
+            else {
+               await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
+               history.push(`/studios/${studio.id}`)
+            }
+      }
+```
+A feature I wanted to implement in this project was giving the user the ability to upload image files from their computer. I also wanted to learn cloud services and thought AWS S3 would be a great start. This is a code snippet from a function in a React/Redux application that gets triggered when a user submits an appointment form that contains both text and multiple image file inputs. There were a few things that made implementing this feature challenging. One, since SQLite, the database I was using in development, doesn't support arrays as a datatype, I am unable to store multiple image URL strings for a single appointment. What I had to do instead was to create another table that holds images with a foreign key to the appointments table. Second, since the images need a foreign key and this feature is a POST feature, I need to first create the entry in the database for the appointment before adding the images to the database.
+
+So what the code snippet is doing is that `dispatch` gets called with all the form data, triggering a fetch call and state change. If the data sent back contains an error, an error message will appear. But, if all is well, then an appointment entry will be created and saved in the database. A second fetch call will be called on all the images the user has uploaded and stored in an AWS S3 bucket and a special URL string to the image will be saved in the database with the appointment id of the recently created appointment as the foreign key. Again if an error gets sent back from the second dispatch call then it will be displayed on the client. Lastly, a final dispatch call is used get the newly created image with all the images associated with it and update the Redux store.
+
+This was challenging, but this is what I am also proud of.
+
+TO DO
+- Try to see if can just query for the appointment after saved images to database in appointment API route
+
+# Application Images
+
+## Splash/Landing Page
 
 ![](react-app/src/Images/app-screenshots/get-inked-splash-page.png)
 
-# Home Page (top)
+## Home Page
 
 ![](react-app/src/Images/app-screenshots/get-inked-homepage-top.png)
 
-# Home Page (bottom)
+<!-- # Home Page (bottom)
 
-![](react-app/src/Images/app-screenshots/get-inked-homepage-bottom.png)
+![](react-app/src/Images/app-screenshots/get-inked-homepage-bottom.png) -->
 
-# User Profile
+## User Profile
 
 ![](react-app/src/Images/app-screenshots/get-inked-user-profile.png)
 
-# Appointment Form
+## Appointment Form
 
 ![](react-app/src/Images/app-screenshots/get-inked-appt-form.png)
 
-# Studio Form
+## Studio Form
 
 ![](react-app/src/Images/app-screenshots/get-inked-studio-form.png)
 
-# Tattoos Page
+## Tattoos Page
 
 ![](react-app/src/Images/app-screenshots/get-inked-tattoos-2.png)
 
-# Single Tattoo
+## Single Tattoo
 
 ![](react-app/src/Images/app-screenshots/get-inked-single-tattoo.png)
 
-## Getting started
+<!-- ## Getting started
 
 1. Clone this repository (only this branch)
 
@@ -107,7 +138,7 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 
 6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-<br>
+<br> -->
 
 <!-- ## Deploy to Heroku
 This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations.

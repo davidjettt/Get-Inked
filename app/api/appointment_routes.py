@@ -48,10 +48,10 @@ def create_appt():
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-# POST image reference
+# POST image references
 @appointment_routes.post('/<int:id>/images')
 @login_required
-def post_ref_image(id):
+def post_ref_images(id):
     if 'ref_images' not in request.files:
         return { 'errors': ['Image required'] }, 400
 
@@ -73,7 +73,9 @@ def post_ref_image(id):
         db.session.add(new_img)
         db.session.commit()
 
-    return { 'message': 'Success' }
+    appt = Appointment.query.get(id)
+
+    return { 'appointment': appt.appt_to_dict() }
 
 
 # DELETE image reference
