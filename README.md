@@ -31,32 +31,45 @@ Get Inked is a web app where authenticated users can create or join a tattoo stu
 
 # Challenges/Code Sample
 ```Javascript
-      const data = await dispatch(createApptThunk(formData))
-      if (data.errors) {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setErrors([])
+
+        const formData = new FormData()
+        formData.append('placement', placement)
+        formData.append('size', size)
+        formData.append('color', color)
+        formData.append('description', description)
+        formData.append('date', date?.toUTCString() || '')
+        formData.append('studio_id', studioId)
+        formData.append('image', images ? images[0] : null)
+
+        setLoading(true)
+        const data = await dispatch(createApptThunk(formData))
+
+        if (data.errors) {
             setErrors(data.errors)
             setLoading(false)
-      } else {
+        } else {
             const imageData = new FormData()
             images.forEach(image => imageData.append('ref_images', image))
             const badData = await dispatch(postAppointmentImageThunk(imageData, data.appt.appointment.id))
             if (badData) {
-               setErrors(badData)
-               setLoading(false)
+                setErrors(badData)
+                setLoading(false)
             }
             else {
-               await dispatch(getOneAppointmentThunk(data.appt.appointment.id))
-               history.push(`/studios/${studio.id}`)
+                history.push(`/studios/${studio.id}`)
             }
-      }
+        }
+    }
 ```
 A feature I wanted to implement in this project was giving the user the ability to upload image files from their computer. I also wanted to learn cloud services and thought AWS S3 would be a great start. This is a code snippet from a function in a React/Redux application that gets triggered when a user submits an appointment form that contains both text and multiple image file inputs. There were a few things that made implementing this feature challenging. One, since SQLite, the database I was using in development, doesn't support arrays as a datatype, I am unable to store multiple image URL strings for a single appointment. What I had to do instead was to create another table that holds images with a foreign key to the appointments table. Second, since the images need a foreign key and this feature is a POST feature, I need to first create the entry in the database for the appointment before adding the images to the database.
 
-So what the code snippet is doing is that `dispatch` gets called with all the form data, triggering a fetch call and state change. If the data sent back contains an error, an error message will appear. But, if all is well, then an appointment entry will be created and saved in the database. A second fetch call will be called on all the images the user has uploaded and stored in an AWS S3 bucket and a special URL string to the image will be saved in the database with the appointment id of the recently created appointment as the foreign key. Again if an error gets sent back from the second dispatch call then it will be displayed on the client. Lastly, a final dispatch call is used get the newly created image with all the images associated with it and update the Redux store.
+So what the code snippet is doing is that dispatch gets called with all the form data, triggering a fetch API call and state change. If the data sent back contains an error, an error message will appear. But, if all is well, then an appointment entry will be created and saved in the database. A second fetch API call will be called on all the images the user has uploaded and stored in an AWS S3 bucket and a special URL string to each image will be saved in the database with the appointment id of the recently created appointment as the foreign key. Again, if an error gets sent back from the second dispatch call then the error message will be displayed on the client. If all is well, then there will be a state change with the appointment and images associated with it and then a redirect to a different page of the application.
 
-This was challenging, but this is what I am also proud of.
+I can say I am proud of this code because it was a challenging obstacle I had to overcome, which showcases my ability to probelm solve and knowledge of how data flows in my application.
 
-TO DO
-- Try to see if can just query for the appointment after saved images to database in appointment API route
 
 # Application Images
 
