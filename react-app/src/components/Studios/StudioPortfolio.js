@@ -14,7 +14,7 @@ export default function StudioPortfolio({ studioId }) {
                     .filter(tattoo => +studioId === +tattoo.studioId)).length
     const numPages = Math.ceil(numTattoos / 6)
 
-    const handlePageChange = (value) => {
+    const handlePageChange = (e, value) => {
         setPage(value)
         pageNum = value
         loadTattoos()
