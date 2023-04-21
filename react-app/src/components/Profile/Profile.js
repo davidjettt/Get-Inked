@@ -122,8 +122,8 @@ export default function Profile() {
                                 <Tabs textColor="inherit" TabIndicatorProps={{style: {background: 'black'}}} value={value} onChange={handleChange} aria-label="basic tabs example">
                                     <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label=" Your Tattoos" {...a11yProps(0)} />
                                     <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Bookmarked Tattoos" {...a11yProps(1)} />
-                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Bookmarked Studios" {...a11yProps(2)} />
-                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Profile Settings" {...a11yProps(3)} />
+                                    {/* <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Bookmarked Studios" {...a11yProps(2)} />
+                                    <Tab sx={{fontSize: {mobile: 9, notMobile: 14}}} label="Profile Settings" {...a11yProps(3)} /> */}
                                 </Tabs>
                                 </Box>
                                 <TabPanel value={value} index={0}>
@@ -132,12 +132,12 @@ export default function Profile() {
                                 <TabPanel value={value} index={1}>
                                     <TattooBookmarks />
                                 </TabPanel>
-                                <TabPanel value={value} index={2}>
+                                {/* <TabPanel value={value} index={2}>
                                 Coming Soon!
                                 </TabPanel>
                                 <TabPanel value={value} index={3}>
                                 Coming Soon!
-                                </TabPanel>
+                                </TabPanel> */}
                         </div>
                 </ThemeProvider>
             </div>}
